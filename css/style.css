@@ -1,0 +1,18 @@
+  /* h1 {
+      background-color: yellow;
+      color: red;
+    } */
+
+  div {
+    background-color: red;
+  }
+
+  .name {
+    background-color: aqua;
+    color: tomato;
+  }
+
+  #h3 {
+    color: blue;
+    background-color: violet;
+  }
