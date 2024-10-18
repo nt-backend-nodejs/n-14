@@ -1,48 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<link>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<style>
-  /* 
-  
-  h1 {
-      background-color: yellow;
-      color: red;
-    } 
-
-  div {
-    background-color: red;
-  }
-
-  .name {
-    background-color: aqua;
-    color: tomato;
-  }
-
-  #h3 {
-    color: blue;
-    background-color: violet;
-  }
-
-  */
-</style>
-
-<link rel="stylesheet" href="./css/style.css">
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
+  <main>
+    <div class="container">
+      <h1>Reservation</h1>
+      <h4>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
 
-  <h3 id="h3">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis, similique?
-  </h3>
-  <h1 class="name">XAMIDULLO</h1>
-  <div>
-    SALOM DUNYO
-  </div>
+      </h4>
+      <hr>
+      <form>
+
+        <input type="text" placeholder="Name" name="name" class="name" />
+        <input type="tel" placeholder="Phone" name="phone" class="tel" />
+        <br>
+        <input type="email" placeholder="Email" name="email" class="email" />
+        <br>
+        <input type="date" name="date" class="date" />
+
+        <input type="time" name="time" class="time" />
+        <br>
+        <textarea name="comment" id="comment" placeholder="Name of service" class="comment">
+        </textarea>
+        <br>
+
+
+        <button type="submit">Book now</button>
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>

@@ -1,18 +1,28 @@
-  /* h1 {
-      background-color: yellow;
-      color: red;
-    } */
+/* doesn't transform the text */
+p.none {
+  line-height: 2;
+  text-transform: none;
+  letter-spacing: 10px;
+  text-indent: 40px;
+}
 
-  div {
-    background-color: red;
-  }
+h5 {
+  text-align: end;
+}
 
-  .name {
-    background-color: aqua;
-    color: tomato;
-  }
+p.capitalize {
+  background: orange;
+  /* word-spacing: 30px; */
 
-  #h3 {
-    color: blue;
-    background-color: violet;
-  }
+  /* text-transform: capitalize; */
+}
+
+/* transforms the text to uppercase */
+p.uppercase {
+  text-transform: uppercase;
+}
+
+/* transforms the text to lowercase */
+p.lowercase {
+  text-transform: lowercase;
+}

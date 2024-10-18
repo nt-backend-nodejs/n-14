@@ -1,0 +1,84 @@
+body {
+  background-image: url("https://picsum.photos/1000");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-color: lightgray;
+  background-size: cover;
+}
+
+main {
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Courier New';
+  font-weight: 100;
+}
+
+h4 {
+  text-align: center;
+  font-family: 'Courier New';
+  font-weight: 50;
+}
+
+hr {
+  width: 100px;
+  height: 0.5px;
+}
+
+::placeholder {
+  color: tomato;
+  opacity: 1;
+}
+
+input {
+  padding: 10px;
+  margin: 5px;
+  /* color: tomato; */
+}
+
+
+.name,
+.tel {
+  width: 41%;
+  margin-left: 5px;
+  position: left;
+}
+
+.email {
+  width: 92%;
+}
+
+
+.date,
+.time {
+  width: 41%;
+  margin-left: 5px;
+  position: left;
+}
+
+
+textarea {
+  width: 97%;
+  margin: auto;
+
+}
+
+button {
+  width: 200px;
+  padding: 10px;
+  background-color: tan;
+  border: none;
+  border-radius: 5px;
+  /* margin: auto; */
+  margin-left: 23%;
+  margin-top: 10px;
+  color: white;
+  text-transform: uppercase;
+}
+
+
+/*  */
