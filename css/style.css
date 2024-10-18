@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #1E1E1E;
+}
+
+.container {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  justify-content: center;
+  background-color: #1D1825;
+  text-align: center;
+  margin: auto;
+}
+
+.todo_app {
+  text-align: center;
+}
+
+.header_title {
+  color: wheat;
+}
+
+input {
+  border: 2px solid #9E78CF;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  height: 25px;
+  padding-left: 10px;
+}
+
+form {
+  display: flex;
+  justify-content: space-evenly
+}
+
+.btn_submit {
+  background-color: #9E78CF;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-size: 20px;
+
+}
