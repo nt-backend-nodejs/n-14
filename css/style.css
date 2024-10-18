@@ -3,11 +3,12 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #1E1E1E;
+  color: white;
 }
 
 .container {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 1000px;
   margin: auto;
   justify-content: center;
   background-color: #1D1825;
@@ -43,5 +44,28 @@ form {
   border-radius: 5px;
   padding: 2px 8px;
   font-size: 20px;
+}
 
+ul {
+  padding: 20px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
+.todo-item {
+  display: flex;
+  margin: 10px;
+
+  justify-content: space-between;
+}
+
+li {
+  background-color: #15101C;
+  margin: 20px;
+  border-radius: 10px;
+  margin: 5px 10px;
 }
