@@ -1,53 +1,69 @@
-// const a = "Hello  12"
-// const b = "WOrld!"
-
-// const result = a + b
-
-// console.log({result:result})
-
-// const a = "33"
-// const b = 12
-
-// const result = a + b
-// const result2 = a - b
-
-// console.log({
-//   result:result,
-//   result2:result2
-// })
-
-
-
-
-
-
-// const input  = Number(prompt("Yoshingni kirit!."))
-
-// if(input > 18){
-//   alert("You are an adult.")
-// }else {
-//   alert("You are an younger!.")
+// function greet(name){
+//   console.log(`hello, ${name}`)
 // }
 
+// greet("azizbek")
+// greet("Abdulloh")
 
-// const input = Number(prompt("Sonni kiriting?"))
+// function sum(num1, num2) {
 
-
-// if(input % 3 == 0 && input % 5 == 0){
-//   alert("FIZZBUZZ")
-// }else if(input % 3 == 0){
-//   alert("FIZZ")
-// }else if ( input % 5 == 0){
-//   alert("BUZZ")
-// }else {
-//   alert("Noto'g'ri son kiritdiz!!")
+//    return num1 + num2;
 // }
 
+// let result = sum(1, 2);
 
+// console.log({result})
 
-const age = Number(prompt("Yoshingiz nechida?"))
+// function greetWithPrompt() {
+//   const input = prompt("ISM?");
+//   console.log(`Hello ${input}`);
+// }
 
+// greetWithPrompt()
 
-const message = age>= 18 ? "Siz Kirishingiz Mumkin": "Hali kichkinalik qilasiz?"
+// a,b,c,d = > piremetr
 
-console.log({message})
+// function calcPirm(a, b, c, d) {
+//   return a + b + c + d;
+// }
+
+// console.log(calcPirm(3,2,3,4))
+
+// 10  => 1+2+3+5+6++7+8+9+10 =>
+// 15  => 1+2+3+5+6++7+8+9+10+11+12+13+14+15 =>
+
+// function sumOfNum(number) {
+//   let sum = 0;
+//   for (let i = 0; i <= number; i++) {
+
+//     if (i % 2 === 0) {
+
+//       console.log(i);
+//       sum += i; // sum = sum + i
+//     }
+//   }
+//   console.log({ sum });
+// }
+// let number = Number(prompt("NUM?"));
+
+// sumOfNum(number);
+// sumOfNum(number);
+
+function calcMark(name) {
+  const mark = +prompt("MARK? " + name)
+
+  if (mark >= 90) {
+    console.log("A'lo");
+  } else if(mark >= 80) {
+    console.log("Yaxshi");
+  } else if(mark >= 70) {
+    console.log("Qoniqarli");
+  } else if(mark >= 60) {
+    console.log("Chidasa bo'ladi lekin o'qish kere");
+  } else if(mark < 60) {
+    console.log("CHOPILDI");
+  }
+}
+
+calcMark("AZIZBEK")
+calcMark("BEHRUZ")

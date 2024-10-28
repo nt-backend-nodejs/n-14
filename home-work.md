@@ -1,4 +1,4 @@
-**Oson masalalar (15 ta):**
+**masalalar (15 ta):**
 
 1. **Tog' yoki tekis?**
     
@@ -59,3 +59,19 @@
 15. **Foydalanuvchi nomi teskari**
     
     Foydalanuvchi ismini so'rang va uni teskari yozib chiqaring.
+        
+16. **Foydalanuvchi ismi va familiya**
+    
+    Foydalanuvchidan ismi va familiyasini so'rang. Agar ismi va familiyasi bir xil bo'lsa, "Ism va familiya bir xil", aks holda "Har xil" deb chiqaring.
+
+17. **Faqat juft raqamlarni chiqarish**
+    
+    Foydalanuvchidan uch xonali son kiritishni so'rang. Sonning faqat juft raqamlarini ekranga chiqaring.
+    
+18. **Darajaga ko'tarish**
+    
+    Foydalanuvchidan ikkita son kiritishni so'rang va birinchi sonni ikkinchi son darajasiga ko'taring.
+19. **N soni bilan n yulduz**
+    
+    Foydalanuvchidan son kiritishni so'rang va shu sonning qiymatiga teng yulduzlar (*) chiqaruvchi kod yozing.
+   
