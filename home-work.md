@@ -59,3 +59,4 @@
 15. **Sonni darajaga ko'tarish**
     
     `Math.pow()` yordamida berilgan sonni berilgan darajaga ko'taring va natijani qaytaring.
+  
