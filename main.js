@@ -1,30 +1,40 @@
-const contact = {
-  contacts: [],
-  add(name, phoneNumber) {
-    this.contacts.push({ name, phoneNumber });
-  },
-  getOne(name) {
-    const contact = this.contacts.find((contact) => contact.name === name);
-    console.log(contact);
-  },
-  getAll() {
-    console.log(this.contacts);
-  },
-  deleteAll() {
-    this.contacts = [];
-  },
-  deleteOne(name) {
-    const contacts = this.contacts.filter((contact) => contact.name !== name);
+// function multiply(factor) {
+//   return function (number) {
+//     return number * factor;
+//   };
+// }
 
-    this.contacts = contacts;
-  },
-};
+// const multiplyby2 = multiply(2);
 
-contact.add("ali", 12345678);
-contact.add("vali", 3124523);
-contact.add("zufar", 5345709370);
-// contact.deleteAll();
+// const result = multiplyby2(6);
 
-// contact.getAll();
-contact.deleteOne("ali");
-// contact.getAll();
+// console.log(result);
+
+// function makeCounter() {
+//   let count = 0;
+//   return function () {
+//     return count++;
+//   };
+// }
+
+// const counter = makeCounter();
+
+// counter()
+// counter()
+// counter()
+// counter()
+// counter()
+// const result = counter()
+// console.log(result);
+
+function Person(name, age, isMerried) {
+  this.name = name;
+  this.age = age;
+  this.isMerried = isMerried;
+}
+
+const result = new Person("xamidullo", 12, true);
+const result2 = new Person("Azizbek", 15, true);
+
+console.log(result);
+console.log(result2);
