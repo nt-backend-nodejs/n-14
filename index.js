@@ -1,116 +1,128 @@
-// { } => scope
+// const obj = {
+//   name: "ali",
+//   greet() {
+//     console.log(`Hello ${this.name}`);
+//   },
+//   // greet: () => {
+//   //   console.log(`Hello ${this.name}`);
+//   // },
+// };
 
-// if (true) {
+// obj.greet();
+
+// const add = function (a, b) {
+//   return {
+//     name: "a",
+//     greet() {
+//       console.log(this);
+//     },
+//   };
+// };
+
+// console.log(add(1, 2));
+
+// function Person() {
+//   this.name = "ali";
+//   this.age = 12;
+//   // const that  = {}
+
+//   // that.name = "ali"
+
+//   // return that
 // }
 
-// for (;;) {
+// const person = new Person();
 
-// }
+// console.log(person);
 
-// while(12){
+// const person = {
+//   name: "behruz",
+//   age: 12,
+//   isMeeried: false,
+// };
 
-// }
+// console.log(Object.entries(person));
 
-// function a(){
+// const greet = function (name) {
+//   console.log(this)
+// };
 
-// }
+// // greet("azizbekz")
 
-// let a = 12;
+// greet.call({ age: 12 }, "Guli");
 
-// if (true) {
-//   let a = 90
-//   console.log(a);
-// }
+// function countAll(str) {
+//   let obj = { HARFLAR: 0, RAQAMLAR: 0 };
 
-// const b = 12;
-// for (let i = 0; i < 5; i++) {
-//   // const b = 22;
-//   console.log(b);
-// }
-
-// const c = 122;
-// {
-//   const c = 1;
-//   console.log(c);
-// }
-
-// 1 global scope
-// 2 local scope -> {}=> lar ichidagi
-// 3 functional scope-> {}=> lar ichidagi
-
-// a();
-
-// function a() {
-//   console.log("salom");
-// }
-
-// var b
-
-// console.log(b)
-
-// function getString(arr) {
-//   for (let i = 0; i < arr.length; i++) {
-//     if (typeof arr[i] === "string") {
-//       console.log(arr[i]);
+//   for (let i = 0; i < str.length; i++) {
+//     const char = str[i];
+//     if (char == " ") {
+//     } else if (typeof char === "number") {
+//       obj.RAQAMLAR++;
+//     } else if (typeof char === "string") {
+//       obj.HARFLAR++;
 //     }
 //   }
+//   return obj;
 // }
+// console.log(countAll("Hello World"));
 
-// function getString(arr) {
-//   let stringArr = [];
-//   for (let i = 0; i < arr.length; i++) {
-//     if (typeof arr[i] === "string") {
-//       stringArr.push(arr[i]);
-//       // console.log(arr[i]);
-//     }
-//   }
-//   return stringArr;
-// }
+// countAll("H3ll0 Wor1d") ➞ { "HARFLAR":  7, "RAQAMLAR": 3 }
+// countAll("149990") ➞ { "HARFLAR": 0, "RAQAMLAR": 6 }
 
-// const result = getString([1, 2, 4, "b", "v", 43, "a"]);
-// console.log(result);
+// // Misollar
+// console.log(
+//   afterNYears(
+//     {
+//       Joel: 32,
+//       Fred: 44,
+//       Reginald: 65,
+//       Susan: 33,
+//       Julian: 13,
+//     },
+//     1
+//   )
+// );
+// // Natija: { "Joel" : 33, "Fred" : 45, "Reginald" : 66, "Susan" : 34, "Julian" : 14 }
 
-// function minMax(arr) {}
+// console.log(
+//   afterNYears(
+//     {
+//       Baby: 2,
+//       Child: 8,
+//       Teenager: 15,
+//       Adult: 25,
+//       Elderly: 71,
+//     },
+//     19
+//   )
+// );
+// // Natija: { "Baby" : 21, "Child" : 27, "Teenager" : 34, "Adult" : 44, "Elderly" : 90 }
 
-// minMax([1, 2, 3, 4, 5]); //➞ 5
+// console.log(
+//   afterNYears(
+//     {
+//       Genie: 1000,
+//       Joe: 40,
+//     },
+//     5
+//   )
+// );
+// Natija: { "Genie" : 1005, "Joe" : 45 }
 
-// minMax([2334454, 5]); //➞ 2334454
+function multiply(arr) {
+  return function (num) {
+    return arr.map((item) => item * num);
+  };
+}
 
-/// ********** 1- MISOL ***********
+const result = multiply([1, 2, 3])(2);
+console.log(result);
 
-/* 
- function findPrimeNumber(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] % 2 !== 0) {
-      return arr[i];
-    }
-  }
-} 
+//  ➞ [2, 4, 6]
+console.log(multiply([4, 6, 5])(10));
 
-*/
+// ➞ [40, 60, 50]
 
-// const r1 = findPrimeNumber([4, 12, 42, 9, 12, 3]); // ➞ 9
-// // const r2 = findPrimeNumber([123, 42, 93, 21, 11]); // ➞ 123
-
-// console.log(r1);
-// // console.log(r2);
-
-// function func(arr){
-
-// }
-
-// func([3,4]) //=> 12
-// func([2,4]) //=> 8
-
-// function  countTrue(arr) {
-
-// }
-// countTrue([true, false, false, true, false]) // ➞ 2
-
-// countTrue([false, false, false, false]) //➞ 0
-
-// countTrue([]) //➞ 0
-
-function sumOfItem(arr) {}
-
-sumOfItem([1, 22, 3, 4, 5, 6, 7, 81]);
+console.log(multiply([1, 2, 3])(0));
+//  ➞ [0, 0, 0]
