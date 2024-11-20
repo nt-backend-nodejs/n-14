@@ -1,261 +1,121 @@
+1. **Avtomobil classini yaratish**:
 
-### **Map  Misollari (JavaScript bilan)**
+   - `Car` nomli class yarating. Bu class avtomobilning markasi (`make`), modeli (`model`) va yili (`year`) kabi xususiyatlarni (`properties`) saqlasin.
+   - `getAge()` nomli metod qo'shing, u avtomobilning yoshini hisoblab qaytarsin (joriy yil minus avtomobilning yili).
+     **Izoh**: Bu class yordamida siz avtomobilning ma'lumotlarini saqlashingiz va uning yoshini osongina hisoblash imkoniga ega bo'lasiz.
 
-1. **Do'kon Mahsulotlari**
-   - **Ma'lumotlar**: Mahsulot nomi → Narxi
+2. **Talaba classi**:
+
+   - `Student` nomli class yarating. U talabaning ismi (`name`) va baholari (`grades`) ro'yxatini saqlasin.
+   - `calculateAverage()` metodini yozing, u baholar o'rtachasini hisoblab qaytarsin.
+     **Izoh**: Ushbu class talabaning baholarini tahlil qilish va o'rtacha bahosini aniqlash uchun qulay.
+
+3. **Bank hisobi classi**:
+
+   - `BankAccount` nomli class yarating. U hisob raqami (`accountNumber`) va balansni (`balance`) saqlasin.
+   - `deposit(amount)` va `withdraw(amount)` metodlarini qo'shing, ular balansni mos ravishda oshirsin yoki kamaytirsin.
    - **Misol**:
-     ```javascript
-     const products = new Map([
-       ["Olma", 1200],
-       ["Banan", 800],
-       ["Uzum", 1500]
-     ]);
-     ```
-   - **Hisob-kitob**: 5 ta olma xarid qilish → 1200 * 5 = 6000 so'm
+     **Izoh**: Bu class orqali bank hisobingizni boshqarish, pul qo'shish va yechish imkoniyatiga ega bo'lasiz.
 
-2. **Talaba Baholari**
-   - **Ma'lumotlar**: Talaba ismi → Bahosi
+4. **Kitob classi**:
+
+   - `Book` nomli class yarating. U kitobning nomi (`title`), muallifi (`author`) va sahifalar sonini (`pages`) saqlasin.
+   - `isLong()` metodini yozing, u agar kitob 300 sahifadan ko'p bo'lsa `true`, aks holda `false` qaytarsin.
    - **Misol**:
-     ```javascript
-     const grades = new Map([
-       ["Ali", 85],
-       ["Vali", 90],
-       ["Samiya", 78]
-     ]);
-     ```
-   - **Hisob-kitob**: O'rtacha bahoni hisoblash
+     **Izoh**: Kitobning uzun yoki qisqa ekanligini aniqlash uchun foydali class.
 
-3. **Shahar Aholisi**
-   - **Ma'lumotlar**: Shahar nomi → Aholi soni
+5. **Restoran menyusi**:
+
+   - `Restaurant` nomli class yarating. U restoran nomi (`name`) va menyusini (`menu`) saqlasin.
+   - `addDish(dish)` va `showMenu()` metodlarini yozing, menyuga taom qo'shish va barcha taomlarni ko'rsatish uchun.
    - **Misol**:
-     ```javascript
-     const population = new Map([
-       ["Toshkent", 2700000],
-       ["Samarqand", 520000],
-       ["Buxoro", 300000]
-     ]);
-     ```
-   - **Hisob-kitob**: Toshkent va Samarqand aholi yig'indisi
+     **Izoh**: Restoran menyusini boshqarish va yangilash uchun qulay vosita.
 
-4. **Kitoblar Va Mualliflar**
-   - **Ma'lumotlar**: Kitob nomi → Muallif
-   - **Misol**:
-     ```javascript
-     const books = new Map([
-       ["Harry Potter", "J.K. Rowling"],
-       ["1984", "George Orwell"],
-       ["Don Quixote", "Miguel de Cervantes"]
-     ]);
-     ```
-   - **Hisob-kitob**: Mualliflar soni
+6. **Telefon kontaktlari**:
 
-5. **Avtomobil Modellari Va Narxlari**
-   - **Ma'lumotlar**: Model → Narx
-   - **Misol**:
-     ```javascript
-     const cars = new Map([
-       ["Toyota Camry", 25000],
-       ["Honda Civic", 22000],
-       ["Ford Mustang", 30000]
-     ]);
-     ```
-   - **Hisob-kitob**: 2 ta Ford Mustang sotib olish
+   - `Contact` nomli class yarating. U kontaktning ismi (`name`) va telefon raqamini (`phoneNumber`) saqlasin.
+   - `display()` metodini yozing, u kontakt ma'lumotlarini formatlangan tarzda chiqaradi (masalan, "Ismi: Ali, Telefon: +998901234567").
+     **Izoh**: Kontakt ma'lumotlarini saqlash va ko'rsatish uchun mo'ljallangan.
 
-6. **Kundalik Haroratlar**
-   - **Ma'lumotlar**: Sana → Harorat
-   - **Misol**:
-     ```javascript
-     const temperatures = new Map([
-       ["2024-04-01", 20],
-       ["2024-04-02", 22],
-       ["2024-04-03", 19]
-     ]);
-     ```
-   - **Hisob-kitob**: O'rtacha harorat
+7. **Soat classi**:
 
-7. **Elektron Qurilmalar Va Ularning Xususiyatlari**
-   - **Ma'lumotlar**: Qurilma nomi → Xususiyat
-   - **Misol**:
-     ```javascript
-     const devices = new Map([
-       ["Telefon", "iPhone 14"],
-       ["Noutbuk", "MacBook Pro"],
-       ["Planshet", "iPad Pro"]
-     ]);
-     ```
-   - **Hisob-kitob**: Qurilmalar soni
+   - `Clock` nomli class yarating. Soat (`hours`) va daqiqalarni (`minutes`) saqlasin.
+   - `displayTime()` metodini yozing, u vaqtni "HH:MM" formatida ko'rsatadi.
+     **Izoh**: Vaqtni to'g'ri formatda ko'rsatish uchun ishlatiladi.
 
-8. **Restoran Taomlari Va Kaloriya**
-   - **Ma'lumotlar**: Taom nomi → Kaloriya
-   - **Misol**:
-     ```javascript
-     const menu = new Map([
-       ["Pizza", 800],
-       ["Salat", 300],
-       ["Burger", 700]
-     ]);
-     ```
-   - **Hisob-kitob**: Burger va Salat kaloriyalar yig'indisi
+8. **Film classi**:
 
-9. **Maktab Sinflari Va O'quvchilari**
-   - **Ma'lumotlar**: Sinf → O'quvchilar soni
-   - **Misol**:
-     ```javascript
-     const classes = new Map([
-       ["5-A", 30],
-       ["5-B", 28],
-       ["5-C", 32]
-     ]);
-     ```
-   - **Hisob-kitob**: Barcha sinflardagi o'quvchilar soni
+   - `Movie` nomli class yarating. U film nomi (`title`), janri (`genre`) va davomiyligini (`duration`) saqlasin.
+   - `getDescription()` metodini yozing, u film haqida to'liq ma'lumotni qaytaradi (masalan, "Avengers, Janr: Aksiya, Davomiyligi: 120 daqiqa").
+     **Izoh**: Filmlar haqidagi ma'lumotlarni saqlash va chiqarish uchun foydali.
 
-10. **Sayohat Destinatsiyalari Va Narxlari**
-    - **Ma'lumotlar**: Destinatsiya → Narx
-    - **Misol**:
-      ```javascript
-      const destinations = new Map([
-        ["Parij", 1500],
-        ["Tokio", 2000],
-        ["Nyu-York", 1800]
-      ]);
-      ```
-    - **Hisob-kitob**: Parij va Nyu-York sayohat narxlari yig'indisi
+9. **Savatcha classi**:
 
-### **Set (To'plam) Misollari (JavaScript bilan)**
+   - `ShoppingCart` nomli class yarating. Mahsulotlar (`items`) ro'yxatini saqlasin.
+   - `addItem(item)`, `removeItem(item)`, va `getTotalPrice()` metodlarini yozing.
+     **Izoh**: Onlayn xarid qilish savatchasini boshqarish uchun.
 
-1. **Do'kondagi Unikal Ranglar**
-   - **Ma'lumotlar**: Ranglar to'plami
-   - **Misol**:
-     ```javascript
-     const colors = new Set(["qizil", "yashil", "ko'k", "qizil"]);
-     // Natija: Set(3) {"qizil", "yashil", "ko'k"}
-     ```
-   - **Hisob-kitob**: Unikal ranglar soni
+10. **Kurs classi**:
 
-2. **Kitobxonlikda O'qilgan Kitoblar**
-   - **Ma'lumotlar**: O'qilgan kitoblar nomi
-   - **Misol**:
-     ```javascript
-     const readBooks = new Set(["Harry Potter", "1984", "Don Quixote", "1984"]);
-     // Natija: Set(3) {"Harry Potter", "1984", "Don Quixote"}
-     ```
-   - **Hisob-kitob**: O'qilgan unikal kitoblar soni
+    - `Course` nomli class yarating. Kurs nomi (`courseName`) va talabalarning ro'yxatini (`students`) saqlasin.
+    - `addStudent(student)` va `listStudents()` metodlarini yozing.
+      **Izoh**: Kursga talabalarni qo'shish va ro'yxatini ko'rish imkonini beradi.
 
-3. **Sinovdan O'tgan Talabalar**
-   - **Ma'lumotlar**: Talabalar ismlari
-   - **Misol**:
-     ```javascript
-     const passedStudents = new Set(["Ali", "Vali", "Samiya", "Ali"]);
-     // Natija: Set(3) {"Ali", "Vali", "Samiya"}
-     ```
-   - **Hisob-kitob**: Sinovdan o'tgan unikal talabalar soni
+11. **Musiqa pleyeri**:
 
-4. **Uy Jihozlari Ranglari**
-   - **Ma'lumotlar**: Jihoz ranglari
-   - **Misol**:
-     ```javascript
-     const applianceColors = new Set(["oq", "qora", "oq", "kulrang"]);
-     // Natija: Set(3) {"oq", "qora", "kulrang"}
-     ```
-   - **Hisob-kitob**: Unikal ranglar soni
+    - `MusicPlayer` nomli class yarating. Qo'shiqlar (`songs`) ro'yxatini saqlasin.
+    - `addSong(song)`, `removeSong(song)`, va `showPlaylist()` metodlarini yozing.
+      **Izoh**: Musiqa pleylistini yaratish va boshqarish uchun.
 
-5. **Boshqa Transport Vositalari**
-   - **Ma'lumotlar**: Transport turlari
-   - **Misol**:
-     ```javascript
-     const transports = new Set(["mashina", "velosiped", "mashina", "mototsikl"]);
-     // Natija: Set(3) {"mashina", "velosiped", "mototsikl"}
-     ```
-   - **Hisob-kitob**: Unikal transport turlari soni
+12. **Hayvon classi**:
 
-6. **Telefon Kontaktlari**
-   - **Ma'lumotlar**: Kontakt ismlari
-   - **Misol**:
-     ```javascript
-     const contacts = new Set(["Ali", "Vali", "Samiya", "Ali"]);
-     // Natija: Set(3) {"Ali", "Vali", "Samiya"}
-     ```
-   - **Hisob-kitob**: Unikal kontaktlar soni
+    - `Animal` nomli class yarating. Turi (`type`) va yoshi (`age`) haqida ma'lumot saqlasin.
+    - `makeSound()` metodini yozing, u hayvonning ovozini chiqaradi (masalan, "Mushuk miyovlaydi").
+      **Izoh**: Har xil hayvonlarning ovozlarini aniqlash uchun.
 
-7. **Online Kurslar**
-   - **Ma'lumotlar**: Kurs nomlari
-   - **Misol**:
-     ```javascript
-     const courses = new Set(["Python", "JavaScript", "Python", "Data Science"]);
-     // Natija: Set(3) {"Python", "JavaScript", "Data Science"}
-     ```
-   - **Hisob-kitob**: Unikal kurslar soni
+13. **Ishchi classi**:
 
-8. **Kunlik Qilingan Vazifalar**
-   - **Ma'lumotlar**: Vazifa nomlari
-   - **Misol**:
-     ```javascript
-     const tasks = new Set(["non pishirish", "kitob o'qish", "sport", "kitob o'qish"]);
-     // Natija: Set(3) {"non pishirish", "kitob o'qish", "sport"}
-     ```
-   - **Hisob-kitob**: Unikal vazifalar soni
+    - `Employee` nomli class yarating. Ismi (`name`), lavozimi (`position`) va oylik maoshini (`salary`) saqlasin.
+    - `getAnnualSalary()` metodini yozing, u yillik maoshni hisoblab qaytarsin.
+      **Izoh**: Ishchining yillik daromadini hisoblash uchun.
 
-9. **Film Janrlari**
-   - **Ma'lumotlar**: Janrlar
-   - **Misol**:
-     ```javascript
-     const genres = new Set(["aksiya", "komediya", "drama", "aksiya"]);
-     // Natija: Set(3) {"aksiya", "komediya", "drama"}
-     ```
-   - **Hisob-kitob**: Unikal janrlar soni
+14. **Kalendariya voqeasi**:
 
-10. **Sport Turlari**
-    - **Ma'lumotlar**: Sport turlari
-    - **Misol**:
-      ```javascript
-      const sports = new Set(["futbol", "basketbol", "voleybol", "futbol"]);
-      // Natija: Set(3) {"futbol", "basketbol", "voleybol"}
-      ```
-    - **Hisob-kitob**: Unikal sport turlari soni
+    - `CalendarEvent` nomli class yarating. Voqea nomi (`eventName`), sanasi (`date`) va vaqti (`time`) haqida ma'lumot saqlasin.
+    - `getEventDetails()` metodini yozing, u voqeaning qachon bo'lishini formatlangan tarzda qaytaradi.
+      **Izoh**: Tadbirlar jadvalini tuzish va kuzatish uchun.
 
-### **Qo'shimcha Hisob-kitob Misollari**
+15. **Matn analizatori**:
 
-- **Map Misoli: Talabaning Baholarini Yangilash**
-  ```javascript
-  const grades = new Map([
-    ["Ali", 85],
-    ["Vali", 90],
-    ["Samiya", 78]
-  ]);
+    - `TextAnalyzer` nomli class yarating. Berilgan matnni (`text`) saqlasin.
+    - `wordCount()` va `letterCount()` metodlarini yozing, ular so'zlar sonini va harflar sonini hisoblab qaytaradi.
+      **Izoh**: Matn tahlili uchun foydali vosita.
 
-  grades.set("Samiya", 82); // Samiya bahosi yangilanadi
+16. **Mahsulot classi**:
 
-  // Yangi o'rtacha baho hisoblash
-  ```
+    - `Product` nomli class yarating. Nomi (`name`), narxi (`price`) va miqdorini (`quantity`) saqlasin.
+    - `getTotalCost()` metodini yozing, u jami qiymatini (narx * miqdor) hisoblab qaytaradi.
+      **Izoh**: Xaridlar umumiy narxini hisoblash uchun.
 
-- **Set Misoli: Do'kondagi Unikal Mijozlar**
-  ```javascript
-  const customers = new Set(["Ali", "Vali", "Samiya", "Ali", "Diana"]);
-  // Natija: Set(4) {"Ali", "Vali", "Samiya", "Diana"}
-  ```
+17. **Harorat classi**:
 
-### **Map va Set Birgalikda**
+    - `Temperature` nomli class yarating. Selsiyda haroratni (`celsius`) saqlasin.
+    - `toFahrenheit()` metodini yozing, u haroratni Farengeytga aylantiradi.
+      **Izoh**: Haroratni turli o'lchov birliklariga aylantirish uchun.
 
-- **Mahsulotlar va Ularning Ranglari**
-  ```javascript
-  const products = new Map([
-    ["Olma", new Set(["qizil", "yashil"])],
-    ["Banan", new Set(["sariq"])],
-    ["Uzum", new Set(["ko'k", "yashil"])]
-  ]);
+18. **O'yinchi classi**:
 
-  // Barcha unikal ranglarni olish
-  // Natija: Set(4) {"qizil", "yashil", "sariq", "ko'k"}
-  ```
+    - `Player` nomli class yarating. Ismi (`name`) va ochkolarini (`score`) saqlasin.
+    - `addScore(points)` va `getScore()` metodlarini yozing, ochkolarni qo'shish va hozirgi ochkolarni ko'rsatish uchun.
+      **Izoh**: O'yinlarda o'yinchining ochkolarini kuzatish uchun.
 
-- **Talabalar Va Ularning Fanlari**
-  ```javascript
-  const studentCourses = new Map([
-    ["Ali", new Set(["Matematika", "Fizika"])],
-    ["Vali", new Set(["Biologiya", "Matematika"])],
-    ["Samiya", new Set(["Fizika", "Kimyo"])]
-  ]);
+19. **Valyuta konvertori**:
 
-  // Barcha unikal fanlarni olish
-  // Natija: Set(4) {"Matematika", "Fizika", "Biologiya", "Kimyo"}
-  ```
+    - `CurrencyConverter` nomli class yarating. Konvertatsiya kursini (`exchangeRate`) saqlang.
+    - `convert(amount)` metodini yozing, u dollardan boshqa valyutaga aylantiradi.
+      **Izoh**: Valyutalar o'rtasida hisob-kitob qilish uchun qulay vosita.
+
+20. **Rang classi**:
+
+    - `Color` nomli class yarating. Qizil (`red`), yashil (`green`) va ko'k (`blue`) qiymatlarini saqlasin.
+    - `toHex()` metodini yozing, u rangni HEX formatiga aylantiradi (masalan, `#FFFFFF`).

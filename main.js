@@ -1,60 +1,57 @@
-const person = new Map();
+// class Car {
 
-person.set("name", "xamidullo");
-person.set("age", 44);
-person.set("isMerried", false);
-
-const personName = person.get("name");
-const personAge = person.get("age");
-
-// console.log(personName);
-// console.log(personAge);
-
-// console.log("AGE before", person.has("age"));
-// console.log("SIZe before", person.size);
-
-// person.delete("age");
-
-// console.log("AGE after ", person.has("age"));
-// console.log("SIZe after", person.size);
-
-// console.log(person)
-
-// person.clear()
-
-// console.log(person)
-
-// console.log(person.entries());
-// for (const user of person) {
-//   console.log(user)
 // }
 
-// person.forEach((a, b, c) => {
-//   console.log(a, b, c);
-// });
+// const car =  new Car()
 
-// console.log(person.keys());
+// console.log(car)
 
-// class Person {
-//   constructor(name, age) {
+// function Car (){
+//     return  {}
+// }
+
+// const result = Car()
+
+// console.log(result);
+
+// class Car {
+//   constructor(name, year, color) {
 //     this.name = name;
-//     this.age = age;
+//     this.year = year;
+//     this.color = color;
 //   }
+
 // }
 
-// let odam = new Person("xamidullo", 44);
-
-// console.log(odam);
+// const newCar = new Car("BMW", 1999, "black");
+// const newCar1 = new Car("AUDI", 2000, "red");
+// const newCar2 = new Car("TESLA", 2001, "green");
+// const newCar3 = new Car("MERS", 2002, "pink");
+// const newCar4 = new Car("CHEVROLET", 2004, "white");
+// console.log(newCar);
+// console.log(newCar1);
+// console.log(newCar2);
+// console.log(newCar3);
+// console.log(newCar4);
 
 class Person {
-  name = "xamidullo";
-
-  constructor(name, age){
-    this.name = name
-    this.age = age
+  constructor(firstName, lastName, age, gender, add) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.gender = gender;
+    this.add = add;
+  }
+  makeSpeak() {
+    console.log(`${this.name} gapirmoqda!.`);
+  }
+  logFullName() {
+    console.log(`${this.firstName}  ${this.lastName}`);
   }
 }
+const bexruz = new Person("Bexruz", "Adxamov", 34, "male", "TOSHKENT");
 
-let odam = new Person("azizbek");
+// bexruz.makeSpeak();
+// bexruz.logFullName();
 
-console.log(odam);
+
