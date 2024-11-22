@@ -1,121 +1,229 @@
-1. **Avtomobil classini yaratish**:
+Albatta, har bir masalani batafsil tushuntirib beraman, JavaScript'da sinflardan foydalanib, qadam-baqadam kod yozib chiqamiz.
 
-   - `Car` nomli class yarating. Bu class avtomobilning markasi (`make`), modeli (`model`) va yili (`year`) kabi xususiyatlarni (`properties`) saqlasin.
-   - `getAge()` nomli metod qo'shing, u avtomobilning yoshini hisoblab qaytarsin (joriy yil minus avtomobilning yili).
-     **Izoh**: Bu class yordamida siz avtomobilning ma'lumotlarini saqlashingiz va uning yoshini osongina hisoblash imkoniga ega bo'lasiz.
+---
 
-2. **Talaba classi**:
+### 1. **"Student" nomli sinf yaratish**
 
-   - `Student` nomli class yarating. U talabaning ismi (`name`) va baholari (`grades`) ro'yxatini saqlasin.
-   - `calculateAverage()` metodini yozing, u baholar o'rtachasini hisoblab qaytarsin.
-     **Izoh**: Ushbu class talabaning baholarini tahlil qilish va o'rtacha bahosini aniqlash uchun qulay.
+**Vazifa**: "Student" sinfini yarating, u ism, yosh va kurs xususiyatlariga ega bo'lsin. Talabaning ma'lumotlarini ko'rsatish uchun metod qo'shing. "Student" sinfidan ikkita nusxa yarating va ularning ma'lumotlarini ko'rsating.
 
-3. **Bank hisobi classi**:
+#### Qadamlar:
 
-   - `BankAccount` nomli class yarating. U hisob raqami (`accountNumber`) va balansni (`balance`) saqlasin.
-   - `deposit(amount)` va `withdraw(amount)` metodlarini qo'shing, ular balansni mos ravishda oshirsin yoki kamaytirsin.
-   - **Misol**:
-     **Izoh**: Bu class orqali bank hisobingizni boshqarish, pul qo'shish va yechish imkoniyatiga ega bo'lasiz.
+1. **"Student" sinfini yaratish**:
+   * **Izoh**:
+     - `class Student` bilan sinfni yaratdik.
+     - `constructor` metodi orqali xususiyatlarni (`name`, `age`, `course`) o'rnatamiz.
+     - `displayInfo()` metodi talabaning ma'lumotlarini konsolga chiqaradi.
 
-4. **Kitob classi**:
+2. **Ikki nusxa yaratish va ma'lumotlarini ko'rsatish**:
+   ```javascript
+   const student1 = new Student('Ali', 20, 'Matematika');
+   const student2 = new Student('Laylo', 22, 'Fizika');
+   
+   student1.displayInfo();
+   student2.displayInfo();
+   ```
+   * **Izoh**:
+     - `student1` va `student2` nomli ikkita obyekt yaratdik.
+     - Har bir obyekt uchun `displayInfo()` metodini chaqirib, ma'lumotlarini ko'rsatdik.
 
-   - `Book` nomli class yarating. U kitobning nomi (`title`), muallifi (`author`) va sahifalar sonini (`pages`) saqlasin.
-   - `isLong()` metodini yozing, u agar kitob 300 sahifadan ko'p bo'lsa `true`, aks holda `false` qaytarsin.
-   - **Misol**:
-     **Izoh**: Kitobning uzun yoki qisqa ekanligini aniqlash uchun foydali class.
+---
 
-5. **Restoran menyusi**:
+### 2. **"Circle" sinfini yaratish**
 
-   - `Restaurant` nomli class yarating. U restoran nomi (`name`) va menyusini (`menu`) saqlasin.
-   - `addDish(dish)` va `showMenu()` metodlarini yozing, menyuga taom qo'shish va barcha taomlarni ko'rsatish uchun.
-   - **Misol**:
-     **Izoh**: Restoran menyusini boshqarish va yangilash uchun qulay vosita.
+**Vazifa**: "Circle" sinfini yarating, radius xususiyatiga ega bo'lsin. Aylanani yuzasi va perimetrini hisoblash uchun metodlar qo'shing. "Circle" sinfidan nusxa yarating va uning yuzasi va perimetrini hisoblang.
 
-6. **Telefon kontaktlari**:
+#### Qadamlar:
 
-   - `Contact` nomli class yarating. U kontaktning ismi (`name`) va telefon raqamini (`phoneNumber`) saqlasin.
-   - `display()` metodini yozing, u kontakt ma'lumotlarini formatlangan tarzda chiqaradi (masalan, "Ismi: Ali, Telefon: +998901234567").
-     **Izoh**: Kontakt ma'lumotlarini saqlash va ko'rsatish uchun mo'ljallangan.
+1. **"Circle" sinfini yaratish**:
+   * **Izoh**:
+     - `class Circle` bilan sinfni yaratdik.
+     - `radius` xususiyatini konstruktor orqali o'rnatamiz.
+     - `getArea()` metodi yuzani hisoblaydi.
+     - `getCircumference()` metodi perimetrni (aylana uzunligini) hisoblaydi.
 
-7. **Soat classi**:
+2. **Nusxa yaratish va hisoblash**:
+   ```javascript
+   const circle = new Circle(5);
+   
+   console.log(`Yuza: ${circle.getArea().toFixed(2)}`);
+   console.log(`Perimetr: ${circle.getCircumference().toFixed(2)}`);
+   ```
+   * **Izoh**:
+     - `circle` nomli obyekt yaratdik, radiusi 5 ga teng.
+     - Yuzani va perimetrni hisoblab, natijani konsolga chiqardik.
+     - `.toFixed(2)` natijani 2 xonali kasr qismiga qadar yuvarlaydi.
 
-   - `Clock` nomli class yarating. Soat (`hours`) va daqiqalarni (`minutes`) saqlasin.
-   - `displayTime()` metodini yozing, u vaqtni "HH:MM" formatida ko'rsatadi.
-     **Izoh**: Vaqtni to'g'ri formatda ko'rsatish uchun ishlatiladi.
+---
 
-8. **Film classi**:
+### 3. **"Vehicle" va "Motorcycle" sinflari**
 
-   - `Movie` nomli class yarating. U film nomi (`title`), janri (`genre`) va davomiyligini (`duration`) saqlasin.
-   - `getDescription()` metodini yozing, u film haqida to'liq ma'lumotni qaytaradi (masalan, "Avengers, Janr: Aksiya, Davomiyligi: 120 daqiqa").
-     **Izoh**: Filmlar haqidagi ma'lumotlarni saqlash va chiqarish uchun foydali.
+**Vazifa**: "Vehicle" sinfini yarating, marka, model va yil xususiyatlariga ega bo'lsin. Mashinaning ma'lumotlarini ko'rsatish uchun metod qo'shing. "Vehicle" sinfidan "Motorcycle" nomli subklass yarating, u qo'shimcha ravishda tur xususiyatiga ega bo'lsin. Ma'lumotlarni ko'rsatish metodini tur bilan birga ko'rsatish uchun qayta yozing.
 
-9. **Savatcha classi**:
+#### Qadamlar:
 
-   - `ShoppingCart` nomli class yarating. Mahsulotlar (`items`) ro'yxatini saqlasin.
-   - `addItem(item)`, `removeItem(item)`, va `getTotalPrice()` metodlarini yozing.
-     **Izoh**: Onlayn xarid qilish savatchasini boshqarish uchun.
+1. **"Vehicle" sinfini yaratish**:
+2. **"Motorcycle" subklassini yaratish**:
+   * **Izoh**:
+     - `extends` kalit so'zi orqali meros oldik.
+     - `super()` bilan ota sinfning konstruktorini chaqirdik.
+     - `displayInfo()` metodini qayta yozdik va `super.displayInfo()` orqali ota sinf metodini chaqirdik.
 
-10. **Kurs classi**:
+3. **Nusxa yaratish va ma'lumotlarni ko'rsatish**:
+   ```javascript
+   const moto = new Motorcycle('Yamaha', 'YZF-R3', 2020, 'Sport');
+   moto.displayInfo();
+   ```
+   * **Izoh**:
+     - `moto` nomli obyekt yaratdik.
+     - Ma'lumotlarni konsolga chiqarish uchun `displayInfo()` metodini chaqirdik.
 
-    - `Course` nomli class yarating. Kurs nomi (`courseName`) va talabalarning ro'yxatini (`students`) saqlasin.
-    - `addStudent(student)` va `listStudents()` metodlarini yozing.
-      **Izoh**: Kursga talabalarni qo'shish va ro'yxatini ko'rish imkonini beradi.
+---
 
-11. **Musiqa pleyeri**:
+### 4. **"BankAccount" sinfi**
 
-    - `MusicPlayer` nomli class yarating. Qo'shiqlar (`songs`) ro'yxatini saqlasin.
-    - `addSong(song)`, `removeSong(song)`, va `showPlaylist()` metodlarini yozing.
-      **Izoh**: Musiqa pleylistini yaratish va boshqarish uchun.
+**Vazifa**: "BankAccount" sinfini yarating, hisob raqami va balans xususiyatlariga ega bo'lsin. Hisobga pul qo'shish va yechish uchun metodlar qo'shing. "BankAccount" sinfidan bir nechta nusxa yarating, pul qo'shing va yeching.
 
-12. **Hayvon classi**:
+#### Qadamlar:
 
-    - `Animal` nomli class yarating. Turi (`type`) va yoshi (`age`) haqida ma'lumot saqlasin.
-    - `makeSound()` metodini yozing, u hayvonning ovozini chiqaradi (masalan, "Mushuk miyovlaydi").
-      **Izoh**: Har xil hayvonlarning ovozlarini aniqlash uchun.
+1. **"BankAccount" sinfini yaratish**:
+2. **Nusxalar yaratish va operatsiyalarni bajarish**:
+   ```javascript
+   const account1 = new BankAccount('1234567890');
+   account1.deposit(500000);
+   account1.withdraw(200000);
+   
+   const account2 = new BankAccount('0987654321', 1000000);
+   account2.withdraw(1500000); // Yetarli mablag' mavjud emas
+   account2.withdraw(500000);
+   ```
+   * **Izoh**:
+     - `account1` va `account2` nomli hisoblar yaratdik.
+     - Hisoblar bo'yicha pul qo'shish va yechish operatsiyalarini bajardik.
 
-13. **Ishchi classi**:
+---
 
-    - `Employee` nomli class yarating. Ismi (`name`), lavozimi (`position`) va oylik maoshini (`salary`) saqlasin.
-    - `getAnnualSalary()` metodini yozing, u yillik maoshni hisoblab qaytarsin.
-      **Izoh**: Ishchining yillik daromadini hisoblash uchun.
+### 5. **"Shape", "Rectangle" va "Triangle" sinflari**
 
-14. **Kalendariya voqeasi**:
+**Vazifa**: "Shape" sinfini yarating, yuzani hisoblash uchun metodga ega bo'lsin. "Rectangle" va "Triangle" nomli ikki subklass yarating, ular "Shape" sinfidan meros olsin va yuzani hisoblash metodini qayta yozsin. "Rectangle" va "Triangle" sinflaridan nusxalar yarating va ularning yuzalarini hisoblang.
 
-    - `CalendarEvent` nomli class yarating. Voqea nomi (`eventName`), sanasi (`date`) va vaqti (`time`) haqida ma'lumot saqlasin.
-    - `getEventDetails()` metodini yozing, u voqeaning qachon bo'lishini formatlangan tarzda qaytaradi.
-      **Izoh**: Tadbirlar jadvalini tuzish va kuzatish uchun.
+#### Qadamlar:
 
-15. **Matn analizatori**:
+1. **"Shape" sinfini yaratish**:
 
-    - `TextAnalyzer` nomli class yarating. Berilgan matnni (`text`) saqlasin.
-    - `wordCount()` va `letterCount()` metodlarini yozing, ular so'zlar sonini va harflar sonini hisoblab qaytaradi.
-      **Izoh**: Matn tahlili uchun foydali vosita.
+2. **"Rectangle" sinfini yaratish**:
 
-16. **Mahsulot classi**:
+3. **"Triangle" sinfini yaratish**:
 
-    - `Product` nomli class yarating. Nomi (`name`), narxi (`price`) va miqdorini (`quantity`) saqlasin.
-    - `getTotalCost()` metodini yozing, u jami qiymatini (narx * miqdor) hisoblab qaytaradi.
-      **Izoh**: Xaridlar umumiy narxini hisoblash uchun.
+4. **Nusxalar yaratish va yuzalarni hisoblash**:
+   ```javascript
+   const rectangle = new Rectangle(5, 10);
+   console.log(`To'rtburchak yuzasi: ${rectangle.getArea()}`);
+   
+   const triangle = new Triangle(4, 8);
+   console.log(`Uchburchak yuzasi: ${triangle.getArea()}`);
+   ```
+   * **Izoh**:
+     - Har bir sinfda `getArea()` metodini qayta yozdik.
+     - Nusxalar yaratib, yuzalarni hisobladik.
 
-17. **Harorat classi**:
+---
 
-    - `Temperature` nomli class yarating. Selsiyda haroratni (`celsius`) saqlasin.
-    - `toFahrenheit()` metodini yozing, u haroratni Farengeytga aylantiradi.
-      **Izoh**: Haroratni turli o'lchov birliklariga aylantirish uchun.
+### 6. **"Employee" va "Manager" sinflari**
 
-18. **O'yinchi classi**:
+**Vazifa**: "Employee" sinfini yarating, ism va maosh xususiyatlariga ega bo'lsin. Yillik maoshni hisoblash uchun metod qo'shing. "Manager" nomli subklass yarating, u "Employee" sinfidan meros olsin va qo'shimcha ravishda bo'lim xususiyatiga ega bo'lsin. Yillik maoshni hisoblash metodini menejerlar uchun bonuslarni qo'shish uchun qayta yozing. "Manager" sinfidan ikkita nusxa yarating va ularning yillik maoshlarini hisoblang.
 
-    - `Player` nomli class yarating. Ismi (`name`) va ochkolarini (`score`) saqlasin.
-    - `addScore(points)` va `getScore()` metodlarini yozing, ochkolarni qo'shish va hozirgi ochkolarni ko'rsatish uchun.
-      **Izoh**: O'yinlarda o'yinchining ochkolarini kuzatish uchun.
+#### Qadamlar:
 
-19. **Valyuta konvertori**:
+1. **"Employee" sinfini yaratish**:
 
-    - `CurrencyConverter` nomli class yarating. Konvertatsiya kursini (`exchangeRate`) saqlang.
-    - `convert(amount)` metodini yozing, u dollardan boshqa valyutaga aylantiradi.
-      **Izoh**: Valyutalar o'rtasida hisob-kitob qilish uchun qulay vosita.
+2. **"Manager" sinfini yaratish**:
 
-20. **Rang classi**:
+3. **Nusxalar yaratish va yillik maoshlarni hisoblash**:
+   ```javascript
+   const manager1 = new Manager('Olim', 8000, 'Marketing');
+   const manager2 = new Manager('Gulnoza', 9000, 'IT');
+   
+   console.log(`${manager1.name}ning yillik maoshi: ${manager1.getAnnualSalary()} so'm`);
+   console.log(`${manager2.name}ning yillik maoshi: ${manager2.getAnnualSalary()} so'm`);
+   ```
+   * **Izoh**:
+     - Menejerlar uchun yillik maoshga bonus qo'shib hisobladik.
 
-    - `Color` nomli class yarating. Qizil (`red`), yashil (`green`) va ko'k (`blue`) qiymatlarini saqlasin.
-    - `toHex()` metodini yozing, u rangni HEX formatiga aylantiradi (masalan, `#FFFFFF`).
+---
+
+### 7. **"Book" va "Ebook" sinflari**
+
+**Vazifa**: "Book" sinfini yarating, nomi, muallifi va nashr yili xususiyatlariga ega bo'lsin. Kitobning ma'lumotlarini ko'rsatish uchun metod qo'shing. "Ebook" nomli subklass yarating, u "Book" sinfidan meros olsin va qo'shimcha ravishda narx xususiyatiga ega bo'lsin. Ma'lumotlarni ko'rsatish metodini narx bilan birga ko'rsatish uchun qayta yozing. "Ebook" sinfidan nusxa yarating va uning ma'lumotlarini ko'rsating.
+
+#### Qadamlar:
+
+1. **"Book" sinfini yaratish**:
+
+2. **"Ebook" sinfini yaratish**:
+
+3. **Nusxa yaratish va ma'lumotlarni ko'rsatish**:
+   ```javascript
+   const ebook = new Ebook('JavaScript Dasturlash', 'Ali Vali', 2021, 20000);
+   ebook.displayInfo();
+   ```
+   * **Izoh**:
+     - `displayInfo()` metodini qayta yozib, narxni ham ko'rsatdik.
+
+---
+
+### 8. **"Animal" va "Cat" sinflari**
+
+**Vazifa**: "Animal" sinfini yarating, turi va ovoz xususiyatlariga ega bo'lsin. Hayvonning ovozini chiqarish uchun metod qo'shing. "Cat" nomli subklass yarating, u "Animal" sinfidan meros olsin va qo'shimcha ravishda rang xususiyatiga ega bo'lsin. Ovoz chiqarish metodini rang bilan birga ko'rsatish uchun qayta yozing. "Cat" sinfidan nusxa yarating va uning ovozini chiqaring.
+
+#### Qadamlar:
+
+1. **"Animal" sinfini yaratish**:
+
+2. **"Cat" sinfini yaratish**:
+
+3. **Nusxa yaratish va ovoz chiqarish**:
+   ```javascript
+   const cat = new Cat('Mushuk', 'Miyov', 'Oq');
+   cat.makeSound();
+   ```
+
+   * **Izoh**:
+     - `makeSound()` metodini qayta yozib, rangni qo'shdik.
+
+---
+
+### 9. **"Bank" sinfi**
+
+**Vazifa**: "Bank" sinfini yarating, bank nomi va filiallari xususiyatlariga ega bo'lsin. Filial qo'shish, o'chirish va barcha filiallarni ko'rsatish uchun metodlar qo'shing. "Bank" sinfidan nusxa yarating va filiallarni qo'shish va o'chirishni bajaring.
+
+#### Qadamlar:
+1. **"Bank" sinfini yaratish**:
+   ```
+
+2. **Nusxa yaratish va operatsiyalarni bajarish**:
+   ```javascript
+   const bank = new Bank('Milliy Bank');
+   bank.addBranch('Toshkent');
+   bank.addBranch('Samarqand');
+   bank.displayBranches();
+   bank.removeBranch('Toshkent');
+   bank.displayBranches();
+   ```
+   * **Izoh**:
+
+     - `branches` massivida filiallarni saqladik.
+     - Filiallarni qo'shish va o'chirishni amalga oshirdik.
+
+---
+
+### 10. **"Product" va "ElectronicProduct" sinflari**
+
+**Vazifa**: "Product" sinfini yarating, mahsulot ID, nomi va narxi xususiyatlariga ega bo'lsin. Miqdor bilan narxni ko'paytirib, umumiy narxni hisoblash uchun metod qo'shing. "ElectronicProduct" nomli subklass yarating, u "Product" sinfidan meros olsin va qo'shimcha ravishda kafolat muddati xususiyatiga ega bo'lsin. Umumiy narxni kafolat muddatini hisobga olgan holda hisoblash uchun metodni qayta yozing. "ElectronicProduct" sinfidan nusxa yarating va uning umumiy narxini hisoblang.
+
+#### Qadamlar:
+
+---
+
+### 11. **"BankAccount" sinfi bilan bir nechta operatsiyalar**
+
+**Vazifa**: "BankAccount" sinfini yarating, hisob raqami, hisob egasi nomi va balans xususiyatlariga ega bo'lsin. Hisobga pul qo'shish, yechish va hisoblar orasida pul o'tkazish uchun metodlar qo'shing. "BankAccount" sinfidan bir nechta nusxa yarating va pul qo'shish, yechish va o'tkazish operatsiyalarini bajaring.
