@@ -1,8 +1,10 @@
 {
+  "editor.minimap.enabled": false,
   "workbench.colorTheme": "One Dark Pro",
   "cSpell.words": [
     "Azizbek",
     "Merried",
+    "nodjs",
     "xamidullo"
   ]
 }
