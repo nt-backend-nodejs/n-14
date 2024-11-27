@@ -1,40 +1,161 @@
-# home work
-1. **`fs` modulini `require` orqali import qilib, `example.txt` faylini o'qiydigan va uning mazmunini konsolga chiqaradigan Node.js skriptini yozing.**
+# Home work
 
-2. **`mathOperations.js` nomli modul yarating, u ikki sonni qo'shadigan funksiyani eksport qiladi. So'ngra boshqa faylda ushbu modulni import qilib, funksiyani ishlating.**
+### **1. Fayl yaratish va matn yozish**
 
-3. **Node.js modulidan bir nechta funksiyalarni `module.exports` yordamida qanday eksport qilishni tushuntiring.**
+**Vazifa**: `fs` modulidan foydalanib, yangi matnli fayl yaratib, unga `"Salom, Dunyo!"` matnini yozish.
 
-4. **`greet.js` nomli modul yozing, u foydalanuvchini ismi bilan salomlaydigan funksiyani eksport qiladi. Boshqa faylda ushbu modulni import qilib, funksiyani ishlating.**
+**Tushuntirish**: Node.js da fayllar bilan ishlash uchun `fs` (File System) moduli qo'llaniladi. Bu vazifada siz yangi fayl yaratib, uning ichiga matn yozishingiz kerak. Buning uchun `fs` modulining `writeFile` funksiyasidan foydalanasiz, u fayl nomini, yoziladigan matnni va bajarilgandan keyin nima qilish kerakligini bildiradigan funksiya qabul qiladi.
 
-5. **`name` va `age` xususiyatlariga ega obyektni eksport qiladigan modul yarating. Boshqa faylda ushbu modulni import qilib, xususiyatlarni konsolga chiqaring.**
+---
 
-6. **CommonJS modullarida `exports` va `module.exports` o'rtasidagi farqni tushuntiring.**
+### **2. Faylni o'qish va konsolga chiqarish**
 
-7. **Ranglar massivini eksport qiladigan modul yarating. Boshqa faylda ushbu massivni import qilib, har bir rangni konsolga chiqaring.**
+**Vazifa**: Berilgan matnli faylni o'qib, uning mazmunini konsolga chiqarish.
 
-8. **`Person` nomli oddiy sinfni eksport qiladigan modul yarating, uning konstruktoriga `name` va `age` parametrlarini bering. Boshqa faylda ushbu sinfni import qilib, ob'ekt yarating va uning xususiyatlarini konsolga chiqaring.**
+**Tushuntirish**: Faylni o'qish uchun `fs` modulining `readFile` funksiyasidan foydalanish kerak. Bu funksiya fayl nomini va o'qish tugagandan keyin bajariladigan funksiyani qabul qiladi. O'qilgan matnni konsolga chiqarish orqali siz faylning mazmunini ko'rishingiz mumkin.
 
-9. **CommonJS modullarida aylana bog'liqlik (circular dependencies) qanday yuzaga kelishini va uni qanday oldini olishni tushuntiring.**
+---
 
-10. **`calculator.js` nomli modul yarating, u qo'shish, ayirish, ko'paytirish va bo'lish funksiyalarini eksport qiladi. Boshqa faylda ushbu funksiyalarni import qilib, ulardan foydalaning.**
+### **3. Operatsion tizim nomini chiqarish**
 
-11. **Joriy sana va vaqtni qaytaradigan funksiyani eksport qiladigan modul yarating. Ushbu modulni import qilib, sana va vaqtni konsolga chiqaring.**
+**Vazifa**: `os` modulidan foydalanib, operatsion tizimingiz nomini konsolga chiqarish.
 
-12. **Node.js da `require` funksiyasi qanday ishlashini va modullarni qanday import qilishni tushuntiring.**
+**Tushuntirish**: `os` moduli operatsion tizim haqida ma'lumot olish uchun ishlatiladi. Tizim nomini olish uchun `os.type()` funksiyasidan foydalaniladi, bu funksiya tizim turini, masalan, `'Windows_NT'`, `'Linux'` yoki `'Darwin'` kabi qiymatni qaytaradi.
 
-13. **`path` modulini `require` orqali import qilib, fayl yo'lini tahlil qiladigan Node.js skriptini yozing.**
+---
 
-14. **Konfiguratsiya sozlamalarini obyekt sifatida eksport qiladigan `config.js` nomli modul yarating. Ushbu modulni import qilib, sozlamalardan foydalaning.**
+### **4. Joriy ishchi katalogini olish**
 
-15. **Node.js modullarida `__dirname` va `__filename` ning roli nima ekanligini tushuntiring.**
+**Vazifa**: `process.cwd()` funksiyasidan foydalanib, joriy ishchi katalogingiz yo'lini konsolga chiqarish.
 
-16. **Xabarni faylga yozadigan funksiyani eksport qiladigan modul yarating. Ushbu funksiyani import qilib, "Hello, CommonJS!" matnini faylga yozing.**
+**Tushuntirish**: `process.cwd()` funksiyasi Node.js ilovasi ishlayotgan katalogning to'liq yo'lini qaytaradi. Bu yo'lni konsolga chiqarish orqali siz hozirgi ishchi katalogingizni aniqlashingiz mumkin.
 
-17. **JSON obyektini eksport qiladigan modul yarating. Ushbu modulni import qilib, uning xususiyatlariga murojaat qiling.**
+---
 
-18. **CommonJS modullarida modul keshlanishi (caching) qanday ishlashini tushuntiring.**
+### **5. Katalogdagi fayllarni ro'yxatlash**
 
-19. **Hodisalar emitentini (EventEmitter) eksport qiladigan modul yarating. Ushbu modulni import qilib, maxsus hodisaga listener o'rnating.**
+**Vazifa**: `fs` modulidan foydalanib, joriy katalogdagi barcha fayl va kataloglarni ro'yxatlash.
 
-20. **Funksiyani to'g'ridan-to'g'ri `module.exports` orqali qanday eksport qilishni va `exports` ga tayinlashdagi farqni tushuntiring.**
+**Tushuntirish**: Katalog ichidagi fayllarni ro'yxatlash uchun `fs.readdir` funksiyasidan foydalaniladi. Bu funksiya katalog nomini va natijalarni qaytarish funksiyasini qabul qiladi. Natijada katalog ichidagi fayl va papkalar ro'yxatini olasiz.
+
+---
+
+### **6. Fayl mavjudligini tekshirish**
+
+**Vazifa**: Berilgan fayl yoki katalog mavjudligini tekshirish va natijani konsolga chiqarish.
+
+**Tushuntirish**: Fayl yoki katalogning mavjudligini tekshirish uchun `fs.access` funksiyasidan foydalaniladi. Agar fayl mavjud bo'lsa, funksiya xatolik chiqarmaydi, aks holda xatolik qaytaradi. Siz ushbu xatolikdan foydalanib, faylning mavjud yoki mavjud emasligini aniqlashingiz mumkin.
+
+---
+
+### **7. Fayl nomidan kengaytmasini ajratish**
+
+**Vazifa**: `path` modulidan foydalanib, berilgan fayl nomining kengaytmasini ajratish va konsolga chiqarish.
+
+**Tushuntirish**: `path.extname()` funksiyasi fayl nomidan uning kengaytmasini ajratib olish uchun ishlatiladi. Masalan, agar fayl nomi `'salom.txt'` bo'lsa, funksiya `'.txt'` ni qaytaradi.
+
+---
+
+### **8. Foydalanuvchi nomini olish**
+
+**Vazifa**: `os` modulidan foydalanib, operatsion tizimdagi foydalanuvchi nomini konsolga chiqarish.
+
+**Tushuntirish**: `os.userInfo()` funksiyasi hozirgi foydalanuvchi haqida ma'lumotlarni qaytaradi, jumladan foydalanuvchi nomini. Siz ushbu ma'lumotdan foydalanuvchi nomini olish uchun foydalanishingiz mumkin.
+
+---
+
+### **9. Yo'lni birlashtirish**
+
+**Vazifa**: `path.join()` funksiyasidan foydalanib, yo'l qismlarini birlashtirib, to'liq yo'l yaratish va konsolga chiqarish.
+
+**Tushuntirish**: `path.join()` funksiyasi yo'l qismlarini birlashtiradi va operatsion tizimga mos ravishda to'g'ri yo'lni hosil qiladi. Bu fayl yo'llarini yaratishda juda qulay.
+
+---
+
+### **10. Faylni qayta nomlash**
+
+**Vazifa**: `fs` modulidan foydalanib, mavjud fayl nomini o'zgartirish (masalan, `'eski.txt'` dan `'yangi.txt'` ga).
+
+**Tushuntirish**: Fayl nomini o'zgartirish uchun `fs.rename` funksiyasidan foydalaniladi. Bu funksiya eski fayl nomini va yangi fayl nomini qabul qiladi va faylni qayta nomlaydi.
+
+---
+
+### **11. Faylni o'chirish**
+
+**Vazifa**: `fs` modulidan foydalanib, berilgan faylni o'chirib tashlash va natijani konsolga chiqarish.
+
+**Tushuntirish**: Faylni o'chirish uchun `fs.unlink` funksiyasidan foydalaniladi. Bu funksiya fayl nomini qabul qiladi va uni tizimdan o'chiradi.
+
+---
+
+### **12. Katalog yaratish**
+
+**Vazifa**: `fs.mkdir()` funksiyasidan foydalanib, yangi katalog yaratish.
+
+**Tushuntirish**: Yangi katalog yaratish uchun `fs.mkdir` funksiyasidan foydalaniladi. Bu funksiya katalog nomini qabul qiladi va agar katalog mavjud bo'lmasa, uni yaratadi.
+
+---
+
+### **13. Faylning absolyut yo'lini olish**
+
+**Vazifa**: `path.resolve()` funksiyasidan foydalanib, berilgan faylning absolyut yo'lini olish va konsolga chiqarish.
+
+**Tushuntirish**: `path.resolve()` funksiyasi berilgan yo'lni absolyut yo'lga aylantiradi. Bu, ayniqsa, faylning to'liq yo'lini aniqlash kerak bo'lganda foydali.
+
+---
+
+### **14. Matnni faylga qo'shish**
+
+**Vazifa**: Mavjud faylning oxiriga yangi matn qo'shish.
+
+**Tushuntirish**: Fayl oxiriga matn qo'shish uchun `fs.appendFile` funksiyasidan foydalaniladi. Bu funksiya fayl nomini va qo'shiladigan matnni qabul qiladi.
+
+---
+
+### **15. Fayl hajmini aniqlash**
+
+**Vazifa**: Berilgan faylning hajmini baytlarda aniqlab, konsolga chiqarish.
+
+**Tushuntirish**: Fayl haqida ma'lumot olish uchun `fs.stat` funksiyasidan foydalaniladi. Bu funksiya fayl hajmi, yaratilgan va o'zgartirilgan vaqtlari kabi ma'lumotlarni qaytaradi.
+
+---
+
+### **16. Faylni nusxalash**
+
+**Vazifa**: `fs.copyFile()` funksiyasidan foydalanib, faylni boshqa nom yoki katalogga nusxalash.
+
+**Tushuntirish**: Faylni nusxalash uchun `fs.copyFile` funksiyasidan foydalaniladi. Bu funksiya manba fayl nomini va nusxa olinadigan fayl nomini qabul qiladi.
+
+---
+
+### **17. Operatsion tizim arxitekturasini olish**
+
+**Vazifa**: `os.arch()` funksiyasidan foydalanib, tizimingiz arxitekturasini konsolga chiqarish.
+
+**Tushuntirish**: `os.arch()` funksiyasi tizim arxitekturasini qaytaradi, masalan, `'x64'` yoki `'arm'`. Bu ma'lumot ba'zi dasturlarda muhim bo'lishi mumkin.
+
+---
+
+### **18. Fayl yo'lidan katalog nomini olish**
+
+**Vazifa**: `path.dirname()` funksiyasidan foydalanib, berilgan fayl yo'lidan katalog nomini olish va konsolga chiqarish.
+
+**Tushuntirish**: `path.dirname()` funksiyasi berilgan yo'ldan katalog qismini ajratib oladi. Masalan, fayl yo'li `/home/user/dokumentlar/salom.txt` bo'lsa, katalog nomi `/home/user/dokumentlar` bo'ladi.
+
+---
+
+### **19. Fayl yaratish va vaqt tamg'asini olish**
+
+**Vazifa**: Fayl yarating, so'ngra uning yaratilgan vaqtini aniqlab, konsolga chiqarish.
+
+**Tushuntirish**: Fayl yaratish uchun `fs.writeFile` funksiyasidan foydalanishingiz mumkin. So'ngra, `fs.stat` funksiyasi yordamida faylning yaratilgan vaqti (`birthtime` xususiyati) ni olishingiz mumkin.
+
+---
+
+### **20. JSON faylni o'qish va ob'ektga aylantirish**
+
+**Vazifa**: JSON formatidagi faylni o'qib, uning mazmunini JavaScript ob'ektiga aylantirish va konsolga chiqarish.
+
+**Tushuntirish**: JSON faylni o'qish uchun `fs.readFile` funksiyasidan foydalanasiz. O'qilgan matnni JavaScript ob'ektiga aylantirish uchun `JSON.parse()` funksiyasidan foydalaniladi. Bu sizga fayldagi ma'lumotlar bilan obyekt sifatida ishlash imkonini beradi.
+
+---
