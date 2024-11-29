@@ -1,161 +1,354 @@
-# Home work
+# Home - Work
+---
 
-### **1. Fayl yaratish va matn yozish**
+### 1. Vazifa: Nolga bo'lishni tekshirish
 
-**Vazifa**: `fs` modulidan foydalanib, yangi matnli fayl yaratib, unga `"Salom, Dunyo!"` matnini yozish.
+**Maqsad:** Ikki sonni bo'ladigan function yarating. Agar bo'luvchi nol bo'lsa, xato xabari chiqaring.
 
-**Tushuntirish**: Node.js da fayllar bilan ishlash uchun `fs` (File System) moduli qo'llaniladi. Bu vazifada siz yangi fayl yaratib, uning ichiga matn yozishingiz kerak. Buning uchun `fs` modulining `writeFile` funksiyasidan foydalanasiz, u fayl nomini, yoziladigan matnni va bajarilgandan keyin nima qilish kerakligini bildiradigan funksiya qabul qiladi.
+**Ko'rsatmalar:**
+- Function yarating, u ikkita parametr qabul qiladi: dividend va divisor.
+- `try-catch` blockidan foydalaning.
+- Agar divisor nol bo'lsa, `throw` orqali xato tashlang.
+- Xato xabarini `console.error` orqali chiqaring.
 
 ---
 
-### **2. Faylni o'qish va konsolga chiqarish**
+### 2. Vazifa: JSON parse qilish
 
-**Vazifa**: Berilgan matnli faylni o'qib, uning mazmunini konsolga chiqarish.
+**Maqsad:** JSON stringni parse qiladigan function yozing.
 
-**Tushuntirish**: Faylni o'qish uchun `fs` modulining `readFile` funksiyasidan foydalanish kerak. Bu funksiya fayl nomini va o'qish tugagandan keyin bajariladigan funksiyani qabul qiladi. O'qilgan matnni konsolga chiqarish orqali siz faylning mazmunini ko'rishingiz mumkin.
-
----
-
-### **3. Operatsion tizim nomini chiqarish**
-
-**Vazifa**: `os` modulidan foydalanib, operatsion tizimingiz nomini konsolga chiqarish.
-
-**Tushuntirish**: `os` moduli operatsion tizim haqida ma'lumot olish uchun ishlatiladi. Tizim nomini olish uchun `os.type()` funksiyasidan foydalaniladi, bu funksiya tizim turini, masalan, `'Windows_NT'`, `'Linux'` yoki `'Darwin'` kabi qiymatni qaytaradi.
+**Ko'rsatmalar:**
+- Function yarating, u JSON stringni qabul qiladi.
+- `try-catch` blockidan foydalaning.
+- `JSON.parse()` dan foydalaning.
+- Agar parse qilish muvaffaqiyatsiz bo'lsa, xato xabarini chiqaring.
 
 ---
 
-### **4. Joriy ishchi katalogini olish**
+### 3. Vazifa: Array elementiga kirish
 
-**Vazifa**: `process.cwd()` funksiyasidan foydalanib, joriy ishchi katalogingiz yo'lini konsolga chiqarish.
+**Maqsad:** Arrayning berilgan indeksdagi elementini qaytaradigan function yozing.
 
-**Tushuntirish**: `process.cwd()` funksiyasi Node.js ilovasi ishlayotgan katalogning to'liq yo'lini qaytaradi. Bu yo'lni konsolga chiqarish orqali siz hozirgi ishchi katalogingizni aniqlashingiz mumkin.
-
----
-
-### **5. Katalogdagi fayllarni ro'yxatlash**
-
-**Vazifa**: `fs` modulidan foydalanib, joriy katalogdagi barcha fayl va kataloglarni ro'yxatlash.
-
-**Tushuntirish**: Katalog ichidagi fayllarni ro'yxatlash uchun `fs.readdir` funksiyasidan foydalaniladi. Bu funksiya katalog nomini va natijalarni qaytarish funksiyasini qabul qiladi. Natijada katalog ichidagi fayl va papkalar ro'yxatini olasiz.
+**Ko'rsatmalar:**
+- Function yarating, u array va indexni qabul qiladi.
+- `try-catch` blockidan foydalaning.
+- Agar index array uzunligidan katta yoki kichik bo'lsa, xato tashlang.
+- Xato xabarini chiqaring.
 
 ---
 
-### **6. Fayl mavjudligini tekshirish**
+### 4. Vazifa: Date formatini tekshirish
 
-**Vazifa**: Berilgan fayl yoki katalog mavjudligini tekshirish va natijani konsolga chiqarish.
+**Maqsad:** Berilgan stringni Date obyektiga aylantiring va xatolarni boshqaring.
 
-**Tushuntirish**: Fayl yoki katalogning mavjudligini tekshirish uchun `fs.access` funksiyasidan foydalaniladi. Agar fayl mavjud bo'lsa, funksiya xatolik chiqarmaydi, aks holda xatolik qaytaradi. Siz ushbu xatolikdan foydalanib, faylning mavjud yoki mavjud emasligini aniqlashingiz mumkin.
-
----
-
-### **7. Fayl nomidan kengaytmasini ajratish**
-
-**Vazifa**: `path` modulidan foydalanib, berilgan fayl nomining kengaytmasini ajratish va konsolga chiqarish.
-
-**Tushuntirish**: `path.extname()` funksiyasi fayl nomidan uning kengaytmasini ajratib olish uchun ishlatiladi. Masalan, agar fayl nomi `'salom.txt'` bo'lsa, funksiya `'.txt'` ni qaytaradi.
+**Ko'rsatmalar:**
+- Function yarating, u date stringni qabul qiladi.
+- `try-catch` blockidan foydalaning.
+- `new Date()` dan foydalaning.
+- Agar date yaroqsiz bo'lsa, xato xabarini chiqaring.
 
 ---
 
-### **8. Foydalanuvchi nomini olish**
+### 5. Vazifa: Object property-ga kirish
 
-**Vazifa**: `os` modulidan foydalanib, operatsion tizimdagi foydalanuvchi nomini konsolga chiqarish.
+**Maqsad:** Objectning berilgan property-siga kirish va mavjud emas bo'lsa, xato tashlash.
 
-**Tushuntirish**: `os.userInfo()` funksiyasi hozirgi foydalanuvchi haqida ma'lumotlarni qaytaradi, jumladan foydalanuvchi nomini. Siz ushbu ma'lumotdan foydalanuvchi nomini olish uchun foydalanishingiz mumkin.
-
----
-
-### **9. Yo'lni birlashtirish**
-
-**Vazifa**: `path.join()` funksiyasidan foydalanib, yo'l qismlarini birlashtirib, to'liq yo'l yaratish va konsolga chiqarish.
-
-**Tushuntirish**: `path.join()` funksiyasi yo'l qismlarini birlashtiradi va operatsion tizimga mos ravishda to'g'ri yo'lni hosil qiladi. Bu fayl yo'llarini yaratishda juda qulay.
+**Ko'rsatmalar:**
+- Function yarating, u object va property nomini qabul qiladi.
+- `try-catch` blockidan foydalaning.
+- Agar property mavjud bo'lmasa, xato tashlang.
+- Xato xabarini chiqaring.
 
 ---
 
-### **10. Faylni qayta nomlash**
+### 6. Vazifa: File o'qish (Node.js)
 
-**Vazifa**: `fs` modulidan foydalanib, mavjud fayl nomini o'zgartirish (masalan, `'eski.txt'` dan `'yangi.txt'` ga).
+**Maqsad:** File o'qishda yuzaga keladigan xatolarni boshqarish.
 
-**Tushuntirish**: Fayl nomini o'zgartirish uchun `fs.rename` funksiyasidan foydalaniladi. Bu funksiya eski fayl nomini va yangi fayl nomini qabul qiladi va faylni qayta nomlaydi.
-
----
-
-### **11. Faylni o'chirish**
-
-**Vazifa**: `fs` modulidan foydalanib, berilgan faylni o'chirib tashlash va natijani konsolga chiqarish.
-
-**Tushuntirish**: Faylni o'chirish uchun `fs.unlink` funksiyasidan foydalaniladi. Bu funksiya fayl nomini qabul qiladi va uni tizimdan o'chiradi.
+**Ko'rsatmalar:**
+- `fs` modulidan foydalaning.
+- `try-catch` blockidan foydalaning.
+- File-ni o'qing.
+- Agar file mavjud bo'lmasa, xato xabarini chiqaring.
 
 ---
 
-### **12. Katalog yaratish**
+### 7. Vazifa: Asynchronous functionda xato boshqarish
 
-**Vazifa**: `fs.mkdir()` funksiyasidan foydalanib, yangi katalog yaratish.
+**Maqsad:** Asynchronous functionda `try-catch` dan foydalanish.
 
-**Tushuntirish**: Yangi katalog yaratish uchun `fs.mkdir` funksiyasidan foydalaniladi. Bu funksiya katalog nomini qabul qiladi va agar katalog mavjud bo'lmasa, uni yaratadi.
-
----
-
-### **13. Faylning absolyut yo'lini olish**
-
-**Vazifa**: `path.resolve()` funksiyasidan foydalanib, berilgan faylning absolyut yo'lini olish va konsolga chiqarish.
-
-**Tushuntirish**: `path.resolve()` funksiyasi berilgan yo'lni absolyut yo'lga aylantiradi. Bu, ayniqsa, faylning to'liq yo'lini aniqlash kerak bo'lganda foydali.
+**Ko'rsatmalar:**
+- `async` function yarating.
+- `try-catch` blockidan foydalaning.
+- `await` bilan xato yuzaga keltiring (masalan, muvaffaqiyatsiz promise).
+- Xato xabarini chiqaring.
 
 ---
 
-### **14. Matnni faylga qo'shish**
+### 8. Vazifa: Kvadrat ildizni hisoblash
 
-**Vazifa**: Mavjud faylning oxiriga yangi matn qo'shish.
+**Maqsad:** Sonning kvadrat ildizini hisoblaydigan function yarating. Manfiy son kiritilganda xato tashlang.
 
-**Tushuntirish**: Fayl oxiriga matn qo'shish uchun `fs.appendFile` funksiyasidan foydalaniladi. Bu funksiya fayl nomini va qo'shiladigan matnni qabul qiladi.
-
----
-
-### **15. Fayl hajmini aniqlash**
-
-**Vazifa**: Berilgan faylning hajmini baytlarda aniqlab, konsolga chiqarish.
-
-**Tushuntirish**: Fayl haqida ma'lumot olish uchun `fs.stat` funksiyasidan foydalaniladi. Bu funksiya fayl hajmi, yaratilgan va o'zgartirilgan vaqtlari kabi ma'lumotlarni qaytaradi.
+**Ko'rsatmalar:**
+- Function yarating, u son qabul qiladi.
+- Agar son manfiy bo'lsa, xato tashlang.
+- `try-catch` blockidan foydalaning.
+- Xato xabarini chiqaring.
 
 ---
 
-### **16. Faylni nusxalash**
+### 9. Vazifa: Stringni numberga aylantirish
 
-**Vazifa**: `fs.copyFile()` funksiyasidan foydalanib, faylni boshqa nom yoki katalogga nusxalash.
+**Maqsad:** Stringni numberga aylantiring va xatolarni boshqaring.
 
-**Tushuntirish**: Faylni nusxalash uchun `fs.copyFile` funksiyasidan foydalaniladi. Bu funksiya manba fayl nomini va nusxa olinadigan fayl nomini qabul qiladi.
-
----
-
-### **17. Operatsion tizim arxitekturasini olish**
-
-**Vazifa**: `os.arch()` funksiyasidan foydalanib, tizimingiz arxitekturasini konsolga chiqarish.
-
-**Tushuntirish**: `os.arch()` funksiyasi tizim arxitekturasini qaytaradi, masalan, `'x64'` yoki `'arm'`. Bu ma'lumot ba'zi dasturlarda muhim bo'lishi mumkin.
+**Ko'rsatmalar:**
+- Function yarating, u stringni qabul qiladi.
+- `parseInt()` yoki `parseFloat()` dan foydalaning.
+- Agar natija `NaN` bo'lsa, xato tashlang.
+- `try-catch` blockidan foydalaning.
 
 ---
 
-### **18. Fayl yo'lidan katalog nomini olish**
+### 10. Vazifa: Objectni JSON stringga aylantirish
 
-**Vazifa**: `path.dirname()` funksiyasidan foydalanib, berilgan fayl yo'lidan katalog nomini olish va konsolga chiqarish.
+**Maqsad:** Objectni JSON stringga aylantiring va xatolarni boshqaring.
 
-**Tushuntirish**: `path.dirname()` funksiyasi berilgan yo'ldan katalog qismini ajratib oladi. Masalan, fayl yo'li `/home/user/dokumentlar/salom.txt` bo'lsa, katalog nomi `/home/user/dokumentlar` bo'ladi.
-
----
-
-### **19. Fayl yaratish va vaqt tamg'asini olish**
-
-**Vazifa**: Fayl yarating, so'ngra uning yaratilgan vaqtini aniqlab, konsolga chiqarish.
-
-**Tushuntirish**: Fayl yaratish uchun `fs.writeFile` funksiyasidan foydalanishingiz mumkin. So'ngra, `fs.stat` funksiyasi yordamida faylning yaratilgan vaqti (`birthtime` xususiyati) ni olishingiz mumkin.
+**Ko'rsatmalar:**
+- Function yarating, u objectni qabul qiladi.
+- `JSON.stringify()` dan foydalaning.
+- Agar xato bo'lsa (masalan, circular reference), xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning.
 
 ---
 
-### **20. JSON faylni o'qish va ob'ektga aylantirish**
+### 11. Vazifa: URL ni tekshirish
 
-**Vazifa**: JSON formatidagi faylni o'qib, uning mazmunini JavaScript ob'ektiga aylantirish va konsolga chiqarish.
+**Maqsad:** Berilgan string yaroqli URL ekanligini tekshiring.
 
-**Tushuntirish**: JSON faylni o'qish uchun `fs.readFile` funksiyasidan foydalanasiz. O'qilgan matnni JavaScript ob'ektiga aylantirish uchun `JSON.parse()` funksiyasidan foydalaniladi. Bu sizga fayldagi ma'lumotlar bilan obyekt sifatida ishlash imkonini beradi.
+**Ko'rsatmalar:**
+- Function yarating, u stringni qabul qiladi.
+- `try-catch` blockidan foydalaning.
+- `new URL(string)` dan foydalaning.
+- Xato bo'lsa, xato xabarini chiqaring.
+
+---
+
+### 12. Vazifa: Modulni yuklash
+
+**Maqsad:** Modulni yuklashda yuzaga keladigan xatolarni boshqarish.
+
+**Ko'rsatmalar:**
+- `try-catch` blockidan foydalaning.
+- `require()` dan foydalaning.
+- Agar modul topilmasa, xato xabarini chiqaring.
+
+---
+
+### 13. Vazifa: Matematik ifodani hisoblash
+
+**Maqsad:** Berilgan stringni matematik ifoda sifatida hisoblang.
+
+**Ko'rsatmalar:**
+- Function yarating, u stringni qabul qiladi.
+- `eval()` dan foydalaning.
+- Xavfsizlikni inobatga oling (foydalanuvchi kiritmasini to'g'ridan-to'g'ri `eval` qilmang).
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 14. Vazifa: Foydalanuvchi kiritmasini tekshirish
+
+**Maqsad:** Foydalanuvchi kiritmasini tekshiring va xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- `prompt()` orqali kiritma oling.
+- Agar kiritma bo'sh bo'lsa, xato tashlang.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 15. Vazifa: Promise xatolarini boshqarish
+
+**Maqsad:** `Promise` ichida `try-catch` dan foydalanish.
+
+**Ko'rsatmalar:**
+- `Promise` yarating.
+- `try-catch` blockidan foydalaning.
+- Xato yuzaga keltiring (masalan, `reject` qiling).
+- `catch()` bilan xatoni tuting.
+
+---
+
+### 16. Vazifa: Objectni klonlash
+
+**Maqsad:** Objectni klonlashda xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- Function yarating, u objectni qabul qiladi.
+- `JSON.stringify()` va `JSON.parse()` dan foydalaning.
+- Circular structurelarda xato yuzaga keladi.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 17. Vazifa: Arrayni bo'lish
+
+**Maqsad:** Arrayni berilgan indeksda bo'ling va xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- Function yarating, u array va indexni qabul qiladi.
+- `slice()` dan foydalaning.
+- Agar index yaroqsiz bo'lsa, xato tashlang.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 18. Vazifa: Faylga yozish (Node.js)
+
+**Maqsad:** Faylga yozishda xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- `fs` modulidan foydalaning.
+- Faylga yozing (`fs.writeFileSync()`).
+- Xato bo'lsa, xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 19. Vazifa: RegExp ni tekshirish
+
+**Maqsad:** Berilgan RegExp string yaroqliligini tekshiring.
+
+**Ko'rsatmalar:**
+- Function yarating, u RegExp stringni qabul qiladi.
+- `new RegExp()` dan foydalaning.
+- Xato bo'lsa, xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 20. Vazifa: HTTP so'rov yuborish
+
+**Maqsad:** HTTP so'rov yuborishda xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- `fetch()` yoki `axios` dan foydalaning.
+- Xato bo'lsa, xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning (async function ichida).
+
+---
+
+### 21. Vazifa: Logarifmni hisoblash
+
+**Maqsad:** Sonning logarifmini hisoblang. Manfiy yoki nol bo'lsa, xato tashlang.
+
+**Ko'rsatmalar:**
+- Function yarating.
+- `Math.log()` dan foydalaning.
+- Xato sharoitlarini tekshiring.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 22. Vazifa: String uzunligini tekshirish
+
+**Maqsad:** String uzunligini tekshiring va xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- Function yarating.
+- Agar string bo'sh bo'lsa yoki string bo'lmasa, xato tashlang.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 23. Vazifa: Objectlarni birlashtirish
+
+**Maqsad:** Ikki objectni birlashtiring va xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- Function yarating, u ikki objectni qabul qiladi.
+- `Object.assign()` dan foydalaning.
+- Agar parametrlar object bo'lmasa, xato tashlang.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 24. Vazifa: Asynchronous forEach
+
+**Maqsad:** Asynchronous `forEach` ichida xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- `async` function yarating.
+- `forEach` ichida `await` ishlatishga harakat qiling (bu xato beradi).
+- Xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 25. Vazifa: JSON faylni o'qish
+
+**Maqsad:** JSON faylni o'qish va parse qilishda xatolarni boshqaring.
+
+**Ko'rsatmalar:**
+- `fs` modulidan foydalaning.
+- Faylni o'qing va `JSON.parse()` qiling.
+- Xato bo'lsa, xato xabarini chiqaring.
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 26. Vazifa: Maxsus xato obyektini yaratish
+
+**Maqsad:** Xato obyektini yaratib, unga qo'shimcha ma'lumot qo'shing.
+
+**Ko'rsatmalar:**
+- `Error` sinfidan foydalaning.
+- Xato obyektini yarating (`new Error('Xato xabari')`).
+- Qo'shimcha xususiyatlar qo'shing (masalan, `error.code = 404`).
+- `try-catch` blockidan foydalaning.
+
+---
+
+### 27. Vazifa: Xatoni qayta tashlash
+
+**Maqsad:** `catch` blockida xatoni qayta tashlash (re-throw).
+
+**Ko'rsatmalar:**
+- `try-catch` blockidan foydalaning.
+- `catch` ichida xatoni qayta tashlang (`throw error`).
+- Yuqori darajada xatoni tuting.
+
+---
+
+### 28. Vazifa: Turli xatolarni boshqarish
+
+**Maqsad:** Xato turiga qarab harakat qilish.
+
+**Ko'rsatmalar:**
+- `try-catch` blockidan foydalaning.
+- `catch` ichida `instanceof` orqali xato turini tekshiring.
+- Turli xatolar uchun turli xabarlar chiqaring.
+
+---
+
+### 29. Vazifa: Xato zanjiri
+
+**Maqsad:** Bir nechta functionlar orqali xatoni o'tkazish.
+
+**Ko'rsatmalar:**
+- Bir nechta functionlar yarating.
+- Har birida `try-catch` blockidan foydalaning.
+- Xatoni keyingi functionga tashlang (`throw` orqali).
+
+---
+
+### 30. Vazifa: Maxsus xato sinfi yaratish
+
+**Maqsad:** O'z xato sinfingizni yarating va undan foydalaning.
+
+**Ko'rsatmalar:**
+- `CustomError` sinfini yarating, `Error` dan meros olgan.
+- Xato tashlang va tuting (`throw new CustomError('Xato xabari')`).
+- `try-catch` blockidan foydalaning.
 
 ---
