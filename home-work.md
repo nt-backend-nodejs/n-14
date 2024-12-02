@@ -1,354 +1,224 @@
-# Home - Work
 ---
-
-### 1. Vazifa: Nolga bo'lishni tekshirish
-
-**Maqsad:** Ikki sonni bo'ladigan function yarating. Agar bo'luvchi nol bo'lsa, xato xabari chiqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u ikkita parametr qabul qiladi: dividend va divisor.
-- `try-catch` blockidan foydalaning.
-- Agar divisor nol bo'lsa, `throw` orqali xato tashlang.
-- Xato xabarini `console.error` orqali chiqaring.
+#### **1. Ma’lumotlarni Yuklash Simulyatsiyasi**
+**Vazifa:** `fetchData()` nomli funksiya yarating, u ma’lumotlarni serverdan yuklashni simulyatsiya qiladi. 3 soniyadan keyin va’dani bajaradi va "Ma’lumotlar muvaffaqiyatli yuklandi." matnini qaytaradi.
 
 ---
 
-### 2. Vazifa: JSON parse qilish
+#### **2. Foydalanuvchi Autentifikatsiyasi**
 
-**Maqsad:** JSON stringni parse qiladigan function yozing.
-
-**Ko'rsatmalar:**
-- Function yarating, u JSON stringni qabul qiladi.
-- `try-catch` blockidan foydalaning.
-- `JSON.parse()` dan foydalaning.
-- Agar parse qilish muvaffaqiyatsiz bo'lsa, xato xabarini chiqaring.
+**Vazifa:** `authenticateUser(username, password)` funksiyasini yarating. 2 soniyadan keyin, agar `username` va `password` to‘g‘ri bo‘lsa, va’da (Promise) `resolve` bo‘lsin va "Foydalanuvchi muvaffaqiyatli autentifikatsiyalandi." xabarini qaytarsin. Aks holda, `reject` bo‘lsin va "Autentifikatsiya xatosi." xabarini qaytarsin.
 
 ---
 
-### 3. Vazifa: Array elementiga kirish
+#### **3. Kitob Qidiruvi**
 
-**Maqsad:** Arrayning berilgan indeksdagi elementini qaytaradigan function yozing.
-
-**Ko'rsatmalar:**
-- Function yarating, u array va indexni qabul qiladi.
-- `try-catch` blockidan foydalaning.
-- Agar index array uzunligidan katta yoki kichik bo'lsa, xato tashlang.
-- Xato xabarini chiqaring.
+**Vazifa:** `searchBooks(query)` funksiyasini yarating, u kitob qidiruvini simulyatsiya qiladi. 1.5 soniyadan keyin va’da bajarilib, topilgan kitoblar ro‘yxatini qaytarsin. Agar kitob topilmasa, `reject` bilan "Hech qanday kitob topilmadi." xabarini qaytarsin.
 
 ---
 
-### 4. Vazifa: Date formatini tekshirish
+#### **4. Elektron Pochta Yuborish**
 
-**Maqsad:** Berilgan stringni Date obyektiga aylantiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u date stringni qabul qiladi.
-- `try-catch` blockidan foydalaning.
-- `new Date()` dan foydalaning.
-- Agar date yaroqsiz bo'lsa, xato xabarini chiqaring.
+**Vazifa:** `sendEmail(recipient, subject, body)` funksiyasini yarating. 2.5 soniyadan keyin va’da `resolve` bilan "Elektron pochta muvaffaqiyatli yuborildi." xabarini qaytarsin. Agar `recipient` noto‘g‘ri bo‘lsa, `reject` bilan "Yuboriladigan manzil noto‘g‘ri." xabarini qaytarsin.
 
 ---
 
-### 5. Vazifa: Object property-ga kirish
+#### **5. Foydalanuvchi Ro‘yxatdan O‘tishi**
 
-**Maqsad:** Objectning berilgan property-siga kirish va mavjud emas bo'lsa, xato tashlash.
-
-**Ko'rsatmalar:**
-- Function yarating, u object va property nomini qabul qiladi.
-- `try-catch` blockidan foydalaning.
-- Agar property mavjud bo'lmasa, xato tashlang.
-- Xato xabarini chiqaring.
+**Vazifa:** `registerUser(userInfo)` funksiyasini yarating. 3 soniyadan keyin va’da `resolve` bilan "Foydalanuvchi muvaffaqiyatli ro‘yxatdan o‘tdi." xabarini qaytarsin. Agar foydalanuvchi allaqachon mavjud bo‘lsa, `reject` bilan "Foydalanuvchi allaqachon mavjud." xabarini qaytarsin.
 
 ---
 
-### 6. Vazifa: File o'qish (Node.js)
+#### **6. To‘lovni Qabul Qilish**
 
-**Maqsad:** File o'qishda yuzaga keladigan xatolarni boshqarish.
-
-**Ko'rsatmalar:**
-- `fs` modulidan foydalaning.
-- `try-catch` blockidan foydalaning.
-- File-ni o'qing.
-- Agar file mavjud bo'lmasa, xato xabarini chiqaring.
+**Vazifa:** `processPayment(amount)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "To‘lov muvaffaqiyatli amalga oshirildi." xabarini qaytarsin. Agar balans yetarli bo‘lmasa, `reject` bilan "Balans yetarli emas." xabarini qaytarsin.
 
 ---
 
-### 7. Vazifa: Asynchronous functionda xato boshqarish
+#### **7. Rasm Yuklash**
 
-**Maqsad:** Asynchronous functionda `try-catch` dan foydalanish.
-
-**Ko'rsatmalar:**
-- `async` function yarating.
-- `try-catch` blockidan foydalaning.
-- `await` bilan xato yuzaga keltiring (masalan, muvaffaqiyatsiz promise).
-- Xato xabarini chiqaring.
+**Vazifa:** `uploadImage(imageFile)` funksiyasini yarating. 4 soniyadan keyin va’da `resolve` bilan "Rasm muvaffaqiyatli yuklandi." xabarini qaytarsin. Agar fayl turi noto‘g‘ri bo‘lsa, `reject` bilan "Noto‘g‘ri fayl turi." xabarini qaytarsin.
 
 ---
 
-### 8. Vazifa: Kvadrat ildizni hisoblash
+#### **8. Video Qidiruvi**
 
-**Maqsad:** Sonning kvadrat ildizini hisoblaydigan function yarating. Manfiy son kiritilganda xato tashlang.
-
-**Ko'rsatmalar:**
-- Function yarating, u son qabul qiladi.
-- Agar son manfiy bo'lsa, xato tashlang.
-- `try-catch` blockidan foydalaning.
-- Xato xabarini chiqaring.
+**Vazifa:** `searchVideos(query)` funksiyasini yarating. 2 soniyadan keyin va’da bajarilib, topilgan videolar ro‘yxatini qaytarsin. Agar video topilmasa, `reject` bilan "Hech qanday video topilmadi." xabarini qaytarsin.
 
 ---
 
-### 9. Vazifa: Stringni numberga aylantirish
+#### **9. O‘yin Rezervatsiyasi**
 
-**Maqsad:** Stringni numberga aylantiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u stringni qabul qiladi.
-- `parseInt()` yoki `parseFloat()` dan foydalaning.
-- Agar natija `NaN` bo'lsa, xato tashlang.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `reserveSeat(seatNumber)` funksiyasini yarating. 1 soniyadan keyin va’da `resolve` bilan "O‘rin muvaffaqiyatli rezerv qilindi." xabarini qaytarsin. Agar o‘rin band bo‘lsa, `reject` bilan "O‘rin band." xabarini qaytarsin.
 
 ---
 
-### 10. Vazifa: Objectni JSON stringga aylantirish
+#### **10. Mahsulot Qo‘shish**
 
-**Maqsad:** Objectni JSON stringga aylantiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u objectni qabul qiladi.
-- `JSON.stringify()` dan foydalaning.
-- Agar xato bo'lsa (masalan, circular reference), xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `addProduct(product)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "Mahsulot muvaffaqiyatli qo‘shildi." xabarini qaytarsin. Agar mahsulot allaqachon mavjud bo‘lsa, `reject` bilan "Mahsulot allaqachon mavjud." xabarini qaytarsin.
 
 ---
 
-### 11. Vazifa: URL ni tekshirish
+#### **11. Ma’lumotlarni Yangilash**
 
-**Maqsad:** Berilgan string yaroqli URL ekanligini tekshiring.
-
-**Ko'rsatmalar:**
-- Function yarating, u stringni qabul qiladi.
-- `try-catch` blockidan foydalaning.
-- `new URL(string)` dan foydalaning.
-- Xato bo'lsa, xato xabarini chiqaring.
+**Vazifa:** `updateData(id, newData)` funksiyasini yarating. 3 soniyadan keyin va’da `resolve` bilan "Ma’lumotlar muvaffaqiyatli yangilandi." xabarini qaytarsin. Agar ma’lumot topilmasa, `reject` bilan "Ma’lumot topilmadi." xabarini qaytarsin.
 
 ---
 
-### 12. Vazifa: Modulni yuklash
+#### **12. Foydalanuvchi Ma’lumotlarini Olish**
 
-**Maqsad:** Modulni yuklashda yuzaga keladigan xatolarni boshqarish.
-
-**Ko'rsatmalar:**
-- `try-catch` blockidan foydalaning.
-- `require()` dan foydalaning.
-- Agar modul topilmasa, xato xabarini chiqaring.
+**Vazifa:** `getUserData(userId)` funksiyasini yarating. 1.5 soniyadan keyin va’da bajarilib, foydalanuvchi ma’lumotlarini qaytarsin. Agar foydalanuvchi mavjud bo‘lmasa, `reject` bilan "Foydalanuvchi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 13. Vazifa: Matematik ifodani hisoblash
+#### **13. Kitobni Qaytarish**
 
-**Maqsad:** Berilgan stringni matematik ifoda sifatida hisoblang.
-
-**Ko'rsatmalar:**
-- Function yarating, u stringni qabul qiladi.
-- `eval()` dan foydalaning.
-- Xavfsizlikni inobatga oling (foydalanuvchi kiritmasini to'g'ridan-to'g'ri `eval` qilmang).
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `returnBook(bookId)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "Kitob muvaffaqiyatli qaytarildi." xabarini qaytarsin. Agar kitob topilmasa, `reject` bilan "Kitob topilmadi." xabarini qaytarsin.
 
 ---
 
-### 14. Vazifa: Foydalanuvchi kiritmasini tekshirish
+#### **14. Kursga Ro‘yxatdan O‘tish**
 
-**Maqsad:** Foydalanuvchi kiritmasini tekshiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- `prompt()` orqali kiritma oling.
-- Agar kiritma bo'sh bo'lsa, xato tashlang.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `enrollCourse(courseId)` funksiyasini yarating. 2.5 soniyadan keyin va’da `resolve` bilan "Kursga muvaffaqiyatli ro‘yxatdan o‘tdingiz." xabarini qaytarsin. Agar kurs to‘ldirilgan bo‘lsa, `reject` bilan "Kursga joy yo‘q." xabarini qaytarsin.
 
 ---
 
-### 15. Vazifa: Promise xatolarini boshqarish
+#### **15. Xaridni Tasdiqlash**
 
-**Maqsad:** `Promise` ichida `try-catch` dan foydalanish.
-
-**Ko'rsatmalar:**
-- `Promise` yarating.
-- `try-catch` blockidan foydalaning.
-- Xato yuzaga keltiring (masalan, `reject` qiling).
-- `catch()` bilan xatoni tuting.
+**Vazifa:** `confirmPurchase(cartItems)` funksiyasini yarating. 3 soniyadan keyin va’da `resolve` bilan "Xarid muvaffaqiyatli tasdiqlandi." xabarini qaytarsin. Agar ombor yetarli bo‘lmasa, `reject` bilan "Ba’zi mahsulotlar omborda yetarli emas." xabarini qaytarsin.
 
 ---
 
-### 16. Vazifa: Objectni klonlash
+#### **16. Foydalanuvchi Profilini Yangilash**
 
-**Maqsad:** Objectni klonlashda xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u objectni qabul qiladi.
-- `JSON.stringify()` va `JSON.parse()` dan foydalaning.
-- Circular structurelarda xato yuzaga keladi.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `updateProfile(userId, profileData)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "Profil muvaffaqiyatli yangilandi." xabarini qaytarsin. Agar foydalanuvchi topilmasa, `reject` bilan "Foydalanuvchi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 17. Vazifa: Arrayni bo'lish
+#### **17. To‘lov Tarixini Olish**
 
-**Maqsad:** Arrayni berilgan indeksda bo'ling va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u array va indexni qabul qiladi.
-- `slice()` dan foydalaning.
-- Agar index yaroqsiz bo'lsa, xato tashlang.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `getPaymentHistory(userId)` funksiyasini yarating. 1.5 soniyadan keyin va’da bajarilib, foydalanuvchining to‘lov tarixini qaytarsin. Agar tarix bo‘lmasa, `reject` bilan "To‘lov tarixi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 18. Vazifa: Faylga yozish (Node.js)
+#### **18. Xabar Yuborish**
 
-**Maqsad:** Faylga yozishda xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- `fs` modulidan foydalaning.
-- Faylga yozing (`fs.writeFileSync()`).
-- Xato bo'lsa, xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `sendMessage(recipient, message)` funksiyasini yarating. 1.5 soniyadan keyin va’da `resolve` bilan "Xabar muvaffaqiyatli yuborildi." xabarini qaytarsin. Agar `recipient` noto‘g‘ri bo‘lsa, `reject` bilan "Xabar yuborishda xato." xabarini qaytarsin.
 
 ---
 
-### 19. Vazifa: RegExp ni tekshirish
+#### **19. Mahsulotni O‘chirish**
 
-**Maqsad:** Berilgan RegExp string yaroqliligini tekshiring.
-
-**Ko'rsatmalar:**
-- Function yarating, u RegExp stringni qabul qiladi.
-- `new RegExp()` dan foydalaning.
-- Xato bo'lsa, xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `deleteProduct(productId)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "Mahsulot muvaffaqiyatli o‘chirildi." xabarini qaytarsin. Agar mahsulot topilmasa, `reject` bilan "Mahsulot topilmadi." xabarini qaytarsin.
 
 ---
 
-### 20. Vazifa: HTTP so'rov yuborish
+#### **20. Xaridni Bekor Qilish**
 
-**Maqsad:** HTTP so'rov yuborishda xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- `fetch()` yoki `axios` dan foydalaning.
-- Xato bo'lsa, xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning (async function ichida).
+**Vazifa:** `cancelOrder(orderId)` funksiyasini yarating. 1.5 soniyadan keyin va’da `resolve` bilan "Xarid muvaffaqiyatli bekor qilindi." xabarini qaytarsin. Agar xarid topilmasa, `reject` bilan "Xarid topilmadi." xabarini qaytarsin.
 
 ---
 
-### 21. Vazifa: Logarifmni hisoblash
+#### **21. Foydalanuvchi Rolini O‘zgartirish**
 
-**Maqsad:** Sonning logarifmini hisoblang. Manfiy yoki nol bo'lsa, xato tashlang.
-
-**Ko'rsatmalar:**
-- Function yarating.
-- `Math.log()` dan foydalaning.
-- Xato sharoitlarini tekshiring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `changeUserRole(userId, newRole)` funksiyasini yarating. 2.5 soniyadan keyin va’da `resolve` bilan "Foydalanuvchi roli muvaffaqiyatli o‘zgartirildi." xabarini qaytarsin. Agar foydalanuvchi topilmasa, `reject` bilan "Foydalanuvchi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 22. Vazifa: String uzunligini tekshirish
+#### **22. Xizmat Subskriptsiyasini Yaratish**
 
-**Maqsad:** String uzunligini tekshiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating.
-- Agar string bo'sh bo'lsa yoki string bo'lmasa, xato tashlang.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `createSubscription(userId, plan)` funksiyasini yarating. 3 soniyadan keyin va’da `resolve` bilan "Subskriptsiya muvaffaqiyatli yaratilgan." xabarini qaytarsin. Agar plan mavjud bo‘lmasa, `reject` bilan "Tanlangan plan mavjud emas." xabarini qaytarsin.
 
 ---
 
-### 23. Vazifa: Objectlarni birlashtirish
+#### **23. Xarajatlarni Hisoblash**
 
-**Maqsad:** Ikki objectni birlashtiring va xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- Function yarating, u ikki objectni qabul qiladi.
-- `Object.assign()` dan foydalaning.
-- Agar parametrlar object bo'lmasa, xato tashlang.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `calculateExpenses(expenses)` funksiyasini yarating. 2 soniyadan keyin va’da bajarilib, umumiy xarajatlarni qaytarsin. Agar xarajatlar ro‘yxati bo‘sh bo‘lsa, `reject` bilan "Xarajatlar mavjud emas." xabarini qaytarsin.
 
 ---
 
-### 24. Vazifa: Asynchronous forEach
+#### **24. Kurs Materiallarini Yuklash**
 
-**Maqsad:** Asynchronous `forEach` ichida xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- `async` function yarating.
-- `forEach` ichida `await` ishlatishga harakat qiling (bu xato beradi).
-- Xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `loadCourseMaterials(courseId)` funksiyasini yarating. 2 soniyadan keyin va’da bajarilib, kurs materiallarini qaytarsin. Agar kurs topilmasa, `reject` bilan "Kurs topilmadi." xabarini qaytarsin.
 
 ---
 
-### 25. Vazifa: JSON faylni o'qish
+#### **25. Foydalanuvchi Sharhini Qo‘shish**
 
-**Maqsad:** JSON faylni o'qish va parse qilishda xatolarni boshqaring.
-
-**Ko'rsatmalar:**
-- `fs` modulidan foydalaning.
-- Faylni o'qing va `JSON.parse()` qiling.
-- Xato bo'lsa, xato xabarini chiqaring.
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `addReview(userId, review)` funksiyasini yarating. 1.5 soniyadan keyin va’da `resolve` bilan "Sharh muvaffaqiyatli qo‘shildi." xabarini qaytarsin. Agar foydalanuvchi mavjud bo‘lmasa, `reject` bilan "Foydalanuvchi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 26. Vazifa: Maxsus xato obyektini yaratish
+#### **26. Ma’lumotlarni Arxivlash**
 
-**Maqsad:** Xato obyektini yaratib, unga qo'shimcha ma'lumot qo'shing.
-
-**Ko'rsatmalar:**
-- `Error` sinfidan foydalaning.
-- Xato obyektini yarating (`new Error('Xato xabari')`).
-- Qo'shimcha xususiyatlar qo'shing (masalan, `error.code = 404`).
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `archiveData(dataId)` funksiyasini yarating. 3 soniyadan keyin va’da `resolve` bilan "Ma’lumot muvaffaqiyatli arxivlandi." xabarini qaytarsin. Agar ma’lumot topilmasa, `reject` bilan "Ma’lumot topilmadi." xabarini qaytarsin.
 
 ---
 
-### 27. Vazifa: Xatoni qayta tashlash
+#### **27. To‘lovni Qaytarish**
 
-**Maqsad:** `catch` blockida xatoni qayta tashlash (re-throw).
-
-**Ko'rsatmalar:**
-- `try-catch` blockidan foydalaning.
-- `catch` ichida xatoni qayta tashlang (`throw error`).
-- Yuqori darajada xatoni tuting.
+**Vazifa:** `refundPayment(paymentId)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "To‘lov muvaffaqiyatli qaytarildi." xabarini qaytarsin. Agar to‘lov topilmasa, `reject` bilan "To‘lov topilmadi." xabarini qaytarsin.
 
 ---
 
-### 28. Vazifa: Turli xatolarni boshqarish
+#### **28. Statistik Ma’lumotlarni Olish**
 
-**Maqsad:** Xato turiga qarab harakat qilish.
-
-**Ko'rsatmalar:**
-- `try-catch` blockidan foydalaning.
-- `catch` ichida `instanceof` orqali xato turini tekshiring.
-- Turli xatolar uchun turli xabarlar chiqaring.
+**Vazifa:** `getStatistics()` funksiyasini yarating. 1 soniyadan keyin va’da bajarilib, statistik ma’lumotlarni qaytarsin. Agar ma’lumotlar mavjud bo‘lmasa, `reject` bilan "Statistik ma’lumotlar mavjud emas." xabarini qaytarsin.
 
 ---
 
-### 29. Vazifa: Xato zanjiri
+#### **29. Foydalanuvchi Seansini Tugatish**
 
-**Maqsad:** Bir nechta functionlar orqali xatoni o'tkazish.
-
-**Ko'rsatmalar:**
-- Bir nechta functionlar yarating.
-- Har birida `try-catch` blockidan foydalaning.
-- Xatoni keyingi functionga tashlang (`throw` orqali).
+**Vazifa:** `logoutUser(userId)` funksiyasini yarating. 1.5 soniyadan keyin va’da `resolve` bilan "Foydalanuvchi muvaffaqiyatli tizimdan chiqdi." xabarini qaytarsin. Agar foydalanuvchi topilmasa, `reject` bilan "Foydalanuvchi topilmadi." xabarini qaytarsin.
 
 ---
 
-### 30. Vazifa: Maxsus xato sinfi yaratish
+#### **30. Ma’lumotlarni Export Qilish**
 
-**Maqsad:** O'z xato sinfingizni yarating va undan foydalaning.
-
-**Ko'rsatmalar:**
-- `CustomError` sinfini yarating, `Error` dan meros olgan.
-- Xato tashlang va tuting (`throw new CustomError('Xato xabari')`).
-- `try-catch` blockidan foydalaning.
+**Vazifa:** `exportData(format)` funksiyasini yarating. 2 soniyadan keyin va’da `resolve` bilan "Ma’lumotlar muvaffaqiyatli eksport qilindi: [format]." xabarini qaytarsin. Agar format qo‘llab-quvvatlanmasa, `reject` bilan "Noto‘g‘ri eksport formati." xabarini qaytarsin.
 
 ---
+
+### Har Bir Masalaning Qisqacha Tavsifi
+
+1. **Ma’lumotlarni Yuklash Simulyatsiyasi:** Serverdan ma’lumotlarni yuklashni Promises bilan simulyatsiya qilish.
+2. **Foydalanuvchi Autentifikatsiyasi:** Foydalanuvchini autentifikatsiyalash jarayonini Promises yordamida amalga oshirish.
+3. **Kitob Qidiruvi:** Kitob qidiruv funksiyasini yaratish va natijalarni Promises orqali boshqarish.
+4. **Elektron Pochta Yuborish:** Elektron pochta yuborish jarayonini Promises bilan simulyatsiya qilish.
+5. **Foydalanuvchi Ro‘yxatdan O‘tishi:** Foydalanuvchini ro‘yxatdan o‘tish jarayonini Promises yordamida amalga oshirish.
+6. **To‘lovni Qabul Qilish:** To‘lovni qabul qilish jarayonini Promises bilan boshqarish.
+7. **Rasm Yuklash:** Rasm yuklash funksiyasini Promises yordamida yaratish va boshqarish.
+8. **Video Qidiruvi:** Video qidiruv jarayonini Promises bilan simulyatsiya qilish.
+9. **O‘yin Rezervatsiyasi:** O‘rin rezervatsiyasini Promises orqali amalga oshirish.
+10. **Mahsulot Qo‘shish:** Mahsulot qo‘shish jarayonini Promises yordamida boshqarish.
+11. **Ma’lumotlarni Yangilash:** Ma’lumotlarni yangilash funksiyasini Promises bilan yaratish.
+12. **Foydalanuvchi Ma’lumotlarini Olish:** Foydalanuvchi ma’lumotlarini Promises yordamida olish.
+13. **Kitobni Qaytarish:** Kitobni qaytarish jarayonini Promises orqali boshqarish.
+14. **Kursga Ro‘yxatdan O‘tish:** Kursga ro‘yxatdan o‘tish funksiyasini Promises bilan amalga oshirish.
+15. **Xaridni Tasdiqlash:** Xaridni tasdiqlash jarayonini Promises yordamida boshqarish.
+16. **Foydalanuvchi Profilini Yangilash:** Profilni yangilash funksiyasini Promises bilan yaratish.
+17. **To‘lov Tarixini Olish:** To‘lov tarixini Promises yordamida olish.
+18. **Xabar Yuborish:** Xabar yuborish jarayonini Promises bilan simulyatsiya qilish.
+19. **Mahsulotni O‘chirish:** Mahsulotni o‘chirish funksiyasini Promises yordamida amalga oshirish.
+20. **Xaridni Bekor Qilish:** Xaridni bekor qilish jarayonini Promises orqali boshqarish.
+21. **Foydalanuvchi Rolini O‘zgartirish:** Foydalanuvchi rolini Promises yordamida o‘zgartirish.
+22. **Xizmat Subskriptsiyasini Yaratish:** Subskriptsiya yaratish funksiyasini Promises bilan amalga oshirish.
+23. **Xarajatlarni Hisoblash:** Xarajatlarni hisoblash jarayonini Promises orqali boshqarish.
+24. **Kurs Materiallarini Yuklash:** Kurs materiallarini Promises yordamida yuklash.
+25. **Foydalanuvchi Sharhini Qo‘shish:** Sharh qo‘shish funksiyasini Promises bilan yaratish.
+26. **Ma’lumotlarni Arxivlash:** Ma’lumotlarni arxivlash jarayonini Promises yordamida boshqarish.
+27. **To‘lovni Qaytarish:** To‘lovni qaytarish funksiyasini Promises bilan amalga oshirish.
+28. **Statistik Ma’lumotlarni Olish:** Statistik ma’lumotlarni Promises yordamida olish.
+29. **Foydalanuvchi Seansini Tugatish:** Foydalanuvchi seansini tugatish jarayonini Promises orqali boshqarish.
+30. **Ma’lumotlarni Export Qilish:** Ma’lumotlarni eksport qilish funksiyasini Promises bilan yaratish.
+
+---
+
+### Masalalarni Yechish Bo‘yicha Qo‘llanma
+
+Har bir masalani yechishda quyidagi qadamlarni bajarishingiz mumkin:
+
+1. **Funksiyani Yarating:** Masala tavsifiga mos ravishda kerakli funksiyani yaratish.
+2. **Promises Qo‘llang:** Funksiya ichida `new Promise` konstruktori yordamida asinxron operatsiyani simulyatsiya qilish.
+3. **Resolve va Reject:** Shartlarga qarab `resolve` yoki `reject` chaqiring.
+4. **Test Qiling:** Funksiyani chaqirib, `.then()` va `.catch()` metodlari bilan natijalarni boshqaring.
+5. **Kodni Tozalang:** Kodni o‘qilishi oson va optimallashtirilgan holga keltiring.
