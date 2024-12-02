@@ -6,7 +6,9 @@ class Person {
   }
 }
 
+
 class Student extends Person {
+
   constructor(name, age, gender, course, level) {
     super(name, age, gender);
     this.course = course;
