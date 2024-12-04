@@ -1,6 +1,3 @@
-Albatta! Quyida siz so‘ragan beshta vazifaning har biri uchun aniq va tushunarli JavaScript **Promises** va **async/await** yordamida yechimlarni taqdim etaman. Har bir vazifa uchun vazifa tavsifi, yechim kodi va qisqacha tushuntirish keltirilgan.
-
----
 
 ## **Vazifa 1: Timer bilan Ishlash**
 
@@ -17,16 +14,6 @@ Bu vazifada biz `setTimeout` funksiyasini `Promise` ichida ishlatamiz va `async/
 
 ```javascript
 // 1. Promise yaratish: 3 soniya kutish
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-// 2. Async funksiyani yaratish va await dan foydalanish
-async function timer() {
-  console.log("Kechikish boshlanmoqda...");
-  await delay(3000); // 3 soniya kutish
-  console.log("Vaqt tugadi!");
-}
 
 // 3. Funksiyani chaqirish
 timer();
@@ -72,33 +59,10 @@ Bu vazifada biz ikkita asinxron funksiyani yaratamiz: biri qo‘shish, ikkinchis
 
 ```javascript
 // 1. Asinxron qo'shish funksiyasi
-function add(a, b) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(a + b);
-    }, 1000); // 1 soniya kutish
-  });
-}
 
 // 2. Asinxron ko'paytirish funksiyasi
-function multiply(a, b) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(a * b);
-    }, 1000); // 1 soniya kutish
-  });
-}
 
 // 3. Async funksiyani yaratish va amallarni bajarish
-async function performMathOperations() {
-  console.log("Qo'shish amalini bajarish boshlanmoqda...");
-  const sum = await add(5, 10);
-  console.log(`Qo'shish natijasi: ${sum}`); // Qo'shish natijasi: 15
-
-  console.log("Ko'paytirish amalini bajarish boshlanmoqda...");
-  const product = await multiply(5, 10);
-  console.log(`Ko'paytirish natijasi: ${product}`); // Ko'paytirish natijasi: 50
-}
 
 // 4. Funksiyani chaqirish
 performMathOperations();
@@ -151,27 +115,8 @@ Bu vazifada biz 1 soniya kutib, tasodifiy raqam yaratamiz va uning kattaligiga q
 
 ```javascript
 // 1. Asinxron random raqam funksiyasi
-function getRandomNumber() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const randomNum = Math.floor(Math.random() * 100) + 1; // 1 dan 100 gacha raqam
-      resolve(randomNum);
-    }, 1000); // 1 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va raqamni tekshirish
-async function handleRandomNumber() {
-  console.log("Tasodifiy raqam yaratilmoqda...");
-  const number = await getRandomNumber();
-  console.log(`Tasodifiy raqam: ${number}`);
-  
-  if (number > 50) {
-    console.log("Katta raqam!");
-  } else {
-    console.log("Kichik raqam!");
-  }
-}
 
 // 3. Funksiyani chaqirish
 handleRandomNumber();
@@ -225,22 +170,8 @@ Bu vazifada biz 1 dan 5 soniya gacha tasodifiy vaqt kutib, va'dani bajaruvchi fu
 
 ```javascript
 // 1. Asinxron maxsus va'da funksiyasi
-function randomDelay() {
-  return new Promise(resolve => {
-    // 1 dan 5 soniya gacha kechikish
-    const delayTime = Math.floor(Math.random() * 5000) + 1000;
-    setTimeout(() => {
-      resolve(`Va'da bajarildi! (${delayTime / 1000} soniya kutildi)`);
-    }, delayTime);
-  });
-}
 
 // 2. Async funksiyani yaratish va va'dani bajarish
-async function executeRandomPromise() {
-  console.log("Maxsus va'da bajarilmoqda...");
-  const message = await randomDelay();
-  console.log(message);
-}
 
 // 3. Funksiyani chaqirish
 executeRandomPromise();
@@ -286,28 +217,8 @@ Bu vazifada biz foydalanuvchi nomi va parolni tekshiruvchi va 2 soniya kutib nat
 
 ```javascript
 // 1. Asinxron login funksiyasi
-function login(username, password) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // Oddiy parol tekshiruvi
-      if (password === '12345') {
-        resolve("Login muvaffaqiyatli!");
-      } else {
-        reject("Login muvaffaqiyatsiz. Noto'g'ri parol.");
-      }
-    }, 2000); // 2 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va loginni bajarish
-async function performLogin(username, password) {
-  try {
-    const result = await login(username, password);
-    console.log(result); // "Login muvaffaqiyatli!"
-  } catch (error) {
-    console.error(error); // "Login muvaffaqiyatsiz. Noto'g'ri parol."
-  }
-}
 
 // 3. Funksiyani chaqirish
 performLogin("user1", "12345"); // Muvaffaqiyatli login
@@ -360,28 +271,8 @@ Agar siz `async/await` bilan ko'proq mashq qilmoqchi bo'lsangiz, quyidagi qo'shi
 
 ```javascript
 // 1. Asinxron ma'lumotlarni olish funksiyasi
-function fetchData() {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const data = ["Element1", "Element2"]; // Ma'lumotlar ro'yxati
-      if (data.length > 0) {
-        resolve(data);
-      } else {
-        reject("Ma'lumot mavjud emas.");
-      }
-    }, 2000); // 2 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va ma'lumotlarni chiqarish
-async function getData() {
-  try {
-    const data = await fetchData();
-    console.log("Olingan ma'lumotlar:", data);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 // 3. Funksiyani chaqirish
 getData();
@@ -413,29 +304,8 @@ Ma'lumot mavjud emas.
 
 ```javascript
 // 1. Asinxron xarajatlarni hisoblash funksiyasi
-function calculateTotal(expenses) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (expenses.length > 0) {
-        const total = expenses.reduce((acc, curr) => acc + curr, 0);
-        resolve(total);
-      } else {
-        reject("Xarajatlar mavjud emas.");
-      }
-    }, 2000); // 2 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va xarajatlarni hisoblash
-async function getTotalExpenses() {
-  try {
-    const expenses = [100, 200, 300]; // Xarajatlar ro'yxati
-    const total = await calculateTotal(expenses);
-    console.log(`Umumiy xarajatlar: $${total}`);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 // 3. Funksiyani chaqirish
 getTotalExpenses();
@@ -467,32 +337,8 @@ Xarajatlar mavjud emas.
 
 ```javascript
 // 1. Asinxron foydalanuvchi ma'lumotlarini olish funksiyasi
-function getUserInfo(userId) {
-  const users = {
-    1: { name: "Alice", age: 25 },
-    2: { name: "Bob", age: 30 }
-  };
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (users[userId]) {
-        resolve(users[userId]);
-      } else {
-        reject("Foydalanuvchi topilmadi.");
-      }
-    }, 2000); // 2 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va foydalanuvchi ma'lumotlarini chiqarish
-async function displayUserInfo(id) {
-  try {
-    const user = await getUserInfo(id);
-    console.log(`Foydalanuvchi: ${user.name}, Yoshi: ${user.age}`);
-  } catch (error) {
-    console.error(error);
-  }
-}
 
 // 3. Funksiyani chaqirish
 displayUserInfo(1); // Mavjud foydalanuvchi
@@ -524,38 +370,8 @@ Foydalanuvchi topilmadi.
 
 ```javascript
 // 1. Asinxron xaridni tasdiqlash funksiyasi
-function confirmOrder(cart) {
-  const inventory = {
-    "Telefon": 10,
-    "Kompyuter": 5,
-    "Planshet": 0
-  };
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      for (let item of cart) {
-        if (!inventory[item] || inventory[item] <= 0) {
-          reject(`Mahsulot yetarli emas: ${item}`);
-          return;
-        }
-      }
-      // Agar barcha mahsulotlar yetarli bo'lsa
-      cart.forEach(item => inventory[item]--);
-      resolve("Xarid tasdiqlandi.");
-    }, 3000); // 3 soniya kutish
-  });
-}
 
 // 2. Async funksiyani yaratish va xaridni tasdiqlash
-async function processOrder() {
-  try {
-    const cart = ["Telefon", "Kompyuter"];
-    const message = await confirmOrder(cart);
-    console.log(message); // "Xarid tasdiqlandi."
-  } catch (error) {
-    console.error(error); // "Mahsulot yetarli emas: Planshet"
-  }
-}
 
 // 3. Funksiyani chaqirish
 processOrder();
@@ -589,10 +405,5 @@ Xarid tasdiqlandi.
 Mahsulot yetarli emas: Planshet
 ```
 
----
 
-## **Xulosa**
 
-Yuqorida taqdim etilgan beshta vazifa orqali siz **Promises** va **async/await** yordamida JavaScriptda asinxron operatsiyalarni qanday boshqarishni o‘rganishingiz mumkin. Har bir vazifa real hayotdagi scenario'larni simulyatsiya qilish orqali amaliyotda qo‘llashni osonlashtiradi. 
-
-Agar qo‘shimcha savollaringiz yoki boshqa masalalar bo‘lsa, bemalol so‘rashingiz mumkin!
