@@ -1,68 +1,35 @@
-// function getHotelDetails() {
-//   // Mehmonxona ma'lumotlari olingan.
-//   return new Promise((resolve, reject) => {
-//     setTimeout(resolve, 2000, `Mehmonxona ma'lumotlari olingan.`);
-//   });
-// }
-// function getFlightDetails() {
-//   // Parvoz ma'lumotlari olingan.
-//   return new Promise((resolve, reject) => {
-//     setTimeout(resolve, 2000, `Parvoz ma'lumotlari olingan`);
-//   });
-// }
-// function getWeatherDetails() {
-//   // Ob-havo ma'lumotlari olingan.
-//   return new Promise((resolve, reject) => {
-//     setTimeout(resolve, 2000, `Ob-havo ma'lumotlari olingan`);
-//   });
-// }
+const boxElement = document.querySelector(".box");
+const getPhotosBtn = document.querySelector(".get_photos");
 
-// async function asyncFunc() {
-//   try {
-//     console.time("PROMISE");
-//     // const hotelData = await getHotelDetails();
-//     // const flightData = await getFlightDetails();
-//     // const weatherData = await getWeatherDetails();
-
-//     // console.log(hotelData);
-//     // console.log(flightData);
-//     // console.log(weatherData);
-
-//     const result = await Promise.all([
-//       getHotelDetails(),
-//       getFlightDetails(),
-//       getWeatherDetails(),
-//     ]);
-//     console.log(result);
-//     console.timeEnd("PROMISE");
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// asyncFunc();
-
-function getCurrentYear() {
-  return new Promise((res) => {
-    setTimeout(res, 3000, new Date().getFullYear());
-  });
+const uri = "https://jsonplaceholder.typicode.com/photos";
+async function getData(uri) {
+  const response = await fetch(uri);
+  if (!response.ok) {
+    return {
+      ok: false,
+    };
+  }
+  const data = await response.json();
+  return data;
 }
 
-// const asyncFunc = async () => {
-//   const result = await getCurrentYear();
-//   console.log(result);
-// };
+getPhotosBtn.addEventListener("click", async () => {
+  const photos = await getData(uri);
 
-// asyncFunc()
+  for (const photo of photos) {
+    const divElement = document.createElement("div");
 
-const getMyage = async (born) => {
-  const currentYear = await getCurrentYear();
+    const h1Element = document.createElement("h1");
+    h1Element.textContent = photo.id;
 
-  const result = currentYear - born;
-  console.log(result);
-};
+    const h2Element = document.createElement("h2");
+    h2Element.textContent = photo.title;
 
-getMyage(2000);
-
-
-
+    const imgElement = document.createElement("img");
+    imgElement.src = photo.url;
+    divElement.appendChild(h1Element);
+    divElement.appendChild(h2Element);
+    divElement.appendChild(imgElement);
+    boxElement.appendChild(divElement);
+  }
+});
