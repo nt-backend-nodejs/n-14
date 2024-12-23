@@ -77,8 +77,90 @@ const server = http.createServer(async (request, response) => {
       response.writeHead(200, { "content-type": "text/html" });
       response.write(content);
       response.end();
-    } catch (error) {}
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    }
+  } else if (url === "/picture" && method === "GET") {
+    try {
+      const content = await fs.readFile("./image.png");
+      response.writeHead(200, { "content-type": "image/png" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    }
+  } else if (url === "/image" && method === "GET") {
+    try {
+      const content = await fs.readFile("./coding.jpg");
+      response.writeHead(200, { "content-type": "image/jpeg" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    }
+  } else if (url === "/video" && method === "GET") {
+    try {
+      const content = await fs.readFile("./data.mp4");
+      response.writeHead(200, { "content-type": "video/mp4" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    }
+  }  else if (url === "/gif" && method === "GET") {
+    try {
+      const content = await fs.readFile("./node_dog1_proto.gif");
+      response.writeHead(200, { "content-type": "image/gif" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    }
+  }  else if (url === "/pdf" && method === "GET") {
+    try {
+      const content = await fs.readFile("./express-home-work.pdf");
+      response.writeHead(200, { "content-type": "application/pdf" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "test/html" });
+      response.write(content);
+      response.end();
+    }
+  }  else if (url === "/camera" && method === "GET") {
+    try {
+      const content = await fs.readFile("./camera.html");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    } catch (error) {
+      const content = await fs.readFile("./404.html", "utf-8");
+      response.writeHead(200, { "content-type": "test/html" });
+      response.write(content);
+      response.end();
+    }
   }
+
+  const content = await fs.readFile("./404.html", "utf-8");
+  response.writeHead(200, { "content-type": "text/html" });
+  response.write(content);
+  response.end();
 });
 
 server.listen(5000, () => {
