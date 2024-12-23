@@ -15,43 +15,39 @@ const users = [
 const server = http.createServer((request, response) => {
   const url = request.url;
   const method = request.method;
+  const params = request.url.split("/")[2];
+  const query = request.url.split("?")[1];
+  let obj = {};
+  const arr = query.split("&");
+  arr.forEach((str) => {
+    const item = str.split("=");
+    obj[item[0]] = item[1];
+  });
+  console.log(obj);
+  
 
   if (url === "/users" && method === "GET") {
     response.writeHead(200, { "content-type": "application/json" });
     response.write(JSON.stringify(users));
     response.end();
-  } else if (url === "/users" && method === "POST") {
-    let body = [];
-    request.on("data", function (chunk) {
-      body.push(chunk);
-    });
-    request.on("end", function () {
-      const user = JSON.parse(body.join(""));
-      console.log(user);
-
-      users.push(user);
-      response.writeHead(200, { "content-type": "application/json" });
-      response.write(JSON.stringify(users));
-      response.end();
-    });
-  } else if (url === "/users" && method === "POST") {
-    let body = [];
-    request.on("data", function (chunk) {
-      body.push(chunk);
-    });
-    request.on("end", function () {
-      const user = JSON.parse(body.join(""));
-      console.log(user);
-
-      users.push(user);
-      response.writeHead(200, { "content-type": "application/json" });
-      response.write(JSON.stringify(users));
-      response.end();
-    });
-  } else if (url === "/users/1" && method === "GET") {
+  } else if (url === `/users/${params}` && method === "GET") {
     response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify(users[0]));
+    response.write(JSON.stringify(users[params - 1]));
     response.end();
+  } else if (url === "/users" && method === "POST") {
+    let body = [];
+    request.on("data", function (chunk) {
+      body.push(chunk);
+    });
+    request.on("end", function () {
+      const user = JSON.parse(body.join(""));
+      console.log(user);
+
+      users.push(user);
+      response.writeHead(200, { "content-type": "application/json" });
+      response.write(JSON.stringify(users));
+      response.end();
+    });
   } else if (url === "/users/1" && method === "PUT") {
     let body = [];
     request.on("data", function (chunk) {
@@ -71,51 +67,6 @@ const server = http.createServer((request, response) => {
     response.write(JSON.stringify(users));
     response.end();
   }
-  // if (url === "/" && method === "GET") {
-  //   response.writeHead(200, { "content-type": "application/json" });
-  //   response.write(
-  //     JSON.stringify({
-  //       method: request.method,
-  //       url: request.url,
-  //       headers: request.headers,
-  //     })
-  //   );
-  //   response.end();
-  // } else if (url === "/user" && method === "GET") {
-  //   response.writeHead(200, { "content-type": "application/json" });
-  //   response.write(
-  //     JSON.stringify({
-  // name: "AZIZBEK",
-  // age: 12,
-  // gender: "MALE",
-  //     })
-  //   );
-  //   response.end();
-  // }
-  // if (url === "/product" && method === "GET") {
-  //   response.writeHead(200, { "content-type": "application/json" });
-  //   response.write(
-  //     JSON.stringify({
-  //       type: "LAPTOP",
-  //       name: "MACBOOK",
-  //       version: "M3",
-  //       make: "CHINA",
-  //       cycle: 20,
-  //       price: 2000,
-  //     })
-  //   );
-  //   response.end();
-  // }
-
-  // response.writeHead(200, { "content-type": "application/json" });
-  // response.write(
-  //   JSON.stringify({
-  //     method: request.method,
-  //     url: request.url,
-  //     headers: request.headers,
-  //   })
-  // );
-  // response.end();
 });
 
 server.listen(5000, () => {
