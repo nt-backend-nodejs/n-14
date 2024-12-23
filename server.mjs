@@ -1,6 +1,8 @@
 import http from "node:http";
 import fs from "node:fs/promises";
 
+import mimetypesByExtension from "./mimetypesByExtension.mjs";
+
 const users = [
   {
     name: "AZIZBEK",
@@ -20,7 +22,6 @@ const server = http.createServer(async (request, response) => {
   const params = request.url.split("/")[2];
   const query = request.url.split("?")[1];
   let obj = {};
-  console.log({ url, method, params, query });
 
   if (query) {
     const arr = query.split("&");
@@ -30,6 +31,28 @@ const server = http.createServer(async (request, response) => {
     });
     console.log(obj);
   }
+
+  const isStatic = request.url.includes("static");
+  console.log({ isStatic, url });
+
+  if (isStatic) {
+    const filepath = request.url;
+    const fileFullPath = "." + filepath;
+    console.log(fileFullPath);
+
+    const content = await fs.readFile(fileFullPath);
+    const extention = request.url.split(".")[1]
+    
+    console.log(mimetypesByExtension[".jpg"], extention);
+
+    response.writeHead(200, {
+      "content-type": mimetypesByExtension[`.${extention}`],
+    });
+    response.write(content);
+    response.end();
+    return;
+  }
+
   if (url === "/users" && method === "GET") {
     response.writeHead(200, { "content-type": "application/json" });
     response.write(JSON.stringify(users));
@@ -119,7 +142,7 @@ const server = http.createServer(async (request, response) => {
       response.write(content);
       response.end();
     }
-  }  else if (url === "/gif" && method === "GET") {
+  } else if (url === "/gif" && method === "GET") {
     try {
       const content = await fs.readFile("./node_dog1_proto.gif");
       response.writeHead(200, { "content-type": "image/gif" });
@@ -131,7 +154,7 @@ const server = http.createServer(async (request, response) => {
       response.write(content);
       response.end();
     }
-  }  else if (url === "/pdf" && method === "GET") {
+  } else if (url === "/pdf" && method === "GET") {
     try {
       const content = await fs.readFile("./express-home-work.pdf");
       response.writeHead(200, { "content-type": "application/pdf" });
@@ -143,7 +166,7 @@ const server = http.createServer(async (request, response) => {
       response.write(content);
       response.end();
     }
-  }  else if (url === "/camera" && method === "GET") {
+  } else if (url === "/camera" && method === "GET") {
     try {
       const content = await fs.readFile("./camera.html");
       response.writeHead(200, { "content-type": "text/html" });
