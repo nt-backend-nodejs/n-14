@@ -1,4 +1,6 @@
 import http from "node:http";
+import fs from "node:fs/promises";
+
 const users = [
   {
     name: "AZIZBEK",
@@ -12,24 +14,27 @@ const users = [
   },
 ];
 
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
   const url = request.url;
   const method = request.method;
   const params = request.url.split("/")[2];
   const query = request.url.split("?")[1];
   let obj = {};
-  const arr = query.split("&");
-  arr.forEach((str) => {
-    const item = str.split("=");
-    obj[item[0]] = item[1];
-  });
-  console.log(obj);
-  
+  console.log({ url, method, params, query });
 
+  if (query) {
+    const arr = query.split("&");
+    arr.forEach((str) => {
+      const item = str.split("=");
+      obj[item[0]] = item[1];
+    });
+    console.log(obj);
+  }
   if (url === "/users" && method === "GET") {
     response.writeHead(200, { "content-type": "application/json" });
     response.write(JSON.stringify(users));
     response.end();
+    return;
   } else if (url === `/users/${params}` && method === "GET") {
     response.writeHead(200, { "content-type": "application/json" });
     response.write(JSON.stringify(users[params - 1]));
@@ -66,6 +71,13 @@ const server = http.createServer((request, response) => {
     response.writeHead(200, { "content-type": "application/json" });
     response.write(JSON.stringify(users));
     response.end();
+  } else if (url === "/" && method === "GET") {
+    try {
+      const content = await fs.readFile("./index.html", "utf-8");
+      response.writeHead(200, { "content-type": "text/html" });
+      response.write(content);
+      response.end();
+    } catch (error) {}
   }
 });
 
