@@ -1,16 +1,20 @@
 {
   "name": "n-14-standard",
   "version": "1.0.0",
-  "main": "server.js",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cowsay": "^1.6.0"
+    "cowsay": "^1.6.0",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
   }
 }
