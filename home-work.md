@@ -1,4 +1,4 @@
-### Simplified Request and Response Examples
+### Adapted Request and Response Examples for Online Phone Store Backend using JSON
 
 #### Authentication
 - **Register**
@@ -87,181 +87,168 @@
     }
     ```
 
-#### Board (Doskalar)
-- **Get All Boards**
-  - **Request:** `GET /boards`
+#### Product (Mahsulotlar)
+- **Get All Products**
+  - **Request:** `GET /products`
   - **Response:**
     ```json
     [
       {
         "id": 1,
-        "title": "Project Board",
-        "columns": []
+        "name": "iPhone 13",
+        "price": 999.99,
+        "description": "Latest Apple iPhone",
+        "stock": 50
       }
     ]
     ```
 
-- **Get Board by ID**
-  - **Request:** `GET /boards/:boardId`
+- **Get Product by ID**
+  - **Request:** `GET /products/:productId`
   - **Response:**
     ```json
     {
       "id": 1,
-      "title": "Project Board",
-      "columns": []
+      "name": "iPhone 13",
+      "price": 999.99,
+      "description": "Latest Apple iPhone",
+      "stock": 50
     }
     ```
 
-- **Create Board**
-  - **Request:** `POST /boards`
+- **Create Product**
+  - **Request:** `POST /products`
     ```json
     {
-      "title": "New Board"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "title": "New Board",
-      "columns": []
-    }
-    ```
-
-- **Update Board**
-  - **Request:** `PUT /boards/:boardId`
-    ```json
-    {
-      "title": "Updated Board"
+      "name": "iPhone 13",
+      "price": 999.99,
+      "description": "Latest Apple iPhone",
+      "stock": 50
     }
     ```
   - **Response:**
     ```json
     {
       "id": 1,
-      "title": "Updated Board",
-      "columns": []
+      "name": "iPhone 13",
+      "price": 999.99,
+      "description": "Latest Apple iPhone",
+      "stock": 50
     }
     ```
 
-- **Delete Board**
-  - **Request:** `DELETE /boards/:boardId`
+- **Update Product**
+  - **Request:** `PUT /products/:productId`
+    ```json
+    {
+      "name": "iPhone 13 Pro",
+      "price": 1099.99,
+      "description": "Latest Apple iPhone with Pro features",
+      "stock": 30
+    }
+    ```
   - **Response:**
     ```json
     {
-      "message": "Board deleted"
+      "id": 1,
+      "name": "iPhone 13 Pro",
+      "price": 1099.99,
+      "description": "Latest Apple iPhone with Pro features",
+      "stock": 30
     }
     ```
 
-#### Task (Vazifalar)
-- **Get All Tasks**
-  - **Request:** `GET /boards/:boardId/tasks`
+- **Delete Product**
+  - **Request:** `DELETE /products/:productId`
+  - **Response:**
+    ```json
+    {
+      "message": "Product deleted"
+    }
+    ```
+
+#### Order (Buyurtmalar)
+- **Get All Orders**
+  - **Request:** `GET /orders`
   - **Response:**
     ```json
     [
       {
         "id": 1,
-        "title": "Task 1",
-        "order": 1,
-        "description": "Task description",
         "userId": 1,
-        "boardId": 1,
-        "columnId": 1
+        "productIds": [1, 2],
+        "total": 1999.98,
+        "status": "processing"
       }
     ]
     ```
 
-- **Get Task by ID**
-  - **Request:** `GET /boards/:boardId/tasks/:taskId`
+- **Get Order by ID**
+  - **Request:** `GET /orders/:orderId`
   - **Response:**
     ```json
     {
       "id": 1,
-      "title": "Task 1",
-      "order": 1,
-      "description": "Task description",
       "userId": 1,
-      "boardId": 1,
-      "columnId": 1
+      "productIds": [1, 2],
+      "total": 1999.98,
+      "status": "processing"
     }
     ```
 
-- **Create Task**
-  - **Request:** `POST /boards/:boardId/tasks`
+- **Create Order**
+  - **Request:** `POST /orders`
     ```json
     {
-      "title": "New Task",
-      "order": 1,
-      "description": "Task description",
       "userId": 1,
-      "columnId": 1
+      "productIds": [1, 2],
+      "total": 1999.98,
+      "status": "processing"
     }
     ```
   - **Response:**
     ```json
     {
       "id": 1,
-      "title": "New Task",
-      "order": 1,
-      "description": "Task description",
       "userId": 1,
-      "boardId": 1,
-      "columnId": 1
+      "productIds": [1, 2],
+      "total": 1999.98,
+      "status": "processing"
     }
     ```
 
-- **Update Task**
-  - **Request:** `PUT /boards/:boardId/tasks/:taskId`
+- **Update Order**
+  - **Request:** `PUT /orders/:orderId`
     ```json
     {
-      "title": "Updated Task",
-      "order": 1,
-      "description": "Updated description",
-      "userId": 1,
-      "columnId": 1
+      "status": "shipped"
     }
     ```
   - **Response:**
     ```json
     {
       "id": 1,
-      "title": "Updated Task",
-      "order": 1,
-      "description": "Updated description",
       "userId": 1,
-      "boardId": 1,
-      "columnId": 1
+      "productIds": [1, 2],
+      "total": 1999.98,
+      "status": "shipped"
     }
     ```
 
-- **Delete Task**
-  - **Request:** `DELETE /boards/:boardId/tasks/:taskId`
+- **Delete Order**
+  - **Request:** `DELETE /orders/:orderId`
   - **Response:**
     ```json
     {
-      "message": "Task deleted"
+      "message": "Order deleted"
     }
     ```
 
 ### Qo'shimcha Talablar
-- **Board** o'chirilganda, uning barcha **Task**lari ham o'chirilishi kerak.
-- **User** o'chirilganda, uning barcha **Task**lari uchun `userId` `null`ga o'zgartirilishi kerak.
+- **Product** o'chirilganda, uning barcha **Order**lari ham yangilanib, o'sha product buyurtmadan olib tashlanishi kerak.
+- **User** o'chirilganda, uning barcha **Order**lari ham o'chirilishi kerak.
 - Endpointlar faqat ma'lumotlar bazasi bilan ishlashi kerak.
 - `application/json` formati so'rov va javoblar uchun ishlatilishi kerak.
 - Kodni alohida fayllarga ajrating (ilova yaratish, routerlar, database va biznes mantiqi).
 - Projectni ishga tushirish uchun `npm start` buyrug'ini ishlating.
 - Xizmat 4000-portda tinglash kerak.
-
-### Ma'lumotlar Bazasi
-- Ma'lumotlar bazasi sifatida PostgreSQLdan foydalaning.
-- `pg` modulini o'rnating.
-- User passwordini `bcrypt` bilan hashlab joylash kerak.
-- Bazaga ulaning va CRUD operatsiyalarni amalga oshiring.
-
-### Vaqt:
-- Imtihon muddati: 4 soat
-
-### BONUS:
-- Yukoridagi tasklarni tugatgandan so'ng, qo'shimcha function qo'shing va `README.md` da qisqacha tavsif qoldiring.
-
-You can find the updated file [here](https://github.com/nt-backend-nodejs/N14/blob/0bb65f413c3dbaba7b75a38f8f1d6acdf1fe3d1f/home-work.md).

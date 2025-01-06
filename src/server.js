@@ -5,6 +5,17 @@ const port = 5000;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.time('middleware');
+  console.log({
+    method: req.method,
+    url: req.url,
+  });
+
+  next();
+  console.timeEnd('middleware');
+});
+
 app.use('/auth', authRouter);
 
 app.listen(port, () => {
