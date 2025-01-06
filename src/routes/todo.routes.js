@@ -6,15 +6,14 @@ import {
   updateTodoController,
   deleteTodoController,
 } from "../controllers/todo.controllers.js";
-const router = Router();
 
-router.post("/", createTodoController);
-router.get("/", getAllTodoController);
-router.get("/:id", getOneTodoController);
-router.put("/:id", updateTodoController);
-router.delete("/:id", deleteTodoController);
+export const todoRoutes = Router();
 
-export default router;
+todoRoutes.post("/", createTodoController);
+todoRoutes.get("/", getAllTodoController);
+todoRoutes.get("/:id", getOneTodoController);
+todoRoutes.put("/:id", updateTodoController);
+todoRoutes.delete("/:id", deleteTodoController);
 
 // //GET ALL TODO
 // router.get("/");
