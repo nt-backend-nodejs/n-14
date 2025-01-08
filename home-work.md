@@ -176,7 +176,7 @@
       {
         "id": 1,
         "userId": 1,
-        "productIds": [1, 2],
+        "productId": 1,
         "total": 1999.98,
         "status": "processing"
       }
@@ -190,7 +190,7 @@
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 2,
       "total": 1999.98,
       "status": "processing"
     }
@@ -201,7 +201,7 @@
     ```json
     {
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "processing"
     }
@@ -211,7 +211,7 @@
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "processing"
     }
@@ -229,7 +229,7 @@
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "shipped"
     }
