@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "productIds": [
+      1,
+      2
+    ],
+    "total": 1999.98,
+    "status": "processing"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "productId": 1,
+    "total": 999.99,
+    "status": "processing"
+  },
+  {
+    "id": 3,
+    "userId": 2,
+    "productId": 1,
+    "total": 999.99,
+    "status": "processing"
+  }
+]

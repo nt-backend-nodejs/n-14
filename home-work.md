@@ -1,7 +1,9 @@
 ### Adapted Request and Response Examples for Online Phone Store Backend using JSON
 
 #### Authentication
+
 - **Register**
+
   - **Request:** `POST /register`
     ```json
     {
@@ -37,7 +39,9 @@
     ```
 
 #### User (Foydalanuvchi)
+
 - **Get All Users**
+
   - **Request:** `GET /users`
   - **Response:**
     ```json
@@ -51,6 +55,7 @@
     ```
 
 - **Get User by ID**
+
   - **Request:** `GET /users/:userId`
   - **Response:**
     ```json
@@ -62,6 +67,7 @@
     ```
 
 - **Update User**
+
   - **Request:** `PUT /users/:userId`
     ```json
     {
@@ -88,7 +94,9 @@
     ```
 
 #### Product (Mahsulotlar)
+
 - **Get All Products**
+
   - **Request:** `GET /products`
   - **Response:**
     ```json
@@ -104,6 +112,7 @@
     ```
 
 - **Get Product by ID**
+
   - **Request:** `GET /products/:productId`
   - **Response:**
     ```json
@@ -117,6 +126,7 @@
     ```
 
 - **Create Product**
+
   - **Request:** `POST /products`
     ```json
     {
@@ -138,6 +148,7 @@
     ```
 
 - **Update Product**
+
   - **Request:** `PUT /products/:productId`
     ```json
     {
@@ -168,7 +179,9 @@
     ```
 
 #### Order (Buyurtmalar)
+
 - **Get All Orders**
+
   - **Request:** `GET /orders`
   - **Response:**
     ```json
@@ -176,7 +189,7 @@
       {
         "id": 1,
         "userId": 1,
-        "productIds": [1, 2],
+        "productId": 1,
         "total": 1999.98,
         "status": "processing"
       }
@@ -184,24 +197,26 @@
     ```
 
 - **Get Order by ID**
+
   - **Request:** `GET /orders/:orderId`
   - **Response:**
     ```json
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 2,
       "total": 1999.98,
       "status": "processing"
     }
     ```
 
 - **Create Order**
+
   - **Request:** `POST /orders`
     ```json
     {
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "processing"
     }
@@ -211,13 +226,14 @@
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "processing"
     }
     ```
 
 - **Update Order**
+
   - **Request:** `PUT /orders/:orderId`
     ```json
     {
@@ -229,7 +245,7 @@
     {
       "id": 1,
       "userId": 1,
-      "productIds": [1, 2],
+      "productId": 1,
       "total": 1999.98,
       "status": "shipped"
     }
@@ -245,6 +261,7 @@
     ```
 
 ### Qo'shimcha Talablar
+
 - **Product** o'chirilganda, uning barcha **Order**lari ham yangilanib, o'sha product buyurtmadan olib tashlanishi kerak.
 - **User** o'chirilganda, uning barcha **Order**lari ham o'chirilishi kerak.
 - Endpointlar faqat ma'lumotlar bazasi bilan ishlashi kerak.

@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 13",
+    "price": 999.99,
+    "description": "Latest Apple iPhone",
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "name": "iPhone 16",
+    "price": 1999.99,
+    "description": "Latest Apple iPhone",
+    "stock": 10
+  }
+]

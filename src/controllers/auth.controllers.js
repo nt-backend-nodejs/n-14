@@ -1,5 +1,4 @@
-const users =
- {
+const users = {
   ali: {
     full_name: 'per cey jecksen',
     username: 'percey',
@@ -24,6 +23,13 @@ export const registerController = (req, res) => {
    * country
    * phone_number
    */
+
+  if (!body.full_name || body.username || body.email) {
+    res.status(400).send({
+      message: 'Hamma malumotlarni kiriting!.',
+    });
+    return;
+  }
   const userExisty = users[body.username];
   if (userExisty) {
     res.status(409).send({

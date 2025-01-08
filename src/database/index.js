@@ -2,15 +2,20 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import exp from 'node:constants';
 
-const dbFilePath = path.join(import.meta.dirname, 'users.json');
+const dbPaths = {
+  users: path.join(import.meta.dirname, 'users.json'),
+  products: path.join(import.meta.dirname, 'products.json'),
+  orders: path.join(import.meta.dirname, 'orders.json'),
+};
 
-export const readDB = async () => {
+export const readDB = async (dbName) => {
   try {
-    const jsonData = await fs.readFile(dbFilePath, 'utf-8');
-    const users = await JSON.parse(jsonData);
+    const filePath = dbPaths[dbName];
+    const jsonData = await fs.readFile(filePath, 'utf-8');
+    const data = await JSON.parse(jsonData);
     return {
       ok: true,
-      data: users,
+      data,
     };
   } catch (error) {
     console.error(error.message);
@@ -21,18 +26,18 @@ export const readDB = async () => {
   }
 };
 
-export const writeDB = async (user) => {
+export const writeDB = async (dbName, userData) => {
   try {
-    const { data: users } = await readDB();
+    const filePath = dbPaths[dbName];
 
+    const { data } = await readDB(dbName);
     const newUser = {
-      id: users.length + 1,
-      ...user,
+      id: data.length + 1,
+      ...userData,
     };
-    console.log(users);
 
-    users.push(newUser);
-    await fs.writeFile(dbFilePath, JSON.stringify(users));
+    data.push(newUser);
+    await fs.writeFile(filePath, JSON.stringify(data));
 
     return {
       ok: true,
@@ -46,13 +51,56 @@ export const writeDB = async (user) => {
   }
 };
 
-writeDB({
-  full_name: 'alisher navoiy',
-  username: 'alisher',
-  email: 'alisher@gamil.com',
-  age: 99,
+export const updateDB = async (dbName, id, data) => {
+  try {
+
+  } catch (error) {}
+};
+
+export const deleteDB = async (dbName, id) => {
+  try {
+    const filePath = dbPaths[dbName];
+
+    const { data, ok } = await readDB(dbName);
+    if (!ok) {
+      throw new Error('xato');
+    }
+
+    const filteredData = data.filter((item) => item.id !== id);
+
+    await fs.writeFile(filePath, JSON.stringify(filteredData));
+    return {
+      ok: true,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      message: error.message,
+    };
+  }
+};
+
+
+/*
+writeDB('users', {
+  full_name: 'Amir temur',
+  username: 'amirtemur',
+  email: 'amirtemur@gamil.com',
+  age: 91,
   gender: 'MALE',
   password: 'qwer12345',
   country: 'USA',
   phone_number: '+998946110061',
 });
+
+*/
+/*
+writeDB('products', {
+  name: 'iPhone 16',
+  price: 1999.99,
+  description: 'Latest Apple iPhone',
+  stock: 10,
+});
+
+
+*/

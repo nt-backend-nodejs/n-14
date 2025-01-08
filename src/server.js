@@ -1,5 +1,7 @@
 import express from 'express';
-import { authRouter } from './routes/index.js';
+import { authRouter, orderRouter } from './routes/index.js';
+
+
 const app = express();
 const port = 5000;
 
@@ -17,6 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/auth', authRouter);
+app.use('/orders', orderRouter);
 
 app.listen(port, () => {
   console.log('Server running on port : http://localhost:5000');
