@@ -1,0 +1,23 @@
+[
+  {
+    "full_name": "per cey jecksen",
+    "username": "percey",
+    "email": "percey@gamil.com",
+    "age": 11,
+    "gender": "MALE",
+    "password": "qwer12345",
+    "country": "USA",
+    "phone_number": "+998946110061"
+  },
+  {
+    "id": 2,
+    "full_name": "alisher navoiy",
+    "username": "alisher",
+    "email": "alisher@gamil.com",
+    "age": 99,
+    "gender": "MALE",
+    "password": "qwer12345",
+    "country": "USA",
+    "phone_number": "+998946110061"
+  }
+]

@@ -1,4 +1,5 @@
-const users = {
+const users =
+ {
   ali: {
     full_name: 'per cey jecksen',
     username: 'percey',
