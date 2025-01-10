@@ -51,10 +51,33 @@ export const writeDB = async (dbName, userData) => {
   }
 };
 
-export const updateDB = async (dbName, id, data) => {
+export const updateDB = async (dbName, id, userData) => {
   try {
+    const filePath = dbPaths[dbName];
 
-  } catch (error) {}
+    const { data, ok } = await readDB(dbName);
+
+    if (!ok) {
+      throw new Error('xato');
+    }
+
+    const itemIndex = data.findIndex((item) => item.id === id);
+
+    const item = data[itemIndex];
+
+    data.splice(itemIndex, 1, { ...item, ...userData });
+
+    await fs.writeFile(filePath, JSON.stringify(data));
+
+    return {
+      ok: true,
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      message: error.message,
+    };
+  }
 };
 
 export const deleteDB = async (dbName, id) => {
@@ -79,7 +102,6 @@ export const deleteDB = async (dbName, id) => {
     };
   }
 };
-
 
 /*
 writeDB('users', {
