@@ -1,5 +1,6 @@
 ### Adapted Request and Response Examples for Blog Backend using JSON
 
+
 #### Authentication
 
 - **Register**
