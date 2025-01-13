@@ -1,54 +1,62 @@
-### Adapted Request and Response Examples for Online Phone Store Backend using JSON
+### Adapted Request and Response Examples for Blog Backend using JSON
+
 
 #### Authentication
 
 - **Register**
 
   - **Request:** `POST /register`
+
     ```json
     {
-      "name": "John Doe",
+      "username": "JohnDoe",
       "email": "john@example.com",
       "password": "yourpassword"
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "John Doe",
+      "username": "JohnDoe",
       "email": "john@example.com"
     }
     ```
 
 - **Login**
   - **Request:** `POST /login`
+
     ```json
     {
       "email": "john@example.com",
       "password": "yourpassword"
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "John Doe",
+      "username": "JohnDoe",
       "email": "john@example.com"
     }
     ```
 
-#### User (Foydalanuvchi)
+#### User
 
 - **Get All Users**
 
   - **Request:** `GET /users`
   - **Response:**
+
     ```json
     [
       {
         "id": 1,
-        "name": "John Doe",
+        "username": "JohnDoe",
         "email": "john@example.com"
       }
     ]
@@ -58,10 +66,11 @@
 
   - **Request:** `GET /users/:userId`
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "John Doe",
+      "username": "JohnDoe",
       "email": "john@example.com"
     }
     ```
@@ -69,17 +78,20 @@
 - **Update User**
 
   - **Request:** `PUT /users/:userId`
+
     ```json
     {
-      "name": "Jane Doe",
+      "username": "JaneDoe",
       "email": "jane@example.com"
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "Jane Doe",
+      "username": "JaneDoe",
       "email": "jane@example.com"
     }
     ```
@@ -87,185 +99,193 @@
 - **Delete User**
   - **Request:** `DELETE /users/:userId`
   - **Response:**
+
     ```json
     {
       "message": "User deleted"
     }
     ```
 
-#### Product (Mahsulotlar)
+#### Blog Post
 
-- **Get All Products**
+- **Get All Posts**
 
-  - **Request:** `GET /products`
+  - **Request:** `GET /posts`
   - **Response:**
+
     ```json
     [
       {
         "id": 1,
-        "name": "iPhone 13",
-        "price": 999.99,
-        "description": "Latest Apple iPhone",
-        "stock": 50
+        "title": "First Blog Post",
+        "content": "Lorem ipsum dolor sit amet...",
+        "authorId": 1
       }
     ]
     ```
 
-- **Get Product by ID**
+- **Get Post by ID**
 
-  - **Request:** `GET /products/:productId`
+  - **Request:** `GET /posts/:postId`
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
+      "title": "First Blog Post",
+      "content": "Lorem ipsum dolor sit amet...",
+      "authorId": 1
     }
     ```
 
-- **Create Product**
+- **Create Post**
 
-  - **Request:** `POST /products`
+  - **Request:** `POST /posts`
+
     ```json
     {
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
+      "title": "First Blog Post",
+      "content": "Lorem ipsum dolor sit amet...",
+      "authorId": 1
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
+      "title": "First Blog Post",
+      "content": "Lorem ipsum dolor sit amet...",
+      "authorId": 1
     }
     ```
 
-- **Update Product**
+- **Update Post**
 
-  - **Request:** `PUT /products/:productId`
+  - **Request:** `PUT /posts/:postId`
+
     ```json
     {
-      "name": "iPhone 13 Pro",
-      "price": 1099.99,
-      "description": "Latest Apple iPhone with Pro features",
-      "stock": 30
+      "title": "Updated Blog Post",
+      "content": "Updated content...",
+      "authorId": 1
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "name": "iPhone 13 Pro",
-      "price": 1099.99,
-      "description": "Latest Apple iPhone with Pro features",
-      "stock": 30
+      "title": "Updated Blog Post",
+      "content": "Updated content...",
+      "authorId": 1
     }
     ```
 
-- **Delete Product**
-  - **Request:** `DELETE /products/:productId`
+- **Delete Post**
+  - **Request:** `DELETE /posts/:postId`
   - **Response:**
+
     ```json
     {
-      "message": "Product deleted"
+      "message": "Post deleted"
     }
     ```
 
-#### Order (Buyurtmalar)
+#### Comment
 
-- **Get All Orders**
+- **Get All Comments**
 
-  - **Request:** `GET /orders`
+  - **Request:** `GET /comments`
   - **Response:**
+
     ```json
     [
       {
         "id": 1,
-        "userId": 1,
-        "productId": 1,
-        "total": 1999.98,
-        "status": "processing"
+        "postId": 1,
+        "content": "Great post!",
+        "authorId": 2
       }
     ]
     ```
 
-- **Get Order by ID**
+- **Get Comment by ID**
 
-  - **Request:** `GET /orders/:orderId`
+  - **Request:** `GET /comments/:commentId`
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "userId": 1,
-      "productId": 2,
-      "total": 1999.98,
-      "status": "processing"
+      "postId": 1,
+      "content": "Great post!",
+      "authorId": 2
     }
     ```
 
-- **Create Order**
+- **Create Comment**
 
-  - **Request:** `POST /orders`
+  - **Request:** `POST /comments`
+
     ```json
     {
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "processing"
+      "postId": 1,
+      "content": "Great post!",
+      "authorId": 2
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "processing"
+      "postId": 1,
+      "content": "Great post!",
+      "authorId": 2
     }
     ```
 
-- **Update Order**
+- **Update Comment**
 
-  - **Request:** `PUT /orders/:orderId`
+  - **Request:** `PUT /comments/:commentId`
+
     ```json
     {
-      "status": "shipped"
+      "content": "Updated comment"
     }
     ```
+
   - **Response:**
+
     ```json
     {
       "id": 1,
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "shipped"
+      "postId": 1,
+      "content": "Updated comment",
+      "authorId": 2
     }
     ```
 
-- **Delete Order**
-  - **Request:** `DELETE /orders/:orderId`
+- **Delete Comment**
+  - **Request:** `DELETE /comments/:commentId`
   - **Response:**
+
     ```json
     {
-      "message": "Order deleted"
+      "message": "Comment deleted"
     }
     ```
 
-### Qo'shimcha Talablar
+### Additional Requirements
 
-- **Product** o'chirilganda, uning barcha **Order**lari ham yangilanib, o'sha product buyurtmadan olib tashlanishi kerak.
-- **User** o'chirilganda, uning barcha **Order**lari ham o'chirilishi kerak.
-- Endpointlar faqat ma'lumotlar bazasi bilan ishlashi kerak.
-- `application/json` formati so'rov va javoblar uchun ishlatilishi kerak.
-- Kodni alohida fayllarga ajrating (ilova yaratish, routerlar, database va biznes mantiqi).
-- Projectni ishga tushirish uchun `npm start` buyrug'ini ishlating.
-- Xizmat 4000-portda tinglash kerak.
+- When a **Post** is deleted, all its **Comments** should also be removed.
+- When a **User** is deleted, all their **Posts** and **Comments** should also be removed.
+- Endpoints should only interact with the database.
+- `application/json` format should be used for requests and responses.
+- Separate the code into different files (application creation, routers, database, and business logic).
+- Use the `npm start` command to start the project.
+- The service should listen on port 4000.
