@@ -1,5 +1,5 @@
 import express from 'express';
-import { authRouter, orderRouter, productRouter } from './routes/index.js';
+import { authRouter, orderRouter, productRouter, photoRouter } from './routes/index.js';
 
 
 const app = express();
@@ -21,6 +21,12 @@ app.use((req, res, next) => {
 app.use('/auth', authRouter);
 app.use('/orders', orderRouter);
 app.use('/products', productRouter);
+app.use('/photos', photoRouter);
+
+
+
+
+
 
 app.listen(port, () => {
   console.log('Server running on port : http://localhost:5001');

@@ -1,20 +1,20 @@
 import express, { Router } from 'express';
-import { productController } from '../controllers/index.js';
+import { photoController } from '../controllers/index.js';
 
 export const orderRouter = Router();
 
 // CREATE -POST
 // localhost:3000/api/orders - POST - create new order
-orderRouter.post('/', productController.create);
+orderRouter.post('/', photoController.create);
 
 // get all orders
-orderRouter.get('/', productController.findAll);
+orderRouter.get('/', photoController.findAll);
 
 // get  order by id
-orderRouter.get('/:id', productController.findOne);
+orderRouter.get('/:id', photoController.findOne);
 
 // update order by id
-orderRouter.put('/:id', productController.update);
+orderRouter.put('/:id', photoController.update);
 
 // delete order by id
-orderRouter.delete('/:id', productController.delete);
+orderRouter.delete('/:id', photoController.delete);
