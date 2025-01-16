@@ -7,6 +7,9 @@ const port =  5001;
 
 app.use(express.json());
 
+
+
+app.use('/static', express.static('uploads'))
 app.use((req, res, next) => {
   console.time('middleware');
   console.log({
@@ -22,10 +25,6 @@ app.use('/auth', authRouter);
 app.use('/orders', orderRouter);
 app.use('/products', productRouter);
 app.use('/photos', photoRouter);
-
-
-
-
 
 
 app.listen(port, () => {

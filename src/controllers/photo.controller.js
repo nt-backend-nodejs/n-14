@@ -5,7 +5,9 @@ export const photoController = {
     try {
       console.log(req.file, req.body);
 
-      return  res.send(req.file);
+      return res.send({
+        url: `http://localhost:5001/static/${req.file.originalname}`,
+      });
     } catch (error) {
       res.status(500).send(error.message);
     }
