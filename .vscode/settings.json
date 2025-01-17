@@ -6,5 +6,8 @@
     "Merried",
     "nodjs",
     "xamidullo"
-  ]
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  }
 }
