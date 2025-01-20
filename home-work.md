@@ -1,8 +1,4 @@
-Quyida **Node.js** va **MongoDB** asosidagi “online ticket” (chipta) loyihasini **murakkabroq** ko‘rinishda amalga oshirish uchun **advanced** darajadagi **API endpoint**lar va funksionalliklar bo‘yicha tavsiyalar (hamda praktikum topshiriqlari) ro‘yxatini keltirib o‘tamiz. Ushbu ro‘yxatni bosqichma-bosqich bajarish orqali o‘quvchilar Node.js, Express, Mongoose, REST API, JWT orqali autentifikatsiya, rollar bilan ishlash, to‘lov tizimlarini ulash, murakkab so‘rov (filter, pagination, sort) kabi masalalarni puxta o‘zlashtiradilar.
-
----
-
-# Murakkabroq API Loyihasi — “Online Ticket System”
+# API Loyihasi — “Online Ticket System”
 
 ## 1. Loyiha Tuzilmasi
 
