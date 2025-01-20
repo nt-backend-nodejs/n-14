@@ -1,271 +1,312 @@
-### Adapted Request and Response Examples for Online Phone Store Backend using JSON
+Quyida **Node.js** va **MongoDB** asosidagi “online ticket” (chipta) loyihasini **murakkabroq** ko‘rinishda amalga oshirish uchun **advanced** darajadagi **API endpoint**lar va funksionalliklar bo‘yicha tavsiyalar (hamda praktikum topshiriqlari) ro‘yxatini keltirib o‘tamiz. Ushbu ro‘yxatni bosqichma-bosqich bajarish orqali o‘quvchilar Node.js, Express, Mongoose, REST API, JWT orqali autentifikatsiya, rollar bilan ishlash, to‘lov tizimlarini ulash, murakkab so‘rov (filter, pagination, sort) kabi masalalarni puxta o‘zlashtiradilar.
 
-#### Authentication
+---
 
-- **Register**
+# Murakkabroq API Loyihasi — “Online Ticket System”
 
-  - **Request:** `POST /register`
-    ```json
-    {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "password": "yourpassword"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com"
-    }
-    ```
+## 1. Loyiha Tuzilmasi
 
-- **Login**
-  - **Request:** `POST /login`
-    ```json
-    {
-      "email": "john@example.com",
-      "password": "yourpassword"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com"
-    }
-    ```
+1. `index.js`
+2. `config/`
+   - `db.js` (MongoDB ulanish sozlamalari)
+3. `models/`
+   - `User.js` (foydalanuvchi modeli: admin yoki oddiy user)
+   - `Ticket.js` (chipta modeli)
+   - `Order.js` (chipta buyurtmalari/tartiblari)
+4. `routes/`
+   - `authRoutes.js` (ro‘yxatdan o‘tish, login, parolni tiklash va h.k.)
+   - `ticketRoutes.js` (chiptalar CRUD)
+   - `orderRoutes.js` (buyurtmalar, to‘lov, status)
+5. `controllers/` (ixtiyoriy, agar MVC uslubida ajratilsa)
+   - `authController.js`
+   - `ticketController.js`
+   - `orderController.js`
+6. `middlewares/`
+   - `errorMiddleware.js` (xatolarni bir joyda tutish)
+7. `.env` (maxfiy sozlamalar: DB_URI, va h.k.)
 
-#### User (Foydalanuvchi)
+> **Topshiriq**: Yuqoridagi tuzilmani `online-ticket-backend` papkasiga tatbiq qiling. Har bir modul/fayl o‘zining maqsadi uchun javobgar bo‘lsin.
 
-- **Get All Users**
+---
 
-  - **Request:** `GET /users`
-  - **Response:**
-    ```json
-    [
+## 2. Foydalanuvchi va Avtorizatsiya (User & Auth)
+
+### 2.1. Model: `models/User.js`
+
+- Ma’lumotlar maydonlari:
+  - `username` (String, unique, required)
+  - `email` (String, unique, required)
+  - `password` (String, required)
+  - `role` (String, default: "user", enum: ["user", "admin"])
+  - `createdAt` (Date, default: `Date.now`)
+  - `updatedAt` (Date, default: `Date.now`)
+
+> **Topshiriq**: Parollarni **hash** qilish uchun `bcrypt` kutubxonasidan foydalaning. Model pre-save hook (`userSchema.pre('save', ...)`) orqali parolni hash qiling.
+
+```js
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
+  },
+  { timestamps: true },
+);
+
+// Parolni saqlashdan oldin hash qilish
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+// Parolni solishtirish metodi
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+module.exports = mongoose.model('User', userSchema);
+```
+
+### 2.2. Auth Router: `routes/authRoutes.js`
+
+#### 2.2.1. **POST** `/api/auth/register`
+
+- **Vazifa**: Yangi foydalanuvchini ro‘yxatdan o‘tkazish.
+- **Body**: `{ "username": "...", "email": "...", "password": "..." }`
+- **Natija**:  “muvaffaqiyatli ro‘yxatdan o‘tildi” xabari.
+
+#### 2.2.2. **POST** `/api/auth/login`
+
+- **Vazifa**: Foydalanuvchini login qilish.
+- **Body**: `{ "email": "...", "password": "..." }`
+- **Natija**: foydalanuvchi ma’lumotlari qaytarilsin.
+
+
+> **Topshiriq**: `authController.js` da `register`, `login`, `getProfile` funksiyalarni yozing.
+
+---
+
+## 3. Chiptalar — Kengaytirilgan CRUD, Filter, Pagination
+
+### 3.1. Model: `models/Ticket.js`
+
+- **Umumiy maydonlar**:
+  - `title` (String, required)
+  - `description` (String)
+  - `category` (String, masalan: “concert”, “sport”, “theater”)
+  - `price` (Number, required)
+  - `date` (Date, required)
+  - `status` (String, enum: [‘available’, ‘sold’, ‘expired’], default: ‘available’)
+  - `createdAt`, `updatedAt`
+- **Qo‘shimcha**:
+  - `location` (String, optional) — Tadbir o‘tkaziladigan joy.
+  - `totalQuantity` (Number, default: 100) — Chiptalar soni.
+  - `soldQuantity` (Number, default: 0) — Qancha chipta sotilgan?
+
+### 3.2. API Endpointlar: `routes/ticketRoutes.js`
+
+1. **POST** `/api/tickets` – **Yangi chipta yaratish**
+
+   - Faqat `admin` ro‘liga ega foydalanuvchi yaratishi kerak.
+   - Middleware: `authMiddleware`, `adminCheck`.
+   - Body: `{ title, description, category, price, date, location, totalQuantity }`.
+
+2. **GET** `/api/tickets` – **Chiptalar ro‘yxati**
+
+   - **Filter**: query orqali filter qilish: `?category=concert&status=available`
+   - **Pagination**: `?page=2&limit=10`
+   - **Sort**: `?sort=price,asc` yoki `?sort=date,desc`
+   - Natija: `{ data: [...], pageInfo: { page, limit, total, totalPages } }`
+
+3. **GET** `/api/tickets/:id` – **Bitta chipta haqida ma’lumot**
+
+   - Kengaytirilgan holda, agar chipta topilmasa, `404 Not Found`.
+
+4. **PUT** `/api/tickets/:id` – **Chiptani yangilash**
+
+   - Faqat `admin` roliga ega foydalanuvchi.
+   - Body: `{ title, description, category, price, date, status, totalQuantity }`.
+   - `status`ga “expired” yoki “sold” ga o‘tkazish mumkin.
+
+5. **DELETE** `/api/tickets/:id` – **Chiptani o‘chirish**
+   - Faqat `admin`.
+   - Agar chiptaga allaqachon buyurtma bo‘lsa, xato qaytarish (masalan, “Chiptani o‘chirib bo‘lmaydi, chunki sotilgan!”).
+
+> **Topshiriq**: Filter, pagination, sortni bir API ichida barpo qiling (`GET /api/tickets`). Masalan:
+>
+> ```js
+> // Query params: category, status, page=1, limit=10, sort=date,order=desc
+> Mongoose chain: Ticket.find({ category, status }).skip(...).limit(...).sort({ date: -1 })
+> ```
+
+---
+
+## 4. Buyurtmalar (Orders) va To‘lov
+
+Ko‘p hollarda foydalanuvchi chiptalarni “add to cart” yoki “buy now” orqali sotib oladi. Har bir buyurtma (order) quyidagi ma’lumotlarni o‘z ichiga olishi mumkin:
+
+### 4.1. Model: `models/Order.js`
+
+- `user` (mongoose.Schema.Types.ObjectId, ref: “User”) — buyurtma qilgan foydalanuvchi.
+- `tickets` – massiv, har bir elementda:
+  - `ticket` (mongoose.Schema.Types.ObjectId, ref: “Ticket”)
+  - `quantity` (Number)
+  - `price` (Number) — chipta narxi (har ehtimolga qarshi momentdagi narx saqlanadi).
+- `totalPrice` (Number) — jami narx.
+- `status` (String, enum: [‘pending’, ‘paid’, ‘cancelled’], default: ‘pending’)
+- `paymentMethod` (String, masalan “stripe”, “paypal”, “cash”)
+- `createdAt`, `updatedAt`
+
+```js
+const mongoose = require('mongoose');
+
+const orderSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    tickets: [
       {
-        "id": 1,
-        "name": "John Doe",
-        "email": "john@example.com"
-      }
-    ]
-    ```
+        ticket: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Ticket',
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          default: 1,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    paymentMethod: {
+      type: String,
+      default: 'stripe',
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'paid', 'cancelled'],
+      default: 'pending',
+    },
+  },
+  { timestamps: true },
+);
 
-- **Get User by ID**
+module.exports = mongoose.model('Order', orderSchema);
+```
 
-  - **Request:** `GET /users/:userId`
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john@example.com"
-    }
-    ```
+### 4.2. Order Router: `routes/orderRoutes.js`
 
-- **Update User**
+1. **POST** `/api/orders` – **Yangi buyurtma yaratish**
 
-  - **Request:** `PUT /users/:userId`
-    ```json
-    {
-      "name": "Jane Doe",
-      "email": "jane@example.com"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "Jane Doe",
-      "email": "jane@example.com"
-    }
-    ```
+   - Foydalanuvchi (tokeni bilan) buyurtma yaratadi.
+   - Body: `{ "tickets": [ { "ticketId": "...", "quantity": 2 }, ... ], "paymentMethod": "stripe" }`
+   - Dastlab `pending` statusda bo‘ladi.
+   - Har bir `ticketId` orqali `Ticket` modeldan narxni olib, `price` maydoniga saqlab qo‘ying.
+   - `totalPrice` ni avtomatik hisoblash: `sum( ticket.price * quantity )`.
 
-- **Delete User**
-  - **Request:** `DELETE /users/:userId`
-  - **Response:**
-    ```json
-    {
-      "message": "User deleted"
-    }
-    ```
+2. **POST** `/api/orders/:orderId/pay` – **Buyurtma uchun to‘lov**
 
-#### Product (Mahsulotlar)
+   - Yangi endpoint: `POST /api/orders/:orderId/pay`
+   - To‘lov integratsiyasi (Stripe yoki PayPal) sodda ko‘rinishda (fake) bo‘lishi mumkin:
+     - Agar to‘lov muvaffaqiyatli bo‘lsa, `status = 'paid'` ga o‘zgartirish.
+     - `Ticket` modelida `soldQuantity` ni oshirish (buyurtma qilingan miqdorda).
+     - Agar `soldQuantity` > `totalQuantity` bo‘lib ketsa, xato qaytarish (over-sell oldini olish).
 
-- **Get All Products**
+3. **GET** `/api/orders` – **Buyurtmalar ro‘yxati**
 
-  - **Request:** `GET /products`
-  - **Response:**
-    ```json
-    [
-      {
-        "id": 1,
-        "name": "iPhone 13",
-        "price": 999.99,
-        "description": "Latest Apple iPhone",
-        "stock": 50
-      }
-    ]
-    ```
+   - **Admin** barcha buyurtmalarni ko‘rishi mumkin.
+   - Oddiy foydalanuvchi esa faqat o‘z buyurtmalarini ko‘rishi mumkin.
+   - Query param bilan `status=pending` yoki `status=paid` ga filtr qilish.
 
-- **Get Product by ID**
+4. **GET** `/api/orders/:orderId` – **Bitta buyurtma haqida ma’lumot**
 
-  - **Request:** `GET /products/:productId`
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
-    }
-    ```
+   - Agar `admin` bo‘lsa, istalgan orderni ko‘rishi mumkin.
+   - Oddiy `user` faqat o‘zining orderini ko‘rsin.
 
-- **Create Product**
+5. **PATCH** `/api/orders/:orderId/cancel` – **Buyurtmani bekor qilish**
+   - Faqat foydalanuvchi “pending” statusdagi buyurtmasini bekor qila olsin.
+   - Buyurtma “paid” bo‘lsa, bekor qilishga ruxsat yo‘q (yoki alohida siyosat).
 
-  - **Request:** `POST /products`
-    ```json
-    {
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "iPhone 13",
-      "price": 999.99,
-      "description": "Latest Apple iPhone",
-      "stock": 50
-    }
-    ```
+> **Topshiriq**: To‘lovning real integratsiyasi uchun (Stripe):
+>
+> - `stripe` npm paketini o‘rnating.
+> - `stripe.charges.create(...)` yoki `paymentIntents.create(...)` bilan test rejimida to‘lovni amalga oshiring.
+> - Test rejimida **test kartalar** (4242 4242 4242 4242, h.k.) bilan sinab ko‘ring.
 
-- **Update Product**
+---
 
-  - **Request:** `PUT /products/:productId`
-    ```json
-    {
-      "name": "iPhone 13 Pro",
-      "price": 1099.99,
-      "description": "Latest Apple iPhone with Pro features",
-      "stock": 30
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "name": "iPhone 13 Pro",
-      "price": 1099.99,
-      "description": "Latest Apple iPhone with Pro features",
-      "stock": 30
-    }
-    ```
+## 5. Qidirish (Search), Filtrlash (Filter), Saralash (Sort), Paginatsiya
 
-- **Delete Product**
-  - **Request:** `DELETE /products/:productId`
-  - **Response:**
-    ```json
-    {
-      "message": "Product deleted"
-    }
-    ```
+**5.1.** `GET /api/tickets` ni murakkab filter, sort, pagination bilan boyitish.
 
-#### Order (Buyurtmalar)
+- **search**: `?search=konsert` — `title` yoki `description` da so‘z qidirish (`$regex`).
+- **category**: `?category=sport` — qaysi turdagi chiptalarni filter qilish.
+- **date**: `?date[gte]=2025-01-01&date[lte]=2025-12-31` — oraliqda filter.
+- **sort**: `?sort=-price` (minus narx demak kamayish tartibida) yoki `?sort=date` (o‘sish tartibida).
+- **pagination**: `?page=2&limit=20`.
 
-- **Get All Orders**
+> **Topshiriq**: `ticketController.js` da query parametrlardan kelib chiqib dinamik `find()` so‘rovini shakllantiring. Kodni murakkab bo‘lib ketmasligi uchun ehtiyot bo‘ling.
 
-  - **Request:** `GET /orders`
-  - **Response:**
-    ```json
-    [
-      {
-        "id": 1,
-        "userId": 1,
-        "productId": 1,
-        "total": 1999.98,
-        "status": "processing"
-      }
-    ]
-    ```
+---
 
-- **Get Order by ID**
+3. **Global Error Handler**: `middlewares/errorMiddleware.js`
+   - Express app da `app.use(errorMiddleware)` orqali xatolarni tutish.
+   - Formati:
+   ```js
+   module.exports = (err, req, res, next) => {
+     console.error(err.stack);
+     res.status(err.statusCode || 500).json({
+       success: false,
+       message: err.message || 'Server Error',
+     });
+   };
+   ```
 
-  - **Request:** `GET /orders/:orderId`
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "productId": 2,
-      "total": 1999.98,
-      "status": "processing"
-    }
-    ```
+---
 
-- **Create Order**
+## 8. Deploy (Joylashtirish)
 
-  - **Request:** `POST /orders`
-    ```json
-    {
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "processing"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "processing"
-    }
-    ```
+3. **.env sozlamalar** va `process.env` dan foydalanish.
 
-- **Update Order**
+---
 
-  - **Request:** `PUT /orders/:orderId`
-    ```json
-    {
-      "status": "shipped"
-    }
-    ```
-  - **Response:**
-    ```json
-    {
-      "id": 1,
-      "userId": 1,
-      "productId": 1,
-      "total": 1999.98,
-      "status": "shipped"
-    }
-    ```
+> **Topshiriq**: Kamida **auth** va **ticket** endpointlari uchun bir nechta test yozing. Masalan, `POST /api/auth/register` muvaffaqiyatli bo‘lsin, xato bo‘lsin, email takrorlansa xato berilsin h.k.
 
-- **Delete Order**
-  - **Request:** `DELETE /orders/:orderId`
-  - **Response:**
-    ```json
-    {
-      "message": "Order deleted"
-    }
-    ```
+---
 
-### Qo'shimcha Talablar
-
-- **Product** o'chirilganda, uning barcha **Order**lari ham yangilanib, o'sha product buyurtmadan olib tashlanishi kerak.
-- **User** o'chirilganda, uning barcha **Order**lari ham o'chirilishi kerak.
-- Endpointlar faqat ma'lumotlar bazasi bilan ishlashi kerak.
-- `application/json` formati so'rov va javoblar uchun ishlatilishi kerak.
-- Kodni alohida fayllarga ajrating (ilova yaratish, routerlar, database va biznes mantiqi).
-- Projectni ishga tushirish uchun `npm start` buyrug'ini ishlating.
-- Xizmat 4000-portda tinglash kerak.
+Ushbu **topshiriqlar**ni amalga oshirish orqali ancha keng ko‘lamli backend tajribasi to‘planadi.  
+**Omad!**
