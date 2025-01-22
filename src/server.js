@@ -1,15 +1,16 @@
 import express from 'express';
-import { authRouter, orderRouter, productRouter, photoRouter } from './routes/index.js';
+import { apiRouter } from './routes/index.js';
+import { connectDB } from './config/db.js';
 
 
 const app = express();
-const port =  5001;
+const port = process.env.PORT || 5001;
 
 app.use(express.json());
 
+connectDB()
 
-
-app.use('/static', express.static('uploads'))
+app.use('/static', express.static('uploads'));
 app.use((req, res, next) => {
   console.time('middleware');
   console.log({
@@ -21,12 +22,8 @@ app.use((req, res, next) => {
   console.timeEnd('middleware');
 });
 
-app.use('/auth', authRouter);
-app.use('/orders', orderRouter);
-app.use('/products', productRouter);
-app.use('/photos', photoRouter);
-
+app.use('/api', apiRouter);
 
 app.listen(port, () => {
-  console.log('Server running on port : http://localhost:5001');
+  console.log(`Server running on port : http://localhost:${port}`);
 });

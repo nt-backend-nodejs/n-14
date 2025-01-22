@@ -1,4 +1,10 @@
-export * from "./auth.routes.js"
-export * from "./order.routes.js"
-export * from "./product.routes.js"
-export * from "./photo.routes.js"
+import { Router } from 'express';
+import { authRouter } from './auth.routes.js';
+import { ticketRouter } from './ticket.routes.js';
+
+
+export const apiRouter = Router();
+
+
+apiRouter.use('/auth', authRouter);
+apiRouter.use('/ticket', ticketRouter);

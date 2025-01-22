@@ -1,4 +1,2 @@
-export * from "./auth.controllers.js"
-export * from "./order.controller.js"
-export * from "./product.controller.js"
-export * from "./photo.controller.js"
+export * from "./auth.controller.js"
+export * from "./ticket.controller.js"
