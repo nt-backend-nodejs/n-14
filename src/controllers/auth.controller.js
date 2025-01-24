@@ -8,9 +8,11 @@ export const authController = {
         throw new Error('USername, Email and password are required');
       }
       const user = new User(body);
-
       await user.save();
 
+    
+      user.password = ""
+  
       res.status(201).json(user);
     } catch (error) {
       if (error.code === 11000) {
@@ -51,7 +53,7 @@ export const authController = {
   },
   async profile(req, res, next) {
     try {
-      const query = req.query
+      const query = req.query;
       if (!query.username || !query.password) {
         throw new Error('Username and password are required');
       }

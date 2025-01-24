@@ -68,7 +68,8 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start:dev": "node --env-file=.env --watch src/server.js"
+    "start:dev": "node --env-file=.env --watch src/server.js",
+    "start": "node --env-file=.env src/server.js"
   },
   "keywords": [],
   "author": "",
