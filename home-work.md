@@ -19,7 +19,12 @@
    - `orderController.js`
 6. `middlewares/`
    - `errorMiddleware.js` (xatolarni bir joyda tutish)
-7. `.env` (maxfiy sozlamalar: DB_URI, va h.k.)
+   - `validateMiddleware.js` (Zod validatsiya uchun)
+7. `validators/` (har bir modul uchun Zod schemalari)
+    - `authValidator.js`
+    - `ticketValidator.js`
+    - `orderValidator.js`
+8. `.env` (maxfiy sozlamalar: DB_URI, va h.k.)
 
 > **Topshiriq**: Yuqoridagi tuzilmani `online-ticket-backend` papkasiga tatbiq qiling. Har bir modul/fayl o‘zining maqsadi uchun javobgar bo‘lsin.
 
@@ -291,6 +296,9 @@ module.exports = mongoose.model('Order', orderSchema);
      });
    };
    ```
+
+   - `Talablar`: middlewares/errorMiddleware.js orqali xatolarni tutish va foydalanuvchiga tushunarli xabarlar qaytarish.
+   - `Topshiriq`: Validatsiya xatolarini yaxshilash va foydalanuvchi uchun aniq xabarlar yaratish.
 
 ---
 
