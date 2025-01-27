@@ -31,17 +31,17 @@ export const ticketController = {
     try {
       const query = req.query;
 
-      const category = query.category || '';
-      const status = query.status || '';
       const page = query.page || 1;
       const limit = query.limit || 10;
+      const orderBy = query.orderBy || 'DESC';
+      //https://erp.api.najottalim.uz/api/staff/groups/for-academic/1318/videos?value=&keys[]=origName&page=1&perPage=10&orderBy=DESC
       const skip = (page - 1) * limit;
+      // const skip = (5 - 1) * 5; // 20
 
-      
       const tickets = await Ticket.find()
         .skip(skip)
         .limit(limit)
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: orderBy === 'DESC' ? -1 : 1 });
       res.status(200).json(tickets);
     } catch (error) {
       next(error);

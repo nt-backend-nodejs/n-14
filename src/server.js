@@ -24,6 +24,8 @@ app.use((req, res, next) => {
 
 app.use('/api', apiRouter);
 
+
+
 app.listen(port, () => {
   console.log(`Server running on port : http://localhost:${port}`);
 });

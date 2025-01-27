@@ -21,11 +21,13 @@
     "detect-libc": "^2.0.3",
     "emoji-regex": "^8.0.0",
     "express": "^4.21.2",
+    "express-validation": "^4.1.1",
     "fs-minipass": "^2.1.0",
     "fs.realpath": "^1.0.0",
     "gauge": "^3.0.2",
     "glob": "^7.2.3",
     "has-unicode": "^2.0.1",
+    "http-status-codes": "^2.3.0",
     "https-proxy-agent": "^5.0.1",
     "inflight": "^1.0.6",
     "inherits": "^2.0.4",
@@ -65,7 +67,8 @@
     "whatwg-url": "^14.1.0",
     "wide-align": "^1.1.5",
     "wrappy": "^1.0.2",
-    "yallist": "^4.0.0"
+    "yallist": "^4.0.0",
+    "zod": "^3.24.1"
   },
   "scripts": {
     "start:dev": "node --env-file=.env --watch src/server.js",
