@@ -328,3 +328,118 @@ module.exports = (err, req, res, next) => {
 
 Ushbu **topshiriqlar**ni amalga oshirish orqali ancha keng ko‘lamli backend tajribasi to‘planadi.  
 **Omad!**
+
+### 2.3. JWT Tokenlar
+
+- **Access Token**: qisqa muddatli token, foydalanuvchini autentifikatsiya qilish uchun ishlatiladi.
+- **Refresh Token**: uzoq muddatli token, access tokenni yangilash uchun ishlatiladi.
+
+### 2.4. Auth Controller: `controllers/authController.js`
+
+```js
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+
+const generateToken = (id, expiresIn) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn });
+};
+
+exports.register = async (req, res) => {
+  const { username, email, password } = req.body;
+  const user = await User.create({ username, email, password });
+  const accessToken = generateToken(user._id, "15m");
+  const refreshToken = generateToken(user._id, "7d");
+  res.status(201).json({ user, accessToken, refreshToken });
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (user && (await user.matchPassword(password))) {
+    const accessToken = generateToken(user._id, "15m");
+    const refreshToken = generateToken(user._id, "7d");
+    res.json({ user, accessToken, refreshToken });
+  } else {
+    res.status(401).json({ message: "Invalid email or password" });
+  }
+};
+
+exports.getProfile = async (req, res) => {
+  const user = await User.findById(req.user.id);
+  res.json(user);
+};
+```
+
+### 2.5. Middleware: `middlewares/authMiddleware.js`
+
+```js
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+
+exports.protect = async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    return res.status(401).json({ message: "Not authorized, no token" });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select("-password");
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Not authorized, token failed" });
+  }
+};
+```
+
+### 2.6. Auth Router: `routes/authRoutes.js`
+
+```js
+const express = require("express");
+const {
+  register,
+  login,
+  getProfile,
+} = require("../controllers/authController");
+const { protect } = require("../middlewares/authMiddleware");
+
+const router = express.Router();
+
+router.post("/register", register);
+router.post("/login", login);
+router.get("/profile", protect, getProfile);
+
+module.exports = router;
+```
+
+### 2.7. Talablar
+
+- **Register** va **Login** endpointlari uchun:
+  - `username`, `email`, `password` maydonlari to‘ldirilishi shart.
+  - `email` noyob bo‘lishi kerak.
+  - Parol kamida 6 ta belgidan iborat bo‘lishi kerak.
+- **Barcha endpointlar** (register va login dan tashqari) uchun:
+  - `authMiddleware` orqali autentifikatsiya talab qilinadi.
+
+### 2.8. Refresh Token Endpoint: `routes/authRoutes.js`
+
+```js
+router.post("/token", async (req, res) => {
+  const { token } = req.body;
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const accessToken = generateToken(decoded.id, "15m");
+    res.json({ accessToken });
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+});
+```
