@@ -1,83 +1,93 @@
-import { User } from '../models/index.js';
-
+import jwt from "jsonwebtoken";
+import { User } from "../models/index.js";
 export const authController = {
-  async register(req, res, next) {
-    try {
-      const body = req.body;
-      const user = new User(body);
-      await user.save();
+	async register(req, res, next) {
+		try {
+			const body = req.body;
+			const user = new User(body);
+			await user.save();
 
-    
-      user.password = ""
-  
-      res.status(201).json(user);
-    } catch (error) {
-      if (error.code === 11000) {
-        error.message = 'User already exists';
-        error.code = 400;
-        res.status(400).json(error);
-        return;
-      }
-      next(error);
-    }
-  },
-  async login(req, res, next) {
-    try {
-      const body = req.body;
+			user.password = "";
 
-      if (!body.username || !body.password) {
-        throw new Error('Username and password are required');
-      }
+			res.status(201).json({
+				message: "registred",
+				data: user,
+			});
+		} catch (error) {
+			if (error.code === 11000) {
+				error.message = "User already exists";
+				error.code = 400;
+				res.status(400).json(error);
+				return;
+			}
+			next(error);
+		}
+	},
+	async login(req, res, next) {
+		try {
+			const body = req.body;
 
-      const user = await User.findOne({
-        username: body.username,
-      });
+			if (!body.username || !body.password) {
+				throw new Error("Username and password are required");
+			}
 
-      if (!user) {
-        throw new Error('User not found');
-      }
+			const user = await User.findOne({
+				username: body.username,
+			});
 
-      const isMatch = await user.matchPassword(body.password);
+			if (!user) {
+				throw new Error("User not found");
+			}
 
-      if (!isMatch) {
-        throw new Error('Invalid credentials');
-      }
+			console.log({
+				userPassword: body.password,
+				dbUserPassword: user.password,
+			});
 
-      res.send(user);
-    } catch (error) {
-      next(error);
-    }
-  },
-  async profile(req, res, next) {
-    try {
-      const query = req.query;
-      if (!query.username || !query.password) {
-        throw new Error('Username and password are required');
-      }
+			if (body.password !== user.password) {
+				throw new Error("Invalid credentials");
+			}
 
-      const user = await User.findOne({
-        username: query.username,
-      });
+			const payload = {
+				sub: user.id,
+				role: user.role,
+				name: user.name,
+			};
 
-      if (!user) {
-        throw new Error('User not found');
-      }
+			const accessToken = await jwt.sign(payload, process.env.ACCESS_TOKEN, {
+				expiresIn: process.env.ACCESS_EXPIRES_IN,
+			});
 
-      const isMatch = await user.matchPassword(query.password);
+			const refreshToken = await jwt.sign(payload, process.env.REFRESH_TOKEN, {
+				expiresIn: process.env.REFRESH_EXPIRES_IN,
+			});
 
-      if (!isMatch) {
-        throw new Error('Invalid credentials');
-      }
+			res.send({
+				data: {
+					accessToken,
+					refreshToken,
+				},
+			});
+		} catch (error) {
+			next(error);
+		}
+	},
+	async profile(req, res, next) {
+		try {
+			const user = req.user;
 
-      res.send(user);
-    } catch (error) {
-      next(error);
-    }
-  },
-  async logout(req, res, next) {
-    try {
-    } catch (error) {
-      next(error);
-    }
-  },
+			res.send({
+				messagge: "profile",
+				data: user,
+			});
+		} catch (error) {
+			next(error);
+		}
+	},
+	async logout(req, res, next) {
+		try {
+		} catch (error) {
+			next(error);
+		}
+	},
 };
