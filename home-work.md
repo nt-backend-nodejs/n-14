@@ -4,27 +4,38 @@
 
 1. `index.js`
 2. `config/`
-   - `db.js` (MongoDB ulanish sozlamalari)
+
+- `db.js` (MongoDB ulanish sozlamalari)
+
 3. `models/`
-   - `User.js` (foydalanuvchi modeli: admin yoki oddiy user)
-   - `Ticket.js` (chipta modeli)
-   - `Order.js` (chipta buyurtmalari/tartiblari)
+
+- `User.js` (foydalanuvchi modeli: admin yoki oddiy user)
+- `Ticket.js` (chipta modeli)
+- `Order.js` (chipta buyurtmalari/tartiblari)
+
 4. `routes/`
-   - `authRoutes.js` (ro‘yxatdan o‘tish, login, parolni tiklash va h.k.)
-   - `ticketRoutes.js` (chiptalar CRUD)
-   - `orderRoutes.js` (buyurtmalar, to‘lov, status)
+
+- `authRoutes.js` (ro‘yxatdan o‘tish, login, parolni tiklash va h.k.)
+- `ticketRoutes.js` (chiptalar CRUD)
+- `orderRoutes.js` (buyurtmalar, to‘lov, status)
+
 5. `controllers/` (ixtiyoriy, agar MVC uslubida ajratilsa)
-   - `authController.js`
-   - `ticketController.js`
-   - `orderController.js`
+
+- `authController.js`
+- `ticketController.js`
+- `orderController.js`
+
 6. `middlewares/`
-   - `errorMiddleware.js` (xatolarni bir joyda tutish)
-   - `validateMiddleware.js` (Zod validatsiya uchun)
+
+- `errorMiddleware.js` (xatolarni bir joyda tutish)
+- `validateMiddleware.js` (Zod validatsiya uchun)
+- `authMiddleware.js` (JWT autentifikatsiya)
+
 7. `validators/` (har bir modul uchun Zod schemalari)
-    - `authValidator.js`
-    - `ticketValidator.js`
-    - `orderValidator.js`
-8. `.env` (maxfiy sozlamalar: DB_URI, va h.k.)
+   - `authValidator.js`
+   - `ticketValidator.js`
+   - `orderValidator.js`
+8. `.env` (maxfiy sozlamalar: DB_URI, JWT_SECRET, va h.k.)
 
 > **Topshiriq**: Yuqoridagi tuzilmani `online-ticket-backend` papkasiga tatbiq qiling. Har bir modul/fayl o‘zining maqsadi uchun javobgar bo‘lsin.
 
@@ -45,8 +56,8 @@
 > **Topshiriq**: Parollarni **hash** qilish uchun `bcrypt` kutubxonasidan foydalaning. Model pre-save hook (`userSchema.pre('save', ...)`) orqali parolni hash qiling.
 
 ```js
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
@@ -68,16 +79,16 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user',
+      enum: ["user", "admin"],
+      default: "user",
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 // Parolni saqlashdan oldin hash qilish
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();
@@ -88,7 +99,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
 ```
 
 ### 2.2. Auth Router: `routes/authRoutes.js`
@@ -97,16 +108,15 @@ module.exports = mongoose.model('User', userSchema);
 
 - **Vazifa**: Yangi foydalanuvchini ro‘yxatdan o‘tkazish.
 - **Body**: `{ "username": "...", "email": "...", "password": "..." }`
-- **Natija**:  “muvaffaqiyatli ro‘yxatdan o‘tildi” xabari.
+- **Natija**: “muvaffaqiyatli ro‘yxatdan o‘tildi” xabari.
 
 #### 2.2.2. **POST** `/api/auth/login`
 
 - **Vazifa**: Foydalanuvchini login qilish.
 - **Body**: `{ "email": "...", "password": "..." }`
-- **Natija**: foydalanuvchi ma’lumotlari qaytarilsin.
+- **Natija**: foydalanuvchi ma’lumotlari va JWT tokenlari qaytarilsin.
 
-
-> **Topshiriq**: `authController.js` da `register`, `login`, `getProfile` funksiyalarni yozing.
+> **Topshiriq**: `authController.js` da `register`, `login`, `getProfile` funksiyalarni yozing. JWT tokenlar uchun `jsonwebtoken` kutubxonasidan foydalaning.
 
 ---
 
@@ -131,30 +141,31 @@ module.exports = mongoose.model('User', userSchema);
 
 1. **POST** `/api/tickets` – **Yangi chipta yaratish**
 
-   - Faqat `admin` ro‘liga ega foydalanuvchi yaratishi kerak.
-   - Middleware: `authMiddleware`, `adminCheck`.
-   - Body: `{ title, description, category, price, date, location, totalQuantity }`.
+- Faqat `admin` ro‘liga ega foydalanuvchi yaratishi kerak.
+- Middleware: `authMiddleware`, `adminCheck`.
+- Body: `{ title, description, category, price, date, location, totalQuantity }`.
 
 2. **GET** `/api/tickets` – **Chiptalar ro‘yxati**
 
-   - **Filter**: query orqali filter qilish: `?category=concert&status=available`
-   - **Pagination**: `?page=2&limit=10`
-   - **Sort**: `?sort=price,asc` yoki `?sort=date,desc`
-   - Natija: `{ data: [...], pageInfo: { page, limit, total, totalPages } }`
+- **Filter**: query orqali filter qilish: `?category=concert&status=available`
+- **Pagination**: `?page=2&limit=10`
+- **Sort**: `?sort=price,asc` yoki `?sort=date,desc`
+- Natija: `{ data: [...], pageInfo: { page, limit, total, totalPages } }`
 
 3. **GET** `/api/tickets/:id` – **Bitta chipta haqida ma’lumot**
 
-   - Kengaytirilgan holda, agar chipta topilmasa, `404 Not Found`.
+- Kengaytirilgan holda, agar chipta topilmasa, `404 Not Found`.
 
 4. **PUT** `/api/tickets/:id` – **Chiptani yangilash**
 
-   - Faqat `admin` roliga ega foydalanuvchi.
-   - Body: `{ title, description, category, price, date, status, totalQuantity }`.
-   - `status`ga “expired” yoki “sold” ga o‘tkazish mumkin.
+- Faqat `admin` roliga ega foydalanuvchi.
+- Body: `{ title, description, category, price, date, status, totalQuantity }`.
+- `status`ga “expired” yoki “sold” ga o‘tkazish mumkin.
 
 5. **DELETE** `/api/tickets/:id` – **Chiptani o‘chirish**
-   - Faqat `admin`.
-   - Agar chiptaga allaqachon buyurtma bo‘lsa, xato qaytarish (masalan, “Chiptani o‘chirib bo‘lmaydi, chunki sotilgan!”).
+
+- Faqat `admin`.
+- Agar chiptaga allaqachon buyurtma bo‘lsa, xato qaytarish (masalan, “Chiptani o‘chirib bo‘lmaydi, chunki sotilgan!”).
 
 > **Topshiriq**: Filter, pagination, sortni bir API ichida barpo qiling (`GET /api/tickets`). Masalan:
 >
@@ -182,20 +193,20 @@ Ko‘p hollarda foydalanuvchi chiptalarni “add to cart” yoki “buy now” o
 - `createdAt`, `updatedAt`
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
     },
     tickets: [
       {
         ticket: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Ticket',
+          ref: "Ticket",
           required: true,
         },
         quantity: {
@@ -215,52 +226,53 @@ const orderSchema = new mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      default: 'stripe',
+      default: "stripe",
     },
     status: {
       type: String,
-      enum: ['pending', 'paid', 'cancelled'],
-      default: 'pending',
+      enum: ["pending", "paid", "cancelled"],
+      default: "pending",
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model("Order", orderSchema);
 ```
 
 ### 4.2. Order Router: `routes/orderRoutes.js`
 
 1. **POST** `/api/orders` – **Yangi buyurtma yaratish**
 
-   - Foydalanuvchi (tokeni bilan) buyurtma yaratadi.
-   - Body: `{ "tickets": [ { "ticketId": "...", "quantity": 2 }, ... ], "paymentMethod": "stripe" }`
-   - Dastlab `pending` statusda bo‘ladi.
-   - Har bir `ticketId` orqali `Ticket` modeldan narxni olib, `price` maydoniga saqlab qo‘ying.
-   - `totalPrice` ni avtomatik hisoblash: `sum( ticket.price * quantity )`.
+- Foydalanuvchi (tokeni bilan) buyurtma yaratadi.
+- Body: `{ "tickets": [ { "ticketId": "...", "quantity": 2 }, ... ], "paymentMethod": "stripe" }`
+- Dastlab `pending` statusda bo‘ladi.
+- Har bir `ticketId` orqali `Ticket` modeldan narxni olib, `price` maydoniga saqlab qo‘ying.
+- `totalPrice` ni avtomatik hisoblash: `sum( ticket.price * quantity )`.
 
 2. **POST** `/api/orders/:orderId/pay` – **Buyurtma uchun to‘lov**
 
-   - Yangi endpoint: `POST /api/orders/:orderId/pay`
-   - To‘lov integratsiyasi (Stripe yoki PayPal) sodda ko‘rinishda (fake) bo‘lishi mumkin:
-     - Agar to‘lov muvaffaqiyatli bo‘lsa, `status = 'paid'` ga o‘zgartirish.
-     - `Ticket` modelida `soldQuantity` ni oshirish (buyurtma qilingan miqdorda).
-     - Agar `soldQuantity` > `totalQuantity` bo‘lib ketsa, xato qaytarish (over-sell oldini olish).
+- Yangi endpoint: `POST /api/orders/:orderId/pay`
+- To‘lov integratsiyasi (Stripe yoki PayPal) sodda ko‘rinishda (fake) bo‘lishi mumkin:
+  - Agar to‘lov muvaffaqiyatli bo‘lsa, `status = 'paid'` ga o‘zgartirish.
+  - `Ticket` modelida `soldQuantity` ni oshirish (buyurtma qilingan miqdorda).
+  - Agar `soldQuantity` > `totalQuantity` bo‘lib ketsa, xato qaytarish (over-sell oldini olish).
 
 3. **GET** `/api/orders` – **Buyurtmalar ro‘yxati**
 
-   - **Admin** barcha buyurtmalarni ko‘rishi mumkin.
-   - Oddiy foydalanuvchi esa faqat o‘z buyurtmalarini ko‘rishi mumkin.
-   - Query param bilan `status=pending` yoki `status=paid` ga filtr qilish.
+- **Admin** barcha buyurtmalarni ko‘rishi mumkin.
+- Oddiy foydalanuvchi esa faqat o‘z buyurtmalarini ko‘rishi mumkin.
+- Query param bilan `status=pending` yoki `status=paid` ga filtr qilish.
 
 4. **GET** `/api/orders/:orderId` – **Bitta buyurtma haqida ma’lumot**
 
-   - Agar `admin` bo‘lsa, istalgan orderni ko‘rishi mumkin.
-   - Oddiy `user` faqat o‘zining orderini ko‘rsin.
+- Agar `admin` bo‘lsa, istalgan orderni ko‘rishi mumkin.
+- Oddiy `user` faqat o‘zining orderini ko‘rsin.
 
 5. **PATCH** `/api/orders/:orderId/cancel` – **Buyurtmani bekor qilish**
-   - Faqat foydalanuvchi “pending” statusdagi buyurtmasini bekor qila olsin.
-   - Buyurtma “paid” bo‘lsa, bekor qilishga ruxsat yo‘q (yoki alohida siyosat).
+
+- Faqat foydalanuvchi “pending” statusdagi buyurtmasini bekor qila olsin.
+- Buyurtma “paid” bo‘lsa, bekor qilishga ruxsat yo‘q (yoki alohida siyosat).
 
 > **Topshiriq**: To‘lovning real integratsiyasi uchun (Stripe):
 >
@@ -285,20 +297,22 @@ module.exports = mongoose.model('Order', orderSchema);
 ---
 
 3. **Global Error Handler**: `middlewares/errorMiddleware.js`
-   - Express app da `app.use(errorMiddleware)` orqali xatolarni tutish.
-   - Formati:
-   ```js
-   module.exports = (err, req, res, next) => {
-     console.error(err.stack);
-     res.status(err.statusCode || 500).json({
-       success: false,
-       message: err.message || 'Server Error',
-     });
-   };
-   ```
 
-   - `Talablar`: middlewares/errorMiddleware.js orqali xatolarni tutish va foydalanuvchiga tushunarli xabarlar qaytarish.
-   - `Topshiriq`: Validatsiya xatolarini yaxshilash va foydalanuvchi uchun aniq xabarlar yaratish.
+- Express app da `app.use(errorMiddleware)` orqali xatolarni tutish.
+- Formati:
+
+```js
+module.exports = (err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.statusCode || 500).json({
+    success: false,
+    message: err.message || "Server Error",
+  });
+};
+```
+
+- `Talablar`: middlewares/errorMiddleware.js orqali xatolarni tutish va foydalanuvchiga tushunarli xabarlar qaytarish.
+- `Topshiriq`: Validatsiya xatolarini yaxshilash va foydalanuvchi uchun aniq xabarlar yaratish.
 
 ---
 
