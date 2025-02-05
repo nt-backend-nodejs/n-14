@@ -2,14 +2,13 @@ import { Schema, model } from "mongoose";
 
 const userSchema = new Schema(
 	{
-		username: {
+		name: {
 			type: String,
-			required: true,
-			unique: true,
 			trim: true,
 		},
 		email: {
 			type: String,
+			index: true,
 			required: true,
 			unique: true,
 			trim: true,
@@ -19,9 +18,14 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		isActive: {
+			type: String,
+			enum: ["active", "inactive"],
+			default: "inactive",
+		},
 		role: {
 			type: String,
-			enum: ["user", "admin"],
+			enum: ["user", "admin", "superadmin"],
 			default: "user",
 		},
 	},
@@ -35,8 +39,7 @@ const userSchema = new Schema(
 // 	}
 
 // 	const salt = await genSalt(10);
-// 	this.password =
-// 	next();
+// 	this.password = next();
 // });
 
 // Parolni solishtirish metodi

@@ -1,12 +1,7 @@
 {
   "editor.minimap.enabled": false,
-  "workbench.colorTheme": "Gruvbox Dark Hard",
-  "cSpell.words": [
-    "Azizbek",
-    "Merried",
-    "nodjs",
-    "xamidullo"
-  ],
+  "workbench.colorTheme": "Gruvbox Black",
+  "cSpell.words": ["Azizbek", "Merried", "nodjs", "xamidullo"],
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   }

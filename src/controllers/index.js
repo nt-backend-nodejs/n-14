@@ -1,3 +1,3 @@
-export * from "./auth.controller.js"
-export * from "./ticket.controller.js"
-export * from "./order.controller.js"
+export * from "./auth.controller.js";
+export * from "./category.controller.js";
+export * from "./article.controller.js";
