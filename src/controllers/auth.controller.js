@@ -54,13 +54,21 @@ export const authController = {
 				name: user.name,
 			};
 
-			const accessToken = await jwt.sign(payload, process.env.ACCESS_TOKEN, {
-				expiresIn: process.env.ACCESS_EXPIRES_IN,
-			});
+			const accessToken = await jwt.sign(
+				payload,
+				process.env.JWT_ACCESS_SECRET,
+				{
+					expiresIn: process.env.JWT_ACCESS_EXPIRES_IN,
+				},
+			);
 
-			const refreshToken = await jwt.sign(payload, process.env.REFRESH_TOKEN, {
-				expiresIn: process.env.REFRESH_EXPIRES_IN,
-			});
+			const refreshToken = await jwt.sign(
+				payload,
+				process.env.JWT_REFRESH_SECRET,
+				{
+					expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
+				},
+			);
 
 			res.send({
 				data: {
@@ -75,6 +83,7 @@ export const authController = {
 	async profile(req, res, next) {
 		try {
 			const user = req.user;
+			console.log({ user });
 
 			res.send({
 				messagge: "profile",
