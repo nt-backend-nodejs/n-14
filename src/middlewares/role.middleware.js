@@ -1,12 +1,8 @@
 export const roleGuard = (...roles) => {
+	// ["admin", "superadmin"]
 	return async (req, res, next) => {
 		try {
-			const userRoles = req.user.role;
-
-			console.log("userRoles", userRoles);
-			console.log("permission role", roles);
-
-			console.log(roles.includes(userRoles));
+			const userRoles = req.user.role; // "user"
 
 			if (!roles.includes(userRoles)) {
 				return res.send("Your roles are not allowed to access this route");
@@ -17,3 +13,5 @@ export const roleGuard = (...roles) => {
 		}
 	};
 };
+
+// Middleware == roleGuard("admin", "superadmin");

@@ -6,18 +6,18 @@ const transporter = createTransport({
 	port: 465,
 	secure: true,
 	auth: {
-		user: "khkhamidullo@gmail.com",
-		pass: "mgxp jczf bkmt whfh",
+		user: process.env.MAIL_USER, // TODO: update your email
+		pass: process.env.MAIL_PASS, // TODO: Update your password
 	},
 });
 
-function sendMail(userMail) {
+export function sendMail(userMail, message) {
 	try {
 		const mailOptions = {
-			from: "khkhamidullo@gmail.com",
+			from: process.env.MAIL_USER,
 			to: userMail,
-			subject: "Sending Email With Nodemailer",
-			text: "Assalomu alaykum  Yurtim senga she'r bittim bugun qiyosong!",
+			subject: "OTP manager",
+			text: message,
 			name: "Khamidullo",
 		};
 
@@ -33,8 +33,8 @@ function sendMail(userMail) {
 	}
 }
 
-sendMail("lustrum062@gmail.com");
-sendMail("aliataev9979@gmail.com");
-sendMail("abdulhaqsherqoziyev@gmail.com");
+// sendMail("lustrum062@gmail.com");
+// sendMail("aliataev9979@gmail.com");
+// sendMail("abdulhaqsherqoziyev@gmail.com");
 
 // export default transporter;

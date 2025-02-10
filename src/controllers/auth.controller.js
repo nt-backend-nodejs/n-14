@@ -1,5 +1,8 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/index.js";
+import { User, Otp } from "../models/index.js";
+import { sendMail } from "../common/mail.js";
+import otpGenerator from "otp-generator";
+
 export const authController = {
 	async register(req, res, next) {
 		try {
@@ -7,6 +10,15 @@ export const authController = {
 			const user = new User(body);
 			await user.save();
 
+			const otp = otpGenerator.generate(6, {
+				upperCaseAlphabets: false,
+				digits: true,
+				specialChars: false,
+			});
+
+			sendMail(body.email, `this is yout OTP:${otp}`);
+			const currentOtp = new Otp({ code: otp, author_id: user._id });
+			await currentOtp.save();
 			user.password = "";
 
 			res.status(201).json({
@@ -34,6 +46,10 @@ export const authController = {
 			const user = await User.findOne({
 				username: body.username,
 			});
+
+			if (user.isActive !== "active") {
+				throw new Error("You must be verifed");
+			}
 
 			if (!user) {
 				throw new Error("User not found");
@@ -96,6 +112,41 @@ export const authController = {
 	async logout(req, res, next) {
 		try {
 			console.log();
+		} catch (error) {
+			next(error);
+		}
+	},
+
+	generateOtp() {
+		return otpGenerator.generate(6, {
+			upperCaseAlphabets: false,
+			specialChars: false,
+		});
+	},
+
+	async verify(req, res, next) {
+		try {
+			const body = req.body;
+
+			const user = await User.findOne({
+				username: body.username,
+			});
+
+			if (!user) {
+				throw new Error("User not found");
+			}
+
+			const otp = await Otp.findOne({
+				code: body.code,
+			});
+
+			if (!otp) {
+				throw new Error("otp is not valid");
+			}
+
+			await User.findByIdAndUpdate(user._id, { $set: { isActive: "active" } });
+			await Otp.findByIdAndDelete(otp._id);
+			res.send("deleted");
 		} catch (error) {
 			next(error);
 		}

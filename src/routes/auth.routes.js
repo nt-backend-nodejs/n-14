@@ -17,5 +17,6 @@ authRouter.post(
 	authController.register,
 );
 authRouter.post("/login", validateData(userLoginSchema), authController.login);
+authRouter.post("/verify", authController.verify);
 authRouter.get("/logout", authController.logout);
 authRouter.get("/profile", authMiddleware, authController.profile);
