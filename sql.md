@@ -1,109 +1,127 @@
-Quyida SQL bo‘yicha berilgan mavzularni chuqurroq o‘rganish uchun 20 ta amaliy topshiriq keltirilgan. Har bir topshiriqda aniq vazifa va yo‘riqnoma berilgan. Ushbu topshiriqlarni bosqichma-bosqich bajarish orqali o‘quvchilar SQLning asosiy buyruqlarini puxta o‘zlashtirishlari mumkin.
+1. **Jadval tuzish (PRIMARY KEY va CHECK) – Postgres sintaksisi**
+   - “groups” nomli jadvalni yarating:
+     - `group_id SERIAL PRIMARY KEY`
+     - `group_name VARCHAR(50) UNIQUE`
+     - `max_students INT CHECK (max_students BETWEEN 5 AND 30)`
 
----
+2. **Talabalar jadvali (FOREIGN KEY bilan)**
+   - “students” nomli jadvalni yarating:
+     - `student_id SERIAL PRIMARY KEY`
+     - `first_name VARCHAR(50) NOT NULL`
+     - `last_name VARCHAR(50) NOT NULL`
+     - `birth_date DATE CHECK (birth_date < '2010-01-01')`
+     - `group_id INT REFERENCES groups(group_id)`
 
-1. **Jadval yaratish (CREATE TABLE) va asosiy ustunlar bilan tanishish**
-   - Topshiriq: `students` nomli jadval yarating. Jadvalda quyidagi ustunlar bo‘lsin:
-     1. `student_id` (PRIMARY KEY, INT, AUTO_INCREMENT)
-     2. `first_name` (VARCHAR(50), NOT NULL)
-     3. `last_name` (VARCHAR(50), NOT NULL)
-     4. `birth_date` (DATE)
-   - Talab: Asosiy kalitni (PRIMARY KEY) to‘g‘ri e’lon qilishga e’tibor bering.
-   - Maqsad: Jadval yaratish sintaksisini mustahkamlash.
+3. **O‘qituvchilar jadvali (CHECK)**
+   - “teachers” nomli jadvalni yarating:
+     - `teacher_id SERIAL PRIMARY KEY`
+     - `first_name VARCHAR(50) NOT NULL`
+     - `last_name VARCHAR(50) NOT NULL`
+     - `gender CHAR(1) CHECK (gender IN ('M', 'F'))`
 
-2. **Ma’lumot qo‘shish (INSERT) va ma’lumotlarni tekshirish (SELECT)**
-   - Topshiriq: `students` jadvaliga kamida 3 ta o‘quvchi haqidagi ma’lumotni INSERT orqali kiriting. Har biriga first_name, last_name, birth_date kabi qiymatlarni bering.
-   - Talab: Ma’lumotlar kiritilgandan so‘ng, SELECT yordami bilan kiritilgan yozuvlarni tekshiring.
-   - Maqsad: INSERT va SELECT buyruqlarini amalda qo‘llash.
+4. **Fanlar jadvali (UNIQUE va FOREIGN KEY)**
+   - “subjects” nomli jadvalni yarating:
+     - `subject_id SERIAL PRIMARY KEY`
+     - `subject_name VARCHAR(100) UNIQUE`
+     - `teacher_id INT REFERENCES teachers(teacher_id)`
 
-3. **UPDATE bilan ma’lumotlarni yangilash**
-   - Topshiriq: `students` jadvalidagi bitta yozuvning `last_name` ustunini yangilang (masalan, “Aliyev”ni “Aliev”ga o‘zgartiring).
-   - Talab: O‘zgartirilgan yozuvni SELECT orqali qayta ko‘rib, yangilanishni tasdiqlang.
-   - Maqsad: UPDATE va WHERE sharti bilan ishlashni mustahkamlash.
+5. **Jadvallarga ma’lumot kiritish (INSERT) – Postgresda**
+   - “groups” jadvaliga kamida 5 ta yozuv kiriting.
+   - Har bir guruh uchun `group_name` turlicha bo‘lsin, `max_students` qiymatlarini turli raqamlarda sinab ko‘ring.
+   - Takrorlanuvchi `group_name` yozishni sinab ko‘ring (UNIQUE constraint qanday ishlashini ko‘rish uchun).
 
-4. **DELETE bilan yozuvlarni o‘chirish**
-   - Topshiriq: `students` jadvalida bitta o‘quvchining yozuvini DELETE orqali o‘chiring.
-   - Talab: Qayta SELECT qilganda o‘chirilgan yozuv mavjud emasligiga ishonch hosil qiling.
-   - Maqsad: DELETEdan foydalanishni va ma’lumotlar butligini tushunish.
+6. **Talabalar ma’lumotlari (INSERT) – Postgresda**
+   - “students” jadvaliga kamida 10 ta yozuv qo‘shing.
+   - Yozuvlarda `birth_date` (2000-yillardan to 2009-yillargacha, masalan) va turli `group_id`lar kiriting.
+   - `birth_date` ustuniga 2010-yildan keyingi sanani (masalan, '2012-05-01') kiritib ko‘rib, CHECK constraint ishlashini tekshiring.
 
-5. **WHERE sharti bilan ma’lumot qidirish**
-   - Topshiriq: `students` jadvalidan WHERE sharti orqali `first_name`i “Ali” bo‘lgan barcha yozuvlarni tanlang.
-   - Talab: Kamida ikki xil o‘quvchi “Ali” ismini ishlatgan holatni sinab ko‘ring (agar bo‘lmasa, ma’lumot qo‘shing).
-   - Maqsad: WHERE bilan filtrlash amaliyotini o‘zlashtirish.
+7. **O‘qituvchilar va fanlar (INSERT)**
+   - “teachers” jadvaliga kamida 5 ta yozuv kiritib, `gender` ustuniga `M` va `F` dan boshqa qiymat kiritishga urining (xatolik chiqsin).
+   - “subjects” jadvaliga kamida 6 ta fan nomi kiriting va har bir fanni mos `teacher_id`ga bog‘lang.
 
-6. **ORDER BY bilan tartiblash**
-   - Topshiriq: `students` jadvalidagi barcha yozuvlarni `last_name` bo‘yicha alifbo tartibida saralang.
-   - Talab: O‘quvchilarni oson ko‘rish uchun SELECT natijalarini `first_name, last_name` ustunlari bo‘yicha ko‘rsating.
-   - Maqsad: Ma’lumotlarni kerakli tartibda ko‘rishni o‘rganish.
+8. **Oraliq jadval (enrollments)**
+   - “enrollments” nomli jadvalni yarating:
+     - `enrollment_id SERIAL PRIMARY KEY`
+     - `student_id INT REFERENCES students(student_id)`
+     - `subject_id INT REFERENCES subjects(subject_id)`
+     - `enroll_date DATE NOT NULL`
+     - `grade INT CHECK (grade BETWEEN 1 AND 5)`
+   - Kamida 15–20 ta yozuv qo‘shing (har bir talabaning bir nechta fanga yozilishi mumkin).
 
-7. **LIMIT bilan cheklash**
-   - Topshiriq: `students` jadvalidagi ma’lumotlardan faqat 2 ta yozuvni olish uchun SELECTdan foydalaning.
-   - Talab: ORDER BY bilan birgalikda LIMITdan foydalanib, ma’lumotlarni kerakli tartibda cheklang.
-   - Maqsad: LIMIT yordamida katta jadvallardan faqat kerakli bo‘lagini tanlashni o‘rganish.
+9. **UPDATE bilan ma’lumotni yangilash**
+   - Bitta talabani boshqa guruhga o‘tkazing: `UPDATE students SET group_id = ... WHERE student_id = ...;`
+   - O‘sha talabaning `birth_date` ustunini 2012-yilga yangilashga urining (CHECK constraint xatolik qaytarishi kerak).
 
-8. **AS bilan ustun nomlariga laqab berish**
-   - Topshiriq: `students` jadvalidan `first_name` ustunini “Ism” va `last_name` ustunini “Familiya” sifatida AS bilan qayta nomlab SELECT qiling.
-   - Talab: Natijaviy ustun nomlari “Ism” va “Familiya” bo‘lib chiqsin.
-   - Maqsad: Ustunlarni shartli nomlar bilan ko‘rsatishni bilish.
+10. **DELETE bilan ma’lumotni o‘chirish**
+    - “subjects” jadvalidan bitta fan yozuvini o‘chiring. Agar fan “enrollments” jadvalida mavjud bo‘lsa va FOREIGN KEY sozlamalariga bog‘liq holda xatolik chiqishi yoki kaskadli o‘chish yuz berishi mumkin.
+    - “students” jadvalidan bitta talabani o‘chiring va “enrollments”ga ta’sirini tekshiring.
 
-9. **UNION orqali bir nechta tanlovlarni birlashtirish**
-   - Topshiriq: 2 ta turli SELECT yozing — masalan, birinchisi `students` jadvalidan `first_name`ni, ikkinchisi o‘xshash strukturaga ega boshqa jadvaldan (o‘zingiz yarating, masalan `teachers`) `first_name`ni tanlasin. Keyin UNION yordamida ikkisini birlashtiring.
-   - Talab: Bir xil turdagi ustunlar bo‘lishini ta’minlang.
-   - Maqsad: UNION sintaksisi va birlashtirish jarayonini tushunish.
+11. **PRIMARY KEY va UNIQUE constraint sinovi**
+    - “groups” jadvaliga `group_id` yoki `group_name` ustunlari takrorlanuvchi qiymat kiritib ko‘ring.
+    - Xatolik chiqishini kuzating va sabablab bering (PRIMARY KEY yoki UNIQUE constraint).
 
-10. **Xorijiy kalit (FOREIGN KEY) bilan ishlash**
-    - Topshiriq: `groups` nomli jadval yarating. Jadvalda `group_id` (PRIMARY KEY) va `group_name` (VARCHAR) bo‘lsin. `students` jadvaliga `group_id` ustuni qo‘shing (ALTER TABLE orqali), va uni FOREIGN KEY qilib e’lon qiling, `groups.group_id`ga bog‘lang.
-    - Talab: FOREIGN KEY ustuni NOT NULL bo‘lishi yoki bo‘lmasligini o‘zingiz hal qiling, mos ravishda jadval strukturasini qo‘llang.
-    - Maqsad: Bog‘langan jadvallar, FOREIGN KEY va referential integrity tushunchalarini mustahkamlash.
+12. **CHECK constraint sinovi**
+    - “teachers” jadvalida `gender`ga `'X'` kiritish, “groups” jadvalida `max_students` qiymatini 3 yoki 40 qilib kiritish orqali CHECK constraintni sinab ko‘ring.
+    - Xatolik mazmuni va sabablarini aniqlang.
 
-11. **Ma’lumotlar butligini nazorat qilish (Integrity Constraints)**
-    - Topshiriq: `students` jadvalining `birth_date` ustuniga cheklov qo‘ying (masalan, 2010-yildan keyingi tug‘ilgan o‘quvchilar kiritilmasin). Bu uchun CHECK constraint-dan foydalanish yoki boshqa usulni tanlang.
-    - Talab: Bir nechta test INSERTlari orqali constraint ishlashini tekshiring.
-    - Maqsad: Integrity constraints haqida amaliy tajribaga ega bo‘lish.
+13. **INNER JOIN bilan ma’lumot chiqarish**
+    - “students” va “groups” jadvallarini INNER JOIN yordamida bog‘lab, har bir talabaning guruh nomini ko‘rsating.
+    - JOIN natijasida qancha yozuv chiqqanini tekshirib ko‘ring.
 
-12. **ALTER TABLE bilan ustun qo‘shish/o‘zgartirish**
-    - Topshiriq: `students` jadvaliga `gender` (CHAR(1) yoki VARCHAR(10)) ustunini qo‘shing. Keyin ustunning turini yoki default qiymatini o‘zgartiring.
-    - Talab: Bir necha bosqichda ustun qo‘shing, ma’lumot kiriting, so‘ngra ustunning turini o‘zgartiring (masalan, CHAR(1)dan VARCHAR(10)ga).
-    - Maqsad: ALTER TABLE bilan tanishish va amaliyotga tadbiq etish.
+14. **LEFT JOIN bilan ma’lumot chiqarish**
+    - “subjects” va “teachers” jadvallarini LEFT JOIN orqali bog‘lang.
+    - Agar ba’zi fanlarda o‘qituvchi belgilanmagan bo‘lsa, natijada NULL chiqishini kuzating.
 
-13. **GROUP BY bilan guruhlash**
-    - Topshiriq: `students` jadvalida `group_id` bo‘yicha guruhlang va har bir guruhda qancha talaba borligini COUNT(*) bilan chiqaring.
-    - Talab: SELECTda `group_id` va `COUNT(*) AS student_count` ustunlarini ko‘rsating.
-    - Maqsad: GROUP BY bilan bir nechta yozuvlarni bitta guruhga birlashtirishni o‘rganish.
+15. **RIGHT JOIN bilan ma’lumot chiqarish**
+    - “groups” jadvali bilan “students”ni RIGHT JOIN orqali bog‘lang va barcha guruhlarni (talabasi bo‘lmasa ham) ko‘rsating.
+    - Talaba yo‘q guruhlarda `student_id` maydonlari NULL chiqishini tekshiring.
 
-14. **HAVING bilan guruhlangan natijani filtrlash**
-    - Topshiriq: Oldingi GROUP BY misolingizdan foydalanib, faqat kamida 2 ta talaba ega bo‘lgan guruhlarni ko‘rsating.
-    - Talab: Buning uchun `HAVING COUNT(*) >= 2` sharti bilan foydalaning.
-    - Maqsad: GROUP BY va HAVING ni birgalikda qo‘llash.
+16. **GROUP BY va HAVING**
+    - “students” jadvalidan talabalarning guruh bo‘yicha hisobini chiqaring:
+      ```sql
+      SELECT group_id, COUNT(*)
+      FROM students
+      GROUP BY group_id;
+      ```
+    - Faqat 5 tadan ortiq talaba bo‘lgan guruhlarni ko‘rsatish uchun HAVING qo‘llang.
 
-15. **CROSS JOIN**
-    - Topshiriq: `students` va `groups` jadvallari o‘rtasida CROSS JOIN amalga oshiring.
-    - Talab: CROSS JOIN natijasida yozuvlar soni `students` dagi yozuvlar soni × `groups` dagi yozuvlar soni bo‘lishini tasdiqlang.
-    - Maqsad: CROSS JOIN mantig‘ini tushunish va natijani tahlil qilish.
+17. **ON DELETE CASCADE sinovi**
+    - “students” jadvalidagi FOREIGN KEY e’lonida `ON DELETE CASCADE` yoki `ON DELETE RESTRICT` belgilab ko‘ring.
+    - Bitta talaba yozuvini o‘chirib, “enrollments” jadvaliga ta’sirini kuzating.
+    - Kaskadli yoki cheklovchi o‘chirish natijalarini izohlang.
 
-16. **INNER JOIN (ichki qo‘shilish)**
-    - Topshiriq: `students` va `groups` jadvallarini INNER JOIN orqali bog‘lang.
-    - Talab: JOIN sharti sifatida `students.group_id = groups.group_id` dan foydalaning.
-    - Maqsad: Ichki bog‘lanish natijasida faqat mos keladigan yozuvlar chiqishini ko‘rish.
+18. **ON UPDATE CASCADE sinovi**
+    - “subjects” jadvalidagi PRIMARY KEY uchun `ON UPDATE CASCADE` ishlatib ko‘ring.
+    - Bitta fanning `subject_id` qiymatini yangilab, “enrollments” jadvalidagi mos yozuvlar ham o‘zgargan-o‘zgarmaganini tekshiring.
 
-17. **LEFT JOIN**
-    - Topshiriq: `students` jadvali bilan `groups` jadvalini LEFT JOIN yordamida bog‘lang.
-    - Talab: Ma’lumotlar mavjud bo‘lmagan holatlarda `students` tarafidan hamma yozuvlar chiqishini kuzating.
-    - Maqsad: Jadvaldagi mos yozuvlar bo‘lmasa ham chap jadvaldagi barcha yozuvlar kelishini tushunish.
+19. **Bir nechta JOIN kombinasiyasi**
+    - “students”, “enrollments”, “subjects” va “teachers”ni bir so‘rovda bog‘lang, har bir talabaning qaysi fanga yozilgani va o‘qituvchining ism-familiyasi qanday ekanini chiqaring.
+    - Natijalarni ma’lumotlarga qarab saralang (`ORDER BY`).
 
-18. **RIGHT JOIN**
-    - Topshiriq: Avvalgi misolni RIGHT JOINda takrorlang, ammo bu safar `groups` tomoni asos bo‘ladi.
-    - Talab: `groups` jadvalidagi yozuvlar hammasi chiqib, `students` dagi mos ma’lumot bo‘lmasa, NULL ko‘rinsin.
-    - Maqsad: RIGHT JOIN ish mexanizmini tushunish.
+20. **ORDER BY va LIMIT**
+    - “enrollments” jadvalidan baho (`grade`) bo‘yicha saralash uchun `ORDER BY grade DESC` yozib ko‘ring.
+    - Eng yaxshi 5 bahoni ko‘rish uchun `LIMIT 5`dan foydalaning.
+    - Natijalar ustida tahlil olib boring va constraint’lar bilan taqqoslang.
 
-19. **Bir nechta JOINlardan foydalanish (Multiple JOIN)**
-    - Topshiriq: Uchta yoki undan ortiq jadval yaratib (masalan, `students`, `groups`, `teachers`), ularni bir nechta JOIN bilan bog‘lab SELECT qiling. Har bir jadvalda kamida 3 tadan yozuv bo‘lsin.
-    - Talab: Jadval biriktirishda INNER JOIN, LEFT JOIN kabi turli JOINlarni birgalikda ishlating.
-    - Maqsad: Katta so‘rovlar tuzish va ma’lumotlarni turli jadvallardan yig‘ishni o‘rganish.
+21. **OFFSET va FETCH**
+    - “students” jadvalidan 5-tadan keyingi talabalarni ko‘rish uchun `OFFSET 5`dan foydalaning.
+    - Keyingi 3 talabani ko‘rish uchun `FETCH NEXT 3 ROWS ONLY` qo‘llanmasidan foydalaning.
+    - Natijalarni tekshirib, OFFSET va FETCH qo‘llanmasining ishlashini tushunib chiqing.
 
-20. **Funksiyalar bilan tanishish (MIN, MAX, AVG, SUM va boshqalar)**
-    - Topshiriq: Agar `students` jadvalida tug‘ilgan sanaga qarab eng keksa yoki eng yosh o‘quvchini topish kerak bo‘lsa, `MIN(birth_date)` yoki `MAX(birth_date)`dan foydalaning. Yoki ma’lumot izchil bo‘lsa, `GROUP BY groups.group_id` bilan har bir guruhdagi o‘quvchilarning o‘rtacha yoshini `AVG()` yordamida toping.
-    - Talab: Bir nechta funksiyalarni sinab ko‘ring (MIN, MAX, AVG, COUNT va hokazo).
-    - Maqsad: Aggregation funksiyalarini ishlatish ko‘nikmasini rivojlantirish.
+22. **LIKE operatori va % belgisi**
+    - “students” jadvalidan ismida “a” harfi qatnashgan tal
+    abalarni ko‘rish uchun `WHERE first_name LIKE '%a%'` qo‘llanmasidan foydalaning.
+    - Ismida “a” harfi va “n” harfi qatnashgan talabalar uchun `WHERE first_name LIKE '%a%n%'` qo‘llanmasidan foydalaning.
+    - Natijalarni tekshirib, `LIKE` operatori va `%` belgisining ishlashini tushunib chiqing.
 
----
+23. **IN operatori**
+    - “students” jadvalidan guruh raqamlari 1, 3, 5, 7, 9 bo‘lgan talabalar ro‘yxatini ko‘rish uchun `WHERE group_id IN (1, 3, 5, 7, 9)` qo‘llanmasidan foydalaning.
+    - Natijalarni tekshirib, `IN` operatorining ishlashini tushunib chiqing.
+
+24. **BETWEEN operatori**
+    - “students” jadvalidan tug‘ilgan sanasi 2000-yilning 1-yanvaridan 2005-yilning 31-dekabrigacha bo‘lgan talabalar ro‘yxatini ko‘rish uchun `WHERE birth_date BETWEEN '2000-01-01' AND '2005-12-31'` qo‘llanmasidan foydalaning.
+    - Natijalarni tekshirib, `BETWEEN` operatorining ishlashini tushunib chiqing.
+
+25. **EXISTS operatori**
+    - “enrollments” jadvalida baho (`grade`) 5 ga teng bo‘lgan talabalar ro‘yxatini ko‘rish uchun `WHERE EXISTS (SELECT * FROM enrollments WHERE students.student_id = enrollments.student_id AND grade = 5)` qo‘llanmasidan foydalaning.
+    - Natijalarni tekshirib, `EXISTS` operatorining ishlashini tushunib chiqing.
