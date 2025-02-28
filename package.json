@@ -1,7 +1,7 @@
 {
-  "name": "n-14-standard",
+  "name": "nodejs_n14",
   "version": "1.0.0",
-  "type": "module",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "abbrev": "^1.1.1",
@@ -52,6 +52,7 @@
     "once": "^1.4.0",
     "otp-generator": "^4.0.1",
     "path-is-absolute": "^1.0.1",
+    "pg": "^8.13.3",
     "punycode": "^2.3.1",
     "rimraf": "^3.0.2",
     "semver": "^7.7.1",
@@ -72,12 +73,20 @@
     "yallist": "^4.0.0",
     "zod": "^3.24.1"
   },
+  "devDependencies": {},
   "scripts": {
-    "start:dev": "node --env-file=.env --watch src/server.js",
-    "start": "node --env-file=.env src/server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nt-backend-nodejs/n-14.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/nt-backend-nodejs/n-14/issues"
+  },
+  "homepage": "https://github.com/nt-backend-nodejs/n-14#readme"
 }

@@ -65,3 +65,5 @@ WHERE
 
 --
 CREATE TYPE USER_ROLE AS ENUM ('ADMIN', 'USER', 'GUEST');
+
+-- tranzaction
