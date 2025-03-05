@@ -73,8 +73,8 @@ export const setUp = async () => {
       customer_id SERIAL PRIMARY KEY,
       first_name VARCHAR(100),
       last_name VARCHAR(100),
-      email VARCHAR(255),
-      phone VARCHAR(50),
+      email VARCHAR(255) unique not null,
+      phone VARCHAR(50) unique,
       address TEXT
     );
   `;
