@@ -74,6 +74,7 @@ export const setUp = async () => {
       first_name VARCHAR(100),
       last_name VARCHAR(100),
       email VARCHAR(255) unique not null,
+      password varchar(255) not null,
       phone VARCHAR(50) unique,
       address TEXT
     );
