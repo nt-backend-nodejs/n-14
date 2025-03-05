@@ -1,6 +1,11 @@
 import express from "express";
 import { setUp } from "./servies/setup.js";
-import { bookRouter, authorRouter, categoryRouter } from "./routes/index.js";
+import {
+	bookRouter,
+	authorRouter,
+	categoryRouter,
+	authRouter,
+} from "./routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -11,6 +16,7 @@ app.use("/setup", (req, res, next) => {
 	setUp();
 });
 
+app.use("/auth", authRouter);
 app.use("/books", bookRouter);
 app.use("/authors", authorRouter);
 // app.use("/bookauthors");
