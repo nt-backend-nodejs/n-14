@@ -16,7 +16,7 @@ export async function getBookById(userId) {
 
 export async function createBook(name, email) {
 	const query = `
-    INSERT INTO users (name, email)
+    INSERT INTO books (name, email)
     VALUES ($1, $2)
     RETURNING *;
   `;
@@ -25,6 +25,20 @@ export async function createBook(name, email) {
 	try {
 		const result = await query(query, values);
 		return result.rows[0];
+	} catch (error) {
+		console.error("Error creating user:", error);
+		throw error;
+	}
+}
+
+export async function getAllBook() {
+	const query = `
+ 				SELECT * FROM books;
+  `;
+
+	try {
+		const result = await query(query);
+		return result.rows;
 	} catch (error) {
 		console.error("Error creating user:", error);
 		throw error;

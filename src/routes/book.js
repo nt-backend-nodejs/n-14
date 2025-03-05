@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { bookController } from "../controllers/index.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 export const bookRouter = Router();
 
 //create
-bookRouter.post("/", bookController.create);
+bookRouter.post("/", authMiddleware, bookController.create);
 
 //get all
 bookRouter.get("/", bookController.findAll);

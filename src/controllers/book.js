@@ -1,7 +1,6 @@
 export const bookController = {
 	create(req, res, next) {
 		try {
-			console.log();
 		} catch (error) {
 			next(error);
 		}

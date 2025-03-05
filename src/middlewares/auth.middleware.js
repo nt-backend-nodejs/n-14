@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-import { getCategoryById } from "../servies/category.js";
+import { getUserById } from "../servies/user.js";
 export const authMiddleware = async (req, res, next) => {
 	try {
 		if (!req.headers.authorization) {
@@ -19,7 +19,7 @@ export const authMiddleware = async (req, res, next) => {
 
 		console.log({ decode });
 
-		const user = await getCategoryById(decode.sub);
+		const user = await getUserById(decode.sub);
 
 		console.log(user);
 
