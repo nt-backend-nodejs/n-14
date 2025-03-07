@@ -4,7 +4,7 @@ import { validateData } from "../middlewares/validationMiddleware.js";
 import { signInSchema, signUpSchema } from "../validations/auth.validation.js";
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 
-export const authRouter = Router();
+authRouter = Router();
 
 authRouter.post("/signup", validateData(signUpSchema), authController.signup);
 authRouter.post("/signin", validateData(signInSchema), authController.signin);

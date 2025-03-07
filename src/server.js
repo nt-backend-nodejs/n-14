@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { setUp } from "./servies/setup.js";
 import {
 	bookRouter,
@@ -10,6 +11,7 @@ import {
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/setup", (req, res, next) => {
@@ -19,6 +21,7 @@ app.use("/setup", (req, res, next) => {
 app.use("/auth", authRouter);
 app.use("/books", bookRouter);
 app.use("/authors", authorRouter);
+app.use("/test", (req, res) => {});
 // app.use("/bookauthors");
 app.use("/categories", categoryRouter);
 // app.use("/customers");

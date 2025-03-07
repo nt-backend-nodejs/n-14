@@ -1,94 +1,51 @@
-# library store
-1. Books
-2. Authors
-3. BookAuthors (junction table for many-to-many relationship)
-4. Publishers
-5. Categories
-6. Customers
-7. Orders
-8. OrderItems
+Mana, TypeScript asoslari bo'yicha turli mavzularda 10 ta task (vazifa):
 
----
-## 1. Books Table
-Columns:
-book_id (Primary Key): Unique identifier for each book.
-- title: Title of the book.
-- publisher_id (Foreign Key): References the Publishers table.
-- publication_year: Year the book was published.
-- isbn: International Standard Book Number.
-- price: Selling price of the book.
-- category_id (Foreign Key): References the Categories table.
-- stock_quantity: Number of copies available in inventory.
+### 1. **Array (Massiv)**
 
-## 2. Authors Table
-Purpose: Contains information about authors who have written books.
-Columns:
-- author_id (Primary Key): Unique identifier for each author.
-- first_name: Author's first name.
-- last_name: Author's last name.
-- bio: Short biography of the author.
+-   **Task**: TypeScriptda massiv yaratib, undagi elementlarning turini aniqlang. Misol: faqat `string` va `number` turidagi elementlardan iborat massiv yaratib, undan foydalaning.
+-   **Misol**:
 
-## 3. BookAuthors Table (Junction Table)
-Purpose: Resolves the many-to-many relationship between Books and Authors.
+### 2. **Tuple (Kuple)**
 
-Columns:
+-   **Task**: Tupledan foydalanib, bir nechta turdagi ma'lumotlarni o'z ichiga olgan o'zgaruvchilar yaratib chiqing. Misol uchun: ism, yosh va tug'ilgan sana.
+-   **Misol**:
 
-- book_id (Foreign Key): References the Books table.
-- author_id (Foreign Key): References the Authors table.
+### 3. **Type Aliases (Tur nomi aliaslari)**
 
+-   **Task**: `type` yordamida yangi tur yaratib, uni bir nechta joyda ishlatishga misol keltiring. Misol: biror shaxsning malumotlari (ism, yosh, manzil).
+-   **Misol**:
 
-## 4. Publishers Table
-Purpose: Stores information about book publishers.
+### 4. **Union Type (Ittifoq turi)**
 
-Columns:
+-   **Task**: Union turidan foydalanib, bir o'zgaruvchiga bir nechta turdagi qiymatlarni qabul qilishini ta'minlang. Masalan, o'zgaruvchi raqam yoki matn bo'lishi mumkin.
+-   **Misol**:
 
-- publisher_id (Primary Key): Unique identifier for each publisher.
-- name: Name of the publisher.
-- address: Publisher's address.
-- phone: Contact phone number.
-- email: Contact email address.
+### 5. **Function (Funktsiya)**
 
-## 5. Categories Table
-Purpose: Defines the categories or genres of books.
+-   **Task**: TypeScriptda funksiya yaratib, uning parametr va qaytish turini aniqlang. Misol: ikkita raqamni qo'shadigan funksiya.
+-   **Misol**:
 
-Columns:
+### 6. **Literal Type (Literal tur)**
 
-- category_id (Primary Key): Unique identifier for each category.
-- category_name: Name of the category (e.g., Fiction, Non-fiction).
--description: Description of the category.
+-   **Task**: Literal turidan foydalanib, faqat muayyan qiymatlarni qabul qiladigan o'zgaruvchi yaratish.
+-   **Misol**:
 
+### 7. **Object Type (Obyekt turi)**
 
-## 6. Customers Table
-Purpose: Holds information about customers who purchase books.
+-   **Task**: Object turidan foydalanib, ma'lum bir tuzilishga ega obyekt yaratib, uning xususiyatlarini aniqlang.
+-   **Misol**:
 
-Columns:
+### 8. **Optional Properties (Ixtiyoriy xususiyatlar)**
 
-- customer_id (Primary Key): Unique identifier for each customer.
-- first_name: Customer's first name.
-- last_name: Customer's last name.
-- email: Contact email address.
-- phone: Contact phone number.
-- address: Customer's address.
+-   **Task**: Ixtiyoriy xususiyatlarni aniqlang va obyekt yaratishda ba'zi xususiyatlarni o'tkazib yuboring.
+-   **Misol**:
 
+### 9. **Readonly (Faoliyatni o'zgartirish mumkin bo'lmagan xususiyatlar)**
 
-## 7. Orders Table
-Purpose: Records orders placed by customers.
+-   **Task**: `readonly` modifier yordamida faqat o'qiladigan (o'zgartirilmaydigan) xususiyatlarga ega obyekt yaratish.
+-   **Misol**:
 
-Columns:
+### 10. **Type Assertions (Turga oid aniqlashlar)**
 
-- order_id (Primary Key): Unique identifier for each order.
-- customer_id (Foreign Key): References the Customers table.
-- order_date: Date when the order was placed.
-- status: Current status of the order (e.g., Pending, Shipped, Completed).
-
-
-## 8. OrderItems Table
-Purpose: Details the specific books included in each order.
-
-Columns:
-
-- order_item_id (Primary Key): Unique identifier for each order item.
-- order_id (Foreign Key): References the Orders table.
-- book_id (Foreign Key): References the Books table.
-- quantity: Number of copies of the book ordered.
-- unit_price: Price of the book at the time of the order.
+-   **Task**: Type assertion yordamida TypeScriptga ma'lum bir turga ega bo'lgan o'zgaruvchini ko'rsatish.
+-   **Misol**:
