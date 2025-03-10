@@ -152,7 +152,6 @@ const person: IPerson = {
   },
 };
 
-*/
 
 interface IPerson {
   name: string;
@@ -195,3 +194,134 @@ const worker = new Workers();
 person;
 
 worker.greet();
+
+enum Color {
+  RED = "RED",
+  GREEN = "GREEN",
+  YELLOW = "YELLOW",
+}
+
+enum Roles {
+  admin = 1,
+  user,
+  superAdmin,
+}
+
+const color: Color = Color.RED;
+
+const role: Roles = Roles.user;
+
+*/
+
+import { IpVersion } from "zod";
+
+// function getUserRole(role) {
+//   if (role == 1) {
+//     console.log("Admin");
+//   } else if (role == 2) {
+//     console.log("User");
+//   } else if (role == 3) {
+//     console.log("Editor");
+//   }
+// }
+
+// function getUserRole(role: number) {
+//   const roles = {
+//     1: "user",
+//     2: "admin",
+//     3: "editor",
+//   };
+
+//   return roles[role] ?? "guest";
+// }
+
+// console.log(getUserRole(1));
+
+// function calcTax(salary, tax) {
+//   return salary * tax;
+// }
+
+// calcTax(100000, 0.016);
+
+// interface Box<T> {
+//   contents: T;
+// }
+
+// const a: Box<number> = {
+//   contents: 12,
+// };
+
+// const b: Box<string> = {
+//   contents: "hello",
+// };
+
+// const c: Box<boolean> = {
+//   contents: true,
+// };
+
+// const d: Box<Array<string>> = {
+//   contents: ["sasas"],
+// };
+
+// function identity<T>(arg: T): T {
+//   return arg;
+// }
+
+// const o1 = identity<number>(1);
+// const o2 = identity<string>("1");
+// const o3 = identity<boolean>(1 === 1);
+
+/*
+function createArray<T = string>(length: number, value: T): T[] {
+  return Array(length).fill(value);
+}
+
+let numArray = createArray<number>(10, 1);
+let strArray = createArray<string>(10, "helllo");
+let boolArray = createArray<boolean>(10, true);
+*/
+
+/*
+const str: string = "hello";
+
+type A = typeof str;
+
+const a: A = "hello";
+
+ */
+
+/*
+function printVale(value: number | boolean | string) {
+  if (typeof value == "string") {
+    value.trim();
+  } else if (typeof value == "number") {
+    value.toFixed();
+  } else {
+    value.valueOf();
+  }
+}
+
+ */
+
+interface IPerson {
+  name: string;
+  age: number;
+  gender: "male" | "female";
+  isMerried?: boolean;
+}
+
+type PersonKeys = keyof IPerson;
+
+// const personKey: PersonKeys = "isMerried";
+
+function printPersonProperty(person: IPerson, key: PersonKeys): void {
+  console.log(person[key]);
+}
+
+const person: IPerson = {
+  name: "ali",
+  age: 12,
+  gender: "male",
+};
+
+printPersonProperty(person, "isMerried");
