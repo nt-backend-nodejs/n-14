@@ -15,7 +15,8 @@
     "zod": "^3.24.2"
   },
   "scripts": {
-    "start:dev": "node --watch --env-file=.env src/server.js"
+    "start:dev": "node --watch --env-file=.env src/server.js",
+    "build": "tsc init"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   },
   "homepage": "https://github.com/nt-backend-nodejs/n-14#readme",
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2"
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0"
   }
 }

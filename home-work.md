@@ -1,51 +1,77 @@
-Mana, TypeScript asoslari bo'yicha turli mavzularda 10 ta task (vazifa):
+# Links
 
-### 1. **Array (Massiv)**
+- [https://exercism.org](https://exercism.org)
+- [https://typehero.dev](https://typehero.dev)
+- [https://basarat.gitbook.io/typescript](https://basarat.gitbook.io/typescript)
 
--   **Task**: TypeScriptda massiv yaratib, undagi elementlarning turini aniqlang. Misol: faqat `string` va `number` turidagi elementlardan iborat massiv yaratib, undan foydalaning.
--   **Misol**:
+### 1. `swap` funksiyasi
 
-### 2. **Tuple (Kuple)**
+#### Input
 
--   **Task**: Tupledan foydalanib, bir nechta turdagi ma'lumotlarni o'z ichiga olgan o'zgaruvchilar yaratib chiqing. Misol uchun: ism, yosh va tug'ilgan sana.
--   **Misol**:
+Bir xil tipdagi ikkita argumentni qabul qiladigan va ularning qiymatlarini almashtiradigan `swap` funksiyasini yozing. Masalani yechishda genericdan foydalaning.
 
-### 3. **Type Aliases (Tur nomi aliaslari)**
+#### Output
 
--   **Task**: `type` yordamida yangi tur yaratib, uni bir nechta joyda ishlatishga misol keltiring. Misol: biror shaxsning malumotlari (ism, yosh, manzil).
--   **Misol**:
+```typescript
+// Sinov uchun
+let a = 1;
+let b = 2;
+[a, b] = swap(a, b);
+console.log(`a: ${a}, b: ${b}`); // a: 2, b: 1
 
-### 4. **Union Type (Ittifoq turi)**
+let x = "hello";
+let y = "world";
+[x, y] = swap(x, y);
+console.log(`x: ${x}, y: ${y}`); // x: world, y: hello
+```
 
--   **Task**: Union turidan foydalanib, bir o'zgaruvchiga bir nechta turdagi qiymatlarni qabul qilishini ta'minlang. Masalan, o'zgaruvchi raqam yoki matn bo'lishi mumkin.
--   **Misol**:
+### 2. `assertString` funksiyasi
 
-### 5. **Function (Funktsiya)**
+#### Input
 
--   **Task**: TypeScriptda funksiya yaratib, uning parametr va qaytish turini aniqlang. Misol: ikkita raqamni qo'shadigan funksiya.
--   **Misol**:
+Kirish parametrini qabul qilib, uning string tipida ekanligini tasdiqlovchi `assertString` funksiyasini yozing. Agar kirish string bo'lmasa, funksiya xatoga yo'l qo'yishi kerak.
 
-### 6. **Literal Type (Literal tur)**
+#### Output
 
--   **Task**: Literal turidan foydalanib, faqat muayyan qiymatlarni qabul qiladigan o'zgaruvchi yaratish.
--   **Misol**:
+```typescript
+// Sinov uchun
+try {
+  assertString("hello"); // OK
+  console.log("Input is a string");
+} catch (e) {
+  console.error(e.message);
+}
 
-### 7. **Object Type (Obyekt turi)**
+try {
+  assertString(123); // Error: Input is not a string
+} catch (e) {
+  console.error(e.message);
+}
+```
 
--   **Task**: Object turidan foydalanib, ma'lum bir tuzilishga ega obyekt yaratib, uning xususiyatlarini aniqlang.
--   **Misol**:
+### 3. Quicksort va Mergesort algoritmlari
 
-### 8. **Optional Properties (Ixtiyoriy xususiyatlar)**
+#### Input
 
--   **Task**: Ixtiyoriy xususiyatlarni aniqlang va obyekt yaratishda ba'zi xususiyatlarni o'tkazib yuboring.
--   **Misol**:
+Quicksort va Mergesort algoritmlarini yozing. Massivni 1000 ta tasodifiy son bilan to'ldiring va yuqoridagi saralash algoritmlaridan foydalangan holda tartiblang. Qaysi metod tezroq ishlashini aniq vaqtlar bilan ko'rsating.
 
-### 9. **Readonly (Faoliyatni o'zgartirish mumkin bo'lmagan xususiyatlar)**
+#### Output
 
--   **Task**: `readonly` modifier yordamida faqat o'qiladigan (o'zgartirilmaydigan) xususiyatlarga ega obyekt yaratish.
--   **Misol**:
+```typescript
+// Tasodifiy sonlar bilan massiv yaratish va saralash
+const array = Array.from({ length: 1000 }, () =>
+  Math.floor(Math.random() * 10000)
+);
 
-### 10. **Type Assertions (Turga oid aniqlashlar)**
+// Quicksort ishlash vaqti
+const quicksortStart = performance.now();
+const quicksortedArray = quicksort(array);
+const quicksortEnd = performance.now();
+console.log(`Quicksort ishlash vaqti: ${quicksortEnd - quicksortStart} ms`);
 
--   **Task**: Type assertion yordamida TypeScriptga ma'lum bir turga ega bo'lgan o'zgaruvchini ko'rsatish.
--   **Misol**:
+// Mergesort ishlash vaqti
+const mergesortStart = performance.now();
+const mergesortedArray = mergesort(array);
+const mergesortEnd = performance.now();
+console.log(`Mergesort ishlash vaqti: ${mergesortEnd - mergesortStart} ms`);
+```
