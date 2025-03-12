@@ -75,3 +75,17 @@ const mergesortedArray = mergesort(array);
 const mergesortEnd = performance.now();
 console.log(`Mergesort ishlash vaqti: ${mergesortEnd - mergesortStart} ms`);
 ```
+
+
+
+    BankAccount sinfini yozing. U private balance: number maydoniga ega bo‘lsin
+
+deposit(amount: number) va withdraw(amount: number) metodlari orqali balansni o‘zgartirish imkoniyati bo‘lsin.
+
+2.Person sinfini yozing. Unda public name: string bo‘lsin va sayHello() metodi Hello, my name is ... deb ekranga chiqarsin.
+
+3.Employee sinfini yozing. Unda protected salary: number bo‘lsin va Developer sinfi undan meros olib, showSalary() metodi orqali ekranga chiqaradigan bo‘lsin.
+
+4.Vehicle interfeysini yarating (brand: string va speed: number maydonlari bo‘lsin).
+
+Car sinfi shu interfeysni implements qilsin va showInfo() metodini qo‘shing.
