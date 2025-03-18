@@ -23,4 +23,8 @@ export const config = {
       expiresIn: process.env.JWT_REFRESH_EXPIRES_IN,
     },
   },
+  mailer: {
+    email: process.env.MAIL_USER,
+    password: process.env.MAIL_PASS,
+  },
 };

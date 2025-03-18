@@ -23,6 +23,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     country_id INTEGER,
+    is_active BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (country_id) REFERENCES countries (id)
 );
 
@@ -97,6 +98,14 @@ CREATE TABLE ecommerce.merchant_activity (
     end_date TIMESTAMP,
     FOREIGN KEY (merchant_id) REFERENCES ecommerce.merchants (id),
     FOREIGN KEY (country_id) REFERENCES countries (id)
+);
+-- 13. otp jadvalini yaratish
+CREATE TABLE ecommerce.otp (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    otp VARCHAR(10) NOT NULL,
+    expires_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 -- 12. Index yaratish
