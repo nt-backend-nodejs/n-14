@@ -3,12 +3,22 @@ import { mailTransporter } from "./nodemailer.config";
 
 export async function sendOtp(to: string, otp: string) {
   try {
-    await mailTransporter.sendMail({
-      from: config.mailer.email,
-      to,
-      subject: "Your OTP Code",
-      text: `Your OTP code is: ${otp}`,
-    });
+    await mailTransporter.sendMail(
+      {
+        from: config.mailer.email,
+        to,
+        subject: "Your OTP Code",
+        text: `Your OTP code is: ${otp}`,
+      },
+      function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      }
+    );
+    console.log("sended");
   } catch (error) {
     console.error("Failed to send OTP:", error);
     throw new Error("Failed to send OTP");

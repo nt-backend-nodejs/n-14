@@ -1,19 +1,25 @@
 import { QueryResult } from "pg";
 import { pool } from "../config";
 import { ICreateUserDTO, IUpdateUserDTO, IUser } from "../constants";
+import { generate } from "../utils";
 
-export async function create(dto: ICreateUserDTO): Promise<void> {
+export async function createUser(dto: ICreateUserDTO): Promise<IUser> {
   try {
     const query = `
       INSERT INTO users (name, email, password, country_id)
       VALUES ($1, $2, $3, $4)
+      RETURNING *
     `;
-    await pool.query(query, [
+    dto.password = await generate(dto.password);
+    const user: QueryResult = await pool.query(query, [
       dto.name,
       dto.email,
       dto.password,
-      dto.country_id || null,
+      dto.country_id
     ]);
+    console.log();
+    
+    return user.rows[0];
   } catch (error) {
     console.error("Error creating user", error);
     throw new Error("Failed to create user");
