@@ -1,11 +1,15 @@
-import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { TodoModule } from './todo/todo.module';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { UserModule } from './user/user.module';
+import { LoggerMiddleware } from './logger/logger.middleware';
 
 @Module({
-  imports: [UsersModule, TodoModule],
-  controllers: [],
-  providers: [],
+  imports: [UserModule],
+  controllers: [], // http
+  providers: [], // service
   exports: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('user');
+  }
+}
