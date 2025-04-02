@@ -9,50 +9,26 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  // url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
-  id           Int        @id @default(autoincrement())
-  first_name   String?
-  last_name    String?
-  email        String?    @unique
-  username     String?    @unique
-  password     String
-  phone_number String?    @unique
-  address      String?
-  posts        Posts[]
-  comments     Comments[]
+  id       Int    @id @default(autoincrement())
+  name     String
+  username String @unique
+  password String
+  Post     Post[]
+
+  @@index([name, password])
 }
 
-model Posts {
-  id       Int        @id @default(autoincrement())
-  User     User?      @relation(fields: [userId], references: [id])
-  userId   Int?
-  title    String
-  slug     String     @unique
-  content  String
-  comments Comments[]
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
 }
-
-model Comments {
-  id      Int    @id @default(autoincrement())
-  content String
-
-  Posts   Posts? @relation(fields: [postsId], references: [id])
-  postsId Int?
-  User    User?  @relation(fields: [userId], references: [id])
-  userId  Int?
-}
-
-// model Project {
-//   id          Int      @id @default(autoincrement())
-//   title       String
-//   description String?
-//   status      String   @default("pending")
-//   createdAt   DateTime @default(now())
-//   updatedAt   DateTime @updatedAt
-//   userId      Int
-//   user        User     @relation(fields: [userId], references: [id])
-// }
