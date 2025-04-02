@@ -7,12 +7,12 @@ async function bootstrap() {
   app.enableCors();
 
   app.setGlobalPrefix('api/v1', {
-    exclude: [{ path: 'user', method: RequestMethod.GET }],
+    exclude: [{ path: 'sasas', method: RequestMethod.GET }],
   });
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,
+      // whitelist: true,
       disableErrorMessages: true,
       transform: true,
     }),
