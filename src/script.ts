@@ -8,21 +8,12 @@ async function main() {
       name: 'Bob',
       username: 'bob@prisma.io',
       password: 'qwqwqw',
-      Post: {
-        create: [
-          {
-            title: 'Hello World',
-            published: true,
-          },
-          {
-            title: 'My second post',
-            content: 'This is still a draft',
-          },
-        ],
-      },
     },
   });
+  const findAllUser = await prisma.user.findMany();
+
   console.log(user);
+  console.log(findAllUser);
 }
 
 main()
